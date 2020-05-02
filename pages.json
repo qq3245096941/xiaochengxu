@@ -1,0 +1,421 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "主页",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}, {
+			"path": "pages/ClassIfication/classification",
+			"style": {
+				"navigationBarTitleText": "分类",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			"path": "pages/Store/store",
+			"style": {
+				"navigationBarTitleText": "门店",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-area": "/wxcomponents/vant/dist/area/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}, {
+			"path": "pages/Mine/Mine",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}, {
+			"path": "pages/Portrait/Portrait",
+			"style": {}
+		}, {
+			"path": "pages/Lattice/Lattice",
+			"style": {}
+		}
+		// ,{
+		//          "path" : "pages/index/index",
+		//          "style" : {}
+		//      }
+		, {
+			"path": "pages/storeDels/storeDels",
+			"style": {
+				"navigationBarTitleText": "产品详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-goods-action": "/wxcomponents/vant/dist/goods-action/index",
+					"van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
+					"van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index",
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					 "van-stepper": "/wxcomponents/vant/dist/stepper/index",
+					 "van-button": "/wxcomponents/vant/dist/button/index",
+					 "van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}, {
+			"path": "pages/homeDetals/homeDetals",
+			"style": {
+				"navigationBarTitleText": "关于我们",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+				  "van-radio": "/wxcomponents/vant/dist/radio/index",
+				  "van-radio-group": "/wxcomponents/vant/dist/radio-group/index"
+				}
+			}
+		}, {
+			// 爱车档案
+			"path": "pages/loveArchives/loveArchives",
+			"style": {
+				"navigationBarTitleText": "爱车档案",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					 "van-index-bar": "/wxcomponents/vant/dist/index-bar/index",
+					  "van-index-anchor": "/wxcomponents/vant/dist/index-anchor/index"
+				}
+			}
+		}, {
+			// 购物车
+			"path": "pages/shoppingCart/shoppingCart",
+			"style": {
+				"navigationBarTitleText": "购物车",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+				  "van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index",
+				  "van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}, {
+			// 收藏
+			"path": "pages/collection/collection",
+			"style": {
+				"navigationBarTitleText": "收藏",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			// 取消收藏
+			"path": "pages/cancelCollection/cancelCollection",
+			"style": {
+				"navigationBarTitleText": "取消收藏",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			// 意见反馈
+			"path": "pages/opinion/opinion",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index"
+				}
+			}
+		}, {
+			// 订单
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单列表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			"path": "pages/buyTire/buyTire",
+			"style": {
+				"navigationBarTitleText": "轮胎购买",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			"path": "pages/baoyang/baoyang",
+			"style": {
+				"navigationBarTitleText": "保养",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+				  "van-collapse": "/wxcomponents/vant/dist/collapse/index",
+				  "van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index"
+				}
+			}
+		}, {
+			"path": "pages/baoyangtwo/baoyangtwo",
+			"style": {
+				"navigationBarTitleText": "保养",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-collapse": "/wxcomponents/vant/dist/collapse/index",
+					"van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index"
+				}
+				
+				
+			}
+		}, {
+			"path": "pages/Search/Search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			"path": "pages/Service/Service",
+			"style": {
+				"navigationBarTitleText": "服务中心",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			"path": "pages/aboutUs/aboutUs",
+			"style": {
+				"navigationBarTitleText": "门店详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index"
+				}
+			}
+		}, {
+			"path": "pages/Invitation/Invitation",
+			"style": {
+				"navigationBarTitleText": "邀请码",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, {
+			"path": "pages/MineMsg/MineMsg",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}
+	    ,{
+            "path" : "pages/chagePhone/chagePhone",
+            "style" : {
+				"navigationBarTitleText": "更换手机号",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/isSechcCom/isSechcCom",
+            "style" : {
+				"navigationBarTitleText": "商品列表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+        }
+        ,{
+            "path" : "pages/getCartType/getCartType",
+            "style" : {
+				"navigationBarTitleText": "绑定车型",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-index-bar": "/wxcomponents/vant/dist/index-bar/index",
+					 "van-index-anchor": "/wxcomponents/vant/dist/index-anchor/index",
+					 "van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/Engine/Engine",
+            "style" : {
+				"navigationBarTitleText": "请选择发动机排量",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000", 
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+        },
+		{
+		    "path" : "pages/caryYear/caryYear",
+		    "style" : {
+				"navigationBarTitleText": "请选择发动机年份",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000", 
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}
+        ,{
+            "path" : "pages/cartTypes/cartTypes",
+            "style" : {
+				"navigationBarTitleText": "请选择车型",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000", 
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/Authorization/Authorization",
+            "style" : {
+				"navigationBarTitleText": "用户授权",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+        }
+        ,{
+            "path" : "pages/Login/Login",
+            "style" : {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/isMap/isMap",
+            "style" : {
+				"navigationBarTitleText": "导航",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+        }
+        ,{
+            "path" : "pages/yesOrder/yesOrder",
+            "style" : {
+				"navigationBarTitleText": "订单确认",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/isbuyorder/isbuyorder",
+            "style" : {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-radio": "/wxcomponents/vant/dist/radio/index",
+					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/Address/Address",
+            "style" : {
+				"navigationBarTitleText": "选择收货地址",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-area": "/wxcomponents/vant/dist/area/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/dizhibianji/dizhibianji",
+            "style" : {
+				"navigationBarTitleText": "编辑收货地址",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-area": "/wxcomponents/vant/dist/area/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index",
+					"van-field": "/wxcomponents/vant/dist/field/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/MyCart/MyCart",
+            "style" : {
+				"navigationBarTitleText": "车型管理",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000"
+			}
+        }
+    ],
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#d4237a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"text": "首页",
+			"iconPath": "static/tabbarimage/home.png",
+			"selectedIconPath": "static/tabbarimage/home1.png"
+		}, {
+			"pagePath": "pages/ClassIfication/classification",
+			"text": "分类",
+			"iconPath": "./static/tabbarimage/class.png",
+			"selectedIconPath": "static/tabbarimage/class1.png"
+		}, {
+			"pagePath": "pages/Store/store",
+			"text": "门店",
+			"iconPath": "./static/tabbarimage/mendian1.png",
+			"selectedIconPath": "static/tabbarimage/mendian.png"
+		}, {
+			"pagePath": "pages/Mine/Mine",
+			"text": "我的",
+			"iconPath": "./static/tabbarimage/wode.png",
+			"selectedIconPath": "static/tabbarimage/wode1.png"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "中盛",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#FFFFFF"
+	},
+"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			// { 
+			// 	"name": "LLWZTEAL2NKA", //模式名称
+			// 	"path": "pages/isbuyorder/isbuyorder", //启动页面，必选
+			// 	"query": "5ABYXEVTRV0Q" //启动参数，在页面的onLoad函数里面得到
+			// }
+		] 
+	} ,
+	"permission": {
+	    "scope.userLocation": {
+	      "desc": "你的位置信息将用于在商品及门店列表展示时计算最优结果" // 高速公路行驶持续后台定位
+	    }
+	  },
+	"sitemapLocation": "sitemap.json"
+
+}
