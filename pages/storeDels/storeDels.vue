@@ -15,7 +15,7 @@
 		<!-- 标题 -->
 		<view class="storetitle">
 			<view class="titleleft">
-				{{delsList.commdityName}}
+				{{delsList.commdityName}} {{delsList.commdityType}}
 			</view>
 			<view class="titleright">
 				<view class="titlerightimg">

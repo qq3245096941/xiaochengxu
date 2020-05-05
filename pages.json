@@ -28,7 +28,10 @@
 				"usingComponents": {
 					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
 					"van-area": "/wxcomponents/vant/dist/area/index",
-					"van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-picker": "/wxcomponents/vant/dist/picker/index",
+					"van-dropdown-menu": "/wxcomponents/vant/dist/dropdown-menu/index",
+					"van-dropdown-item": "/wxcomponents/vant/dist/dropdown-item/index"
 				}
 			}
 		}, {
@@ -47,12 +50,7 @@
 		}, {
 			"path": "pages/Lattice/Lattice",
 			"style": {}
-		}
-		// ,{
-		//          "path" : "pages/index/index",
-		//          "style" : {}
-		//      }
-		, {
+		}, {
 			"path": "pages/storeDels/storeDels",
 			"style": {
 				"navigationBarTitleText": "产品详情",
@@ -63,9 +61,9 @@
 					"van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
 					"van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index",
 					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
-					 "van-stepper": "/wxcomponents/vant/dist/stepper/index",
-					 "van-button": "/wxcomponents/vant/dist/button/index",
-					 "van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-stepper": "/wxcomponents/vant/dist/stepper/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
 		}, {
@@ -75,8 +73,8 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
-				  "van-radio": "/wxcomponents/vant/dist/radio/index",
-				  "van-radio-group": "/wxcomponents/vant/dist/radio-group/index"
+					"van-radio": "/wxcomponents/vant/dist/radio/index",
+					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index"
 				}
 			}
 		}, {
@@ -88,8 +86,10 @@
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
 					"van-field": "/wxcomponents/vant/dist/field/index",
-					 "van-index-bar": "/wxcomponents/vant/dist/index-bar/index",
-					  "van-index-anchor": "/wxcomponents/vant/dist/index-anchor/index"
+					"van-index-bar": "/wxcomponents/vant/dist/index-bar/index",
+					"van-index-anchor": "/wxcomponents/vant/dist/index-anchor/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index"
 				}
 			}
 		}, {
@@ -100,8 +100,8 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
-				  "van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index",
-				  "van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
 		}, {
@@ -153,8 +153,8 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
-				  "van-collapse": "/wxcomponents/vant/dist/collapse/index",
-				  "van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index"
+					"van-collapse": "/wxcomponents/vant/dist/collapse/index",
+					"van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index"
 				}
 			}
 		}, {
@@ -168,8 +168,8 @@
 					"van-collapse": "/wxcomponents/vant/dist/collapse/index",
 					"van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index"
 				}
-				
-				
+
+
 			}
 		}, {
 			"path": "pages/Search/Search",
@@ -193,7 +193,8 @@
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
-					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index"
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-rate": "/wxcomponents/vant/dist/rate/index"
 				}
 			}
 		}, {
@@ -210,10 +211,9 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000"
 			}
-		}
-	    ,{
-            "path" : "pages/chagePhone/chagePhone",
-            "style" : {
+		}, {
+			"path": "pages/chagePhone/chagePhone",
+			"style": {
 				"navigationBarTitleText": "更换手机号",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -221,18 +221,26 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/isSechcCom/isSechcCom",
-            "style" : {
+		}, {
+			"path": "pages/isSechcCom/isSechcCom",
+			"style": {
 				"navigationBarTitleText": "商品列表",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000"
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-collapse": "/wxcomponents/vant/dist/collapse/index",
+					"van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+					"van-card": "/wxcomponents/vant/dist/card/index",
+					"van-image": "/wxcomponents/vant/dist/image/index",
+					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
+				}
 			}
-        }
-        ,{
-            "path" : "pages/getCartType/getCartType",
-            "style" : {
+		}, {
+			"path": "pages/getCartType/getCartType",
+			"style": {
 				"navigationBarTitleText": "绑定车型",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -240,55 +248,52 @@
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-index-bar": "/wxcomponents/vant/dist/index-bar/index",
-					 "van-index-anchor": "/wxcomponents/vant/dist/index-anchor/index",
-					 "van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-index-anchor": "/wxcomponents/vant/dist/index-anchor/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/Engine/Engine",
-            "style" : {
+		}, {
+			"path": "pages/Engine/Engine",
+			"style": {
 				"navigationBarTitleText": "请选择发动机排量",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000", 
+				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-        },
+		},
 		{
-		    "path" : "pages/caryYear/caryYear",
-		    "style" : {
+			"path": "pages/caryYear/caryYear",
+			"style": {
 				"navigationBarTitleText": "请选择发动机年份",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000", 
+				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-		}
-        ,{
-            "path" : "pages/cartTypes/cartTypes",
-            "style" : {
+		}, {
+			"path": "pages/cartTypes/cartTypes",
+			"style": {
 				"navigationBarTitleText": "请选择车型",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000", 
+				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/Authorization/Authorization",
-            "style" : {
+		}, {
+			"path": "pages/Authorization/Authorization",
+			"style": {
 				"navigationBarTitleText": "用户授权",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000"
 			}
-        }
-        ,{
-            "path" : "pages/Login/Login",
-            "style" : {
+		},
+		{
+			"path": "pages/Login/Login",
+			"style": {
 				"navigationBarTitleText": "登录",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -296,18 +301,35 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/isMap/isMap",
-            "style" : {
+		},
+		/* 确认订单 */
+		{
+			"path": "pages/orderConfirmation/orderConfirmation",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
+					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
+				}
+			}
+		},
+		{
+			"path": "pages/isMap/isMap",
+			"style": {
 				"navigationBarTitleText": "导航",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000"
 			}
-        }
-        ,{
-            "path" : "pages/yesOrder/yesOrder",
-            "style" : {
+		}, {
+			"path": "pages/yesOrder/yesOrder",
+			"style": {
 				"navigationBarTitleText": "订单确认",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -315,10 +337,9 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/isbuyorder/isbuyorder",
-            "style" : {
+		}, {
+			"path": "pages/isbuyorder/isbuyorder",
+			"style": {
 				"navigationBarTitleText": "订单详情",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -329,10 +350,9 @@
 					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/Address/Address",
-            "style" : {
+		}, {
+			"path": "pages/Address/Address",
+			"style": {
 				"navigationBarTitleText": "选择收货地址",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -343,10 +363,9 @@
 					"van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/dizhibianji/dizhibianji",
-            "style" : {
+		}, {
+			"path": "pages/dizhibianji/dizhibianji",
+			"style": {
 				"navigationBarTitleText": "编辑收货地址",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
@@ -358,16 +377,15 @@
 					"van-field": "/wxcomponents/vant/dist/field/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/MyCart/MyCart",
-            "style" : {
+		}, {
+			"path": "pages/MyCart/MyCart",
+			"style": {
 				"navigationBarTitleText": "车型管理",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000"
 			}
-        }
-    ],
+		}
+	],
 	"tabBar": {
 		"color": "#8a8a8a",
 		"selectedColor": "#d4237a",
@@ -401,7 +419,7 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#FFFFFF"
 	},
-"condition" : { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [
 			// { 
@@ -409,13 +427,13 @@
 			// 	"path": "pages/isbuyorder/isbuyorder", //启动页面，必选
 			// 	"query": "5ABYXEVTRV0Q" //启动参数，在页面的onLoad函数里面得到
 			// }
-		] 
-	} ,
+		]
+	},
 	"permission": {
-	    "scope.userLocation": {
-	      "desc": "你的位置信息将用于在商品及门店列表展示时计算最优结果" // 高速公路行驶持续后台定位
-	    }
-	  },
+		"scope.userLocation": {
+			"desc": "你的位置信息将用于在商品及门店列表展示时计算最优结果" // 高速公路行驶持续后台定位
+		}
+	},
 	"sitemapLocation": "sitemap.json"
 
 }

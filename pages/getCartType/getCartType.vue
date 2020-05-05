@@ -34,10 +34,8 @@
 					</view>
 				</view>
 			</van-popup>
-
 			<!-- <van-cell title="展示弹出层" is-link @click="showPopup()" />
 		<van-popup :show="show" position="right" custom-style="height: 100%;width:70%" @close="onClose">内容</van-popup> -->
-
 		</view>
 	</view>
 </template>
@@ -79,7 +77,6 @@
 					_this.isSch = true
 					_this.name = e.detail.value
 					_this.comList = []
-					
 					_this.getcomList(_this.page)
 				}
 			},
@@ -101,7 +98,6 @@
 							if (res.data.code == 0) {
 								_this.comListSon = res.data.list;
 								Array.prototype.push.apply(_this.comList, _this.comListSon); //合并加载更多的数据与源数据.
-								
 							}
 						}
 					});

@@ -1,27 +1,30 @@
 <template>
-	<view style="background: #F6F6F6;">
-		<view class="Search-box">
-			<image class="serchImg" src="../../static/home/sousuo.png" mode=""></image>
-			<input @input="fandName" :placeholder="name" placeholder-style="color:#000" 
-			 type="search"
-			 class="Search">
-		</view>
-		<view class="buyTire-cont" v-for="(item,index) in comList" :key="item.commdityId" @click="goToDetl(item.commdityId)" >
-			<view class="buyTire-cont-left">
-				<image class="buyTire-cont-left-image" :src="'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'+item.commdityParameter"  mode=""></image>
-			</view>
-			<view class="buyTire-cont-right">
-				<view class="buyTire-cont-right-view2">{{item.commdityName}}</view>
-				<view class="buyTire-cont-right-view3">
-					<text class="text">全合成</text>
-					<text class="text">全合成</text>
+	<view>
+		<view class="isSechcComHeader">常规保养服务({{maintain.default.length}}/{{maintain.list.length}})</view>
+		<van-collapse :value="maintain.default" @change="onChange">
+			<van-collapse-item v-for="(item,index) in maintain.list" :name="item.id" :key="index">
+				<view slot="title">
+					<van-checkbox catchtap="" :value="item.isCheckAll" @change="clickAll(item)">{{item.name}}丨<text class="total">总计：¥{{item.total}}</text></van-checkbox>
 				</view>
-				<view class="buyTire-cont-right-view5">
-					<text class="buyTire-cont-right-view5-text">¥{{item.commdityPrice}}</text>
+				<!-- 小保养 -->
+				<view v-if="item.id===1">
+					<van-card :key="commodityIndex" v-for="(commodity,commodityIndex) in item.data" :num="commodit.commdity_count"
+					 :price="commodity.commdityPrice" :desc="commodity.remark" :title="commodity.commdityName" :thumb="commodity.commdityThnmbnail" />
 				</view>
-				<view class="buyTire-cont-right-view4">154576条图文评价 99.4%好评</view>
+				<!-- 大保养 -->
+				<view v-if="item.id===2">
+					<van-card :key="commodityIndex" v-for="(commodity,commodityIndex) in item.data" :num="commodit.commdity_count"
+					 :price="commodity.commdityPrice" :desc="commodity.remark" :title="commodity.commdityName" :thumb="commodity.commdityThnmbnail" />
+				</view>
+			</van-collapse-item>
+		</van-collapse>
+		<van-submit-bar :price="maintain.mainTotal*100" button-text="去结算" :disabled="maintain.mainTotal===0" @submit="submit">
+			<button open-type="contact" class="service_btn">联</button>
+			<view class="service">
+				<van-icon size="20" name="service-o" />
+				<text>联系客服</text>
 			</view>
-		</view>
+		</van-submit-bar>
 	</view>
 </template>
 
@@ -30,192 +33,165 @@
 	export default {
 		data() {
 			return {
-				page:1,
-				name:"",
-				comListSon:[],
-				comList:[]
+				page: 1,
+				user: '',
+				maintain: {
+					mainTotal: 0,
+					/* 默认展示小保养服务 */
+					default: [1],
+					list: [{
+							id: 1,
+							name: '小保养服务',
+							/* 总价 */
+							total: 0,
+							/*小保养服务项目 */
+							data: [],
+							/* 是否全选 */
+							isCheckAll: false
+						},
+						{
+							id: 2,
+							name: '大保养服务',
+							/* 总价 */
+							total: 0,
+							/* 数据 */
+							data: [],
+							isCheckAll: false
+						}
+					]
+				}
 			}
 		},
 		methods: {
-			// 搜索商品
-			fandName(e){
-				const _this = this;
-				_this.name = e.detail.value
-				_this.getList(_this.page,_this.name)
+			onChange(res) {
+				this.maintain.default = res.detail;
 			},
-			//跳转商品详情
-			goToDetl(id){
-				//商品详情
+			/* 是否全选 */
+			clickAll(item) {
+				item.isCheckAll = !item.isCheckAll;
+				if (item.isCheckAll) {
+					this.maintain.mainTotal = item.total + this.maintain.mainTotal;
+				} else {
+					this.maintain.mainTotal = this.maintain.mainTotal - item.total;
+				}
+			},
+			/* 提交订单 */
+			submit(res) {
+				let commodityList = [];
+				this.maintain.list.forEach(item => {
+					if (item.isCheckAll) {
+						item.data.forEach(main => {
+							commodityList.push(main.commdityId);
+						})
+					}
+				})
+
+				console.log(commodityList);
+
 				uni.navigateTo({
-					url: '../storeDels/storeDels?id=' + id
-				});
-			},
-			//默认列表
-			getList(page,name){
-				let _this = this;
-				post.gets({
-					method: 'POST',
-					url: '/commdity/commdityAll',
-					data:{
-						page:page,
-						rows:10,
-						commdityType:name
-					}
-				}).then(res => {
-					console.log(res)
-					//轮播图
-					if (res.statusCode === 200) {
-						if (res.data.code == 0) {
-							_this.comList=res.data.commdityList;
-						}
-					}
-				});
+					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.maintain.mainTotal}`
+				})
 			}
 		},
-		onLoad(name) {
-			const _this = this;
-			_this.name = name.name 
-			console.log("当前搜索内容为",name.name)
-			if(name){
-				_this.getList(_this.page,_this.name)
-			}
-		},
-		onReachBottom: function() {
-			const _this = this;
-			_this.page++;
-			post.gets({
+		async onLoad() {
+			this.user = uni.getStorageSync('login');
+
+			/* 通过用户获取当前用户爱车信息 */
+			const aicheList = (await post.gets({
 				method: 'POST',
-				url: '/commdity/commdityAll',
-				data:{
-					page:_this.page,
-					rows:10,
-					commdityType:_this.name
+				url: `/car/${this.user.userId}/carUserAll`
+			})).data.list;
+
+			for (let aiche of aicheList) {
+				if (aiche.isDefault === '1') {
+					/* 通过默认爱车获取小保养*/
+					post.gets({
+						method: 'POST',
+						url: '/pmain/pmainAll',
+						data: {
+							mainType: 1,
+							vehicle: aiche.carName,
+							gongli: aiche.travel
+						}
+					}).then(data => {
+						const list = data.data.mainAll;
+						this.maintain.list[0].data = list.map(data => {
+							data.commdityThnmbnail = post.url + data.commdityThnmbnail
+							return data;
+						});
+
+						/* 计算总价 */
+						list.forEach(item => {
+							this.maintain.list[0].total = item.commdityPrice + this.maintain.list[0].total
+						})
+					})
+
+					/* 获取大保养 */
+					post.gets({
+						method: 'POST',
+						url: '/pmain/pmainAll',
+						data: {
+							mainType: 2,
+							vehicle: aiche.carName,
+							gongli: aiche.travel
+						}
+					}).then(data => {
+						this.maintain.list[1].data = data.data.mainAll.map(data => {
+							data.commdityThnmbnail = post.url + data.commdityThnmbnail
+							return data;
+						})
+
+						/* 计算总价 */
+						data.data.mainAll.forEach(item => {
+							this.maintain.list[1].total = item.commdityPrice + this.maintain.list[1].total
+						})
+
+						console.log('大保养', data.data.mainAll);
+					});
+					break;
 				}
-			}).then(res => {
-				//轮播图
-				if (res.statusCode === 200) {
-					if (res.data.code == 0) {
-						_this.comListSon=res.data.commdityList;
-						Array.prototype.push.apply(_this.comList, _this.comListSon); //合并加载更多的数据与源数据.
-					}
-				}
-			});
+			}
+		},
+		onReachBottom() {
+
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
-	.Search-box{
-		width: 100%;
-		height: 80rpx;
+<style scoped>
+	.isSechcComHeader {
+		text-align: center;
+		padding: 10rpx;
+		color: #fff;
+		font-size: 30rpx;
+		background: #d2d2d2;
+	}
+
+	.thumb {
+		width: 400rpx;
+	}
+
+	.total {
+
+		color: red;
+	}
+
+	.service {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		background: #FFFFFF;
-		position: sticky;
-		top:0;
-		left:0;
-		border-bottom:1rpx solid #f8f8f8;
+		margin-left: 10rpx;
 	}
-	.Search{
-		font-size:22rpx;
-		width: 700rpx;
-		height: 50rpx;
-		background: #f8f8f8;
-		border-radius: 25rpx;
-		margin: 0 auto;
-		padding-left: 50rpx;
-		box-sizing: border-box;
-		position: relative;
-	}
-	.serchImg{
-		position: absolute;
-		width: 30rpx;
-		height: 30rpx;
-		left: 40rpx;
-		top: 28rpx;
-		z-index: 30;
-	}
-	.vehicleType{
-		width: 100%;
-		height: 70rpx;
-		background: #FFFFFF;
-		margin-top: 10rpx;
-		display: flex;
-		align-items: center;
-		font-size: 25rpx;
-	}
-	.vehicleType-view1{
-		margin-left: 50rpx;
-	}
-	.vehicleType-view2{
-		margin-left: 260rpx;
-	}
-	.perfect{
-		width: 100%;
-		height: 50rpx;
-		display: flex;
-		align-items: center;
-		font-size: 25rpx;
-		background: sandybrown;
-		color: saddlebrown;
-		padding-left: 30rpx;
-		margin-top: 10rpx;
-		box-sizing: border-box;
-	}
-	.buyTire-cont{
-		width:100%;
-		height:280rpx;
-		background:rgba(255,255,255,1);
-		display: flex;
-		margin-bottom: 4rpx;
-		.buyTire-cont-left-image{
-			width:230rpx;
-			height:240rpx;
-			margin-top: 28rpx;
-		}
-	}
-	.buyTire-cont-right{
-		margin-left: 64rpx;
-		.buyTire-cont-right-view2{
-			margin-top: 10rpx;
-			font-size:24rpx;
-			font-family:PingFang SC;
-			font-weight:bold;
-			color:rgba(0,0,0,1);
-		}
-	}
-	.buyTire-cont-right-view3{
-		margin-top: 40rpx;
-		.text{
-			padding: 5rpx 6rpx;
-			font-size: 20rpx;
-			background: sandybrown;
-			color: #FFFFFF;
-			border-radius: 8rpx;
-			margin-right: 5rpx;
-		}
-	}
-	.buyTire-cont-right-view4{
+
+	.service text {
 		font-size: 20rpx;
-		color: #888888;
-		margin-top: 10rpx;
 	}
-	.buyTire-cont-right-view5{
-		margin-top: 10rpx;
-		display: flex;
-		align-items: center;
-		.buyTire-cont-right-view5-text{
-			font-size:40rpx;
-			font-family:PingFang SC;
-			font-weight:500;
-			color:rgba(255,0,0,1);
-		}
-	}
-	.Search-image{
-		position: fixed;
+
+	.service_btn {
+		position: absolute;
 		bottom: 0;
-		width: 100%;
-		height: 50rpx;
+		left: 0;
+		width: 80rpx;
+		opacity: 0;
 	}
 </style>

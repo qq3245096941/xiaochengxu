@@ -4,7 +4,7 @@
 			<view class="header">
 				<view class="header-position">
 					<view class="ispositions">
-						<swiper class="u-wrp-bnr" @change="fnChange($event)" style="width:100%" interval="5000" duration="1000" circular="true">
+						<swiper indicator-dots class="u-wrp-bnr" @change="fnChange($event)" style="width:100%" interval="5000" duration="1000" circular="true">
 							<block class="bannerblock" v-for="(item,index) in usercart" :key="item.mycarId">
 								<swiper-item>
 									<view class="header-position-top">
@@ -14,110 +14,73 @@
 										<view class="header-position-top-view1">{{item.carName}}</view>
 									</view>
 									<view class="header-position-middle">
-										<text v-if="item.engineDis">{{item.engineDis}}</text><text v-if="item.departureTime">{{item.departureTime}}款</text>
+										<text v-if="item.engineDis">{{item.engineDis}}</text>丨<text>{{item.productionYear}}</text>
 									</view>
 									<view class="header-position-bottom">
-										<view class="header-position-bottom-view" v-if="item.isDefault==0">已设为默认</view>
-										<view class="header-position-bottom-view" v-if="item.isDefault==1" @click="setDefault(item.mycarId)">设为默认</view>
+										<view class="header-position-bottom-view" v-if="item.isDefault==='1'"><van-icon name="success"/>已设为默认</view>
+										<view class="header-position-bottom-view" v-if="item.isDefault==='0'" @click="setDefault(item.mycarId)">设为默认</view>
 									</view>
 								</swiper-item>
 							</block>
 						</swiper>
-
 					</view>
 				</view>
-			</view>
-			<!-- 头部结束 -->
-			<view class="loveArchives-cont">
+				
 				<!-- 基本信息开始 -->
-				<view class="essentialInformation">
-					<view class="essentialInformation-title">
-						<image class="essentialInformation-title-image" src="../../static/home/my01.png" mode=""></image>
-						<text class="essentialInformation-title-text1">基本信息</text>
-						<text class="essentialInformation-title-text2">为您精确匹配保养服务和配件</text>
-					</view>
-					<view class="essentialInformation-cont">
-						<view class="essentialInformation-cont-view1">
-							<view>
-								<input type="text" class="essentialInformation-cont-view1-T black" v-model="paiLiang" @change="upDetaCar" value="" />
-								<view class="essentialInformation-cont-view1-engine">发动机的排量</view>
+				<view class="loveArchives-cont">
+					<view class="essentialInformation">
+						<view class="essentialInformation-title">
+							<image class="essentialInformation-title-image" src="../../static/home/my01.png" mode=""></image>
+							<text class="essentialInformation-title-text1">基本信息</text>
+							<text class="essentialInformation-title-text2">为您精确匹配保养服务和配件</text>
+						</view>
+						<view class="essentialInformation-cont">
+							<view class="essentialInformation-cont-view1">
+								<view>
+									<input disabled type="text" class="essentialInformation-cont-view1-T black" v-model="paiLiang" @change="upDetaCar" value="" />
+									<view class="essentialInformation-cont-view1-engine">发动机的排量</view>
+								</view>
+								<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
 							</view>
+							<view class="essentialInformation-cont-view2"></view>
+							<view class="essentialInformation-cont-view1">
+								<view>
+									<input disabled type="text" class="essentialInformation-cont-view1-T black" v-model="creatYear" @change="upDetaCar"
+									 value="" />
+									<view class="essentialInformation-cont-view1-engine">生产年份</view>
+								</view>
+								<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
+							</view>
+						</view>
+						<view class="essentialInformation-cont">
+							<view class="essentialInformation-cont-view3">款型</view>
+							<input type="text" class="essentialInformation-cont-input black" v-model="kuanXing" @change="upDetaCar" value="" />
+						</view>
+						
+						<view class="essentialInformation-cont">
+							<view class="essentialInformation-cont-view5">
+								<input type="date" class="essentialInformation-cont-view1-T black" v-model="shangLu" @change="upDetaCar" value="" />
+								<view>上路时间</view>
+							</view>
+							<view class="essentialInformation-cont-view5">
+								<input type="number" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar" value="" />
+								<view>行驶里程(km)</view>
+							</view>
+						</view>
+						
+						<view class="essentialInformation-cont register">
+							<view class="essentialInformation-cont-view3">注册时间</view>
+							<input disabled type="date" class="essentialInformation-cont-input black" v-model="zhuCe" @change="upDetaCar" style="margin-left: -200rpx;"/>
 							<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
 						</view>
-						<view class="essentialInformation-cont-view2"></view>
-						<view class="essentialInformation-cont-view1">
-							<view>
-								<input type="date" class="essentialInformation-cont-view1-T black" v-model="creatYear" @change="upDetaCar"
-								 value="" />
-								<view class="essentialInformation-cont-view1-engine">生产年份</view>
-							</view>
-							<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
-						</view>
+						
 					</view>
-					<view class="essentialInformation-cont">
-						<view class="essentialInformation-cont-view3">款型</view>
-						<input type="text" class="essentialInformation-cont-input black" v-model="kuanXing" @change="upDetaCar" value="" />
-					</view>
-					<view class="essentialInformation-cont">
-						<view class="essentialInformation-cont-view5">
-							<input type="date" class="essentialInformation-cont-view1-T black" v-model="shangLu" @change="upDetaCar" value="" />
-							<view>上路时间</view>
-						</view>
-						<view class="essentialInformation-cont-view2"></view>
-						<view class="essentialInformation-cont-view5">
-							<input type="text" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar" value="" />
-							<view>行驶里程</view>
-						</view>
-					</view>
-					<view class="essentialInformation-cont register">
-						<view class="essentialInformation-cont-view3">注册时间</view>
-						<input type="date" class="essentialInformation-cont-input black" v-model="zhuCe" @change="upDetaCar" style="margin-left: -200rpx;"
-						 value="" />
-						<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
-					</view>
-					<view class="essentialInformation-title">
-						<image class="essentialInformation-title-image" src="../../static/home/my02.png" @change="upDetaCar" mode=""></image>
-						<text class="essentialInformation-title-text1">车险信息</text>
-					</view>
-					<view class="essentialInformation-cont">
-						<view class="essentialInformation-cont-view5">
-							<input type="text" class="essentialInformation-cont-view1-T black" v-model="baoXian" @change="upDetaCar" value="" />
-							<view>商业保险公司</view>
-						</view>
-						<view class="essentialInformation-cont-view2"></view>
-						<view class="essentialInformation-cont-view5">
-							<input type="date" class="essentialInformation-cont-view1-T black" v-model="baoTime" @change="upDetaCar" value="" />
-							<view>保险到期日</view>
-						</view>
-					</view>
-					<view class="essentialInformation-cont">
-						<view class="essentialInformation-cont-view5">
-							<input type="number" class="essentialInformation-cont-view1-T black" v-model="name" @change="upDetaCar" value="" />
-							<view>车主姓名</view>
-						</view>
-						<view class="essentialInformation-cont-view2"></view>
-						<view class="essentialInformation-cont-view5">
-							<input type="text" class="essentialInformation-cont-view1-T black" v-model="IdCard" @change="upDetaCar" value="" />
-							<view>身份证号</view>
-						</view>
-					</view>
-					<view class="essentialInformation-cont">
-						<view class="essentialInformation-cont-view5">
-							<input type="text" class="essentialInformation-cont-view1-T black" v-model="City" @change="upDetaCar" value="" />
-							<view>投保城市</view>
-						</view>
-						<view class="essentialInformation-cont-view2"></view>
-						<view class="essentialInformation-cont-view5">
-							<input type="text" class="essentialInformation-cont-view1-T black" v-model="YandN" @change="upDetaCar" value="" />
-							<view>一年内是否过户</view>
-						</view>
-					</view>
-					<button class="Administration" type="primary" @click="gotoMyCart">管理车型</button>
-
 				</view>
+				
+				<button class="Administration" type="primary" @click="gotoMyCart">管理车型</button>
 			</view>
 		</view>
-
+		
 
 		<view class="Isnothing" v-if="!istrue">
 			<view class="titlemsg">
@@ -159,7 +122,7 @@
 				name: null, //车主姓名
 				IdCard: null, //身份证号
 				City: null, //投保城市
-				YandN: null, //是否过户
+				YandN: null, //是否过户,
 			}
 		},
 		methods: {
@@ -229,8 +192,7 @@
 					_this.YandN = ''
 				}
 				if (_this.mycarIdList.createDate) {
-					_this.zhuCe = _this.mycarIdList.createDate
-					_this.zhuCe = new Date(_this.zhuCe);
+					_this.zhuCe = post.js_date_time(_this.mycarIdList.createDate);
 				} else {
 					_this.zhuCe = ''
 				}
@@ -290,12 +252,12 @@
 
 			},
 			setDefault(id) { //设为默认
+				console.log(id);
 				let _this = this;
 				// 大图轮播
 				post.gets({
 					method: 'POST',
 					url: '/car/' + _this.userid + "/" + id + '/upDefCar',
-					// /car/{userId}/{carId}/upDefCar
 				}).then(res => {
 					_this.getUserCart(_this.userid)
 				});
@@ -319,19 +281,6 @@
 				}
 			})
 		},
-		onShow() {
-			let _this = this;
-			uni.getStorage({ //获取userid
-				key: 'login',
-				success(res) {
-					_this.userid = res.data.userId
-					if (_this.userid) {
-						_this.getUserCart(_this.userid)
-					}
-				}
-			})
-		}
-
 	}
 </script>
 
@@ -368,19 +317,19 @@
 	// 头部
 	.header {
 		width: 750rpx;
-		height: 410rpx;
-		position: relative;
-		background-color: rgba(231, 63, 63, 1);
+		height: 300rpx;
+		background-color: #000;
 	}
 
 	.header-position {
-		position: absolute;
+		position: relative;
+		top: 90rpx;
+		margin: 0 auto;
 		width: 705rpx;
-		height: 255rpx;
-		left: 25rpx;
-		top: 91rpx;
 		background: #FFFFFF;
-		border-radius: 5rpx;
+		border-radius: 15rpx;
+		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+		background: #fff;
 	}
 
 	.header-position-top {
@@ -427,13 +376,10 @@
 	}
 
 	.header-position-middle {
-		width: 146rpx;
 		font-size: 24rpx;
 		font-family: PingFang SC;
 		font-weight: 500;
 		opacity: 0.6;
-		display: flex;
-		justify-content: space-between;
 		margin-left: 150rpx;
 	}
 
@@ -457,17 +403,17 @@
 
 	.loveArchives-cont {
 		width: 705rpx;
-		height: 1080rpx;
 		background: #F0EFF2;
-		box-shadow: 0rpx 0rpx 28rpx 1rpx rgba(78, 101, 153, 0.14);
 		border-radius: 15rpx;
 		margin: 0 auto;
+		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 	}
 
 	/* 基本信息开始 */
 	.essentialInformation {
 		width: 100%;
-		border-radius: 15rpx 15rpx 0 0;
+		border-radius: 15rpx;
+		margin-top: 110rpx;
 		background: #fff;
 	}
 
@@ -568,7 +514,6 @@
 	}
 
 	.register {
-		border-bottom: 14rpx solid #F0EFF2;
 		display: flex;
 		justify-content: space-between;
 	}
