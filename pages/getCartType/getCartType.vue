@@ -17,7 +17,7 @@
 			</van-index-bar>
 			<van-index-bar v-if="isSch">
 				<view>
-					<van-index-anchor index="A" :use-slot="true"/>
+					<van-index-anchor index="A" :use-slot="true" />
 					<van-cell :icon="item.brandLogo" v-for="(item,index) in comList" :key="index" :title="item.brandName" @click="showPopup(item.carBrand,item.brandName)" />
 				</view>
 			</van-index-bar>
@@ -115,7 +115,25 @@
 							if (res.data.code == 0) {
 								_this.comListSon = res.data.list;
 								Array.prototype.push.apply(_this.comList, _this.comListSon); //合并加载更多的数据与源数据.
-								console.log('所有车系',_this.comList); 
+
+								const map = new Map();
+								_this.indexList.forEach(zimu => {
+									map.set(zimu, 0);
+								})
+
+								_this.comList.forEach(item => {
+									map.set(item.brandInitials, map.get(item.brandInitials) + 1);
+								})
+
+								map.forEach((value, key) => {				
+									if(value===0){
+										_this.indexList.splice(_this.indexList.findIndex((zimu)=>{
+											return zimu===key;
+										}),1)
+									}
+								})
+
+								console.log(_this.indexList);
 							}
 						}
 					});

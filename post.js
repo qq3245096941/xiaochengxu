@@ -23,6 +23,34 @@ function request(method, url, data) {
   })
 }
 
+/* 获取 */
+function getLocation(){
+	return new Promise(resolve=>{
+		uni.getLocation({
+			type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+			success(res) {
+				let latitude = res.latitude;
+				let longitude = res.longitude;
+				let keys = 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS';
+				wx.request({
+					url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${keys}`,
+					success(res) {
+						resolve({
+							address:res.data.result.address_component,
+							latitude,
+							longitude
+						});
+					}
+				});
+			},
+			fail(res) {
+				console.log(res);
+			}
+		});
+	})
+	
+}
+
 /* 日期格式化 */
 function js_date_time(unixtime) {
   var date = new Date(unixtime);
@@ -71,7 +99,8 @@ module.exports = {
   gets,
   Debounce,
   js_date_time,
-  url:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'
+  url:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/',
+  getLocation
 }
 
 // 调用方式为

@@ -49,10 +49,7 @@
 								url: '/user/upUser',
 								data: {
 									userId: _this.userid,
-									openId: res.data.data.openId,
-									userTx: _this.touxiang,
-									userTel: res.data.data.userTel,
-									userName: _this.name
+									userTel: res.data.data.userTel
 								}
 							}).then(reqq => {
 								/*获取用户信息*/

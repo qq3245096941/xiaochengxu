@@ -85,11 +85,16 @@
 						})
 					}
 				})
-
+				
+			
 				console.log(commodityList);
+				
+				let commodityNum = Array.from({length:commodityList.length}).map(()=>{
+					return 1;
+				})
 
 				uni.navigateTo({
-					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.maintain.mainTotal}`
+					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.maintain.mainTotal}&num=${JSON.stringify(commodityNum)}`
 				})
 			}
 		},

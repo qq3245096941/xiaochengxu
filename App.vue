@@ -32,7 +32,7 @@
                     }
                 })
             })
-        }
+        },
 	}
 </script>
 
@@ -45,5 +45,10 @@
 		padding: 0;
 		background: #fff;
 		height: 100%;
+	}
+	
+	.hen {
+		background: #e8eaec;
+		height: 11rpx;
 	}
 </style>

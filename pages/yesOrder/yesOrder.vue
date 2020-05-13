@@ -111,13 +111,12 @@
 						  _this.dizhi = res.data
 					  },
 					  fail() {
-					  	uni.navigateTo({
-					  		url:"../dizhibianji/dizhibianji"
-					  	})
+					  	// uni.navigateTo({
+					  	// 	url:"../dizhibianji/dizhibianji"
+					  	// })
 					  }
 					})
 				}
-				
 			})
 		},
 		onLoad(e) {

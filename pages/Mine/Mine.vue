@@ -37,9 +37,9 @@
 					</view>
 				</navigator>
 				<view class="header-position-grid-line"></view>
-				<view class="header-position-grid-box" @click="showMotal">
+				<view class="header-position-grid-box" @click="discountCoupon">
 					<image class="header-position-grid-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine03.png" mode=""></image>
-					<view style="margin-left: 16rpx;" class="header-position-grid-view">至尊宝</view>
+					<view style="margin-left: 16rpx;" class="header-position-grid-view">优惠券</view>
 				</view>
 			</view>
 		</view>
@@ -207,27 +207,20 @@
 						method: "POST",
 						url: "/user/"+res.data.userId+"/userInfo",
 					}).then(res => {
-						console.log(res)
+						console.log('用户信息为',res);
 						//轮播图
 						if(res.data.code==0){
 							_this.userinfo = res.data.obj
-						}
+						} 
 					})
 				  }
 				})
 			},
-			showMotal(){
-				wx.showModal({
-							title: '提示',
-							content: '功能暂未开放',
-							success: function(res) {
-								if (res.confirm) {
-								console.log('用户点击确定')
-								} else if (res.cancel) {
-								console.log('用户点击取消')
-								}
-							}
-						})
+			/* 点击优惠券 */
+			discountCoupon(){
+				uni.navigateTo({
+					url:'../discountCoupon/discountCoupon'
+				})
 			},
 			fnheaderCont(index){
 				uni.navigateTo({
