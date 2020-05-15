@@ -250,7 +250,7 @@
 			}
 		},
 		onLoad({
-			list,
+			list,  //商品id
 			total,
 			/* 商品数量，list为[123,123]则num为[1,1] */
 			num

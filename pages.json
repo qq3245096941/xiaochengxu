@@ -9,17 +9,41 @@
 				"usingComponents": {
 					"van-grid": "/wxcomponents/vant/dist/grid/index",
 					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
-					"van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-tag": "/wxcomponents/vant/dist/tag/index",
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index"
 				}
 			}
-		}, {
+		},
+		{
 			"path": "pages/ClassIfication/classification",
 			"style": {
 				"navigationBarTitleText": "分类",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000"
+
 			}
-		}, {
+		},
+		{
+			"path": "pages/searchCommdity/searchCommdity",
+			"style": {
+				"navigationBarTitleText": "所有商品",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-area": "/wxcomponents/vant/dist/area/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-picker": "/wxcomponents/vant/dist/picker/index",
+					"van-dropdown-menu": "/wxcomponents/vant/dist/dropdown-menu/index",
+					"van-dropdown-item": "/wxcomponents/vant/dist/dropdown-item/index",
+					"van-search": "/wxcomponents/vant/dist/search/index",
+					"van-card": "/wxcomponents/vant/dist/card/index"
+				}
+			}
+		},
+		{
 			"path": "pages/Store/store",
 			"style": {
 				"navigationBarTitleText": "门店",
@@ -44,12 +68,89 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-		}, {
+		},
+		{
 			"path": "pages/Portrait/Portrait",
 			"style": {}
-		}, {
+		},
+		{
+			"path": "component/commdityPop",
+			"style": {
+				"usingComponents": {
+					"van-goods-action": "/wxcomponents/vant/dist/goods-action/index",
+					"van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
+					"van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
+					"van-stepper": "/wxcomponents/vant/dist/stepper/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index"
+					
+				}
+			}
+		},
+		{
+			"path": "component/commdityAction",
+			"style": {
+				"usingComponents": {
+					"van-goods-action": "/wxcomponents/vant/dist/goods-action/index",
+					"van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
+					"van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
+					"van-stepper": "/wxcomponents/vant/dist/stepper/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index"
+					
+				}
+			}
+		},
+		{
+			"path": "component/comment",
+			"style": {
+				"usingComponents": {
+					"van-image": "/wxcomponents/vant/dist/image/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-rate": "/wxcomponents/vant/dist/rate/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+		},
+		{
+			"path": "component/commdity",
+			"style": {
+				"usingComponents": {
+					"van-tag": "/wxcomponents/vant/dist/tag/index"
+				}
+			}
+		},
+		{
+			"path": "component/orderForm",
+			"style": {
+				"usingComponents": {
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index"
+				}
+			}
+		},
+		{
 			"path": "pages/Lattice/Lattice",
-			"style": {}
+			"style": {
+				"usingComponents": {
+					"van-grid": "/wxcomponents/vant/dist/grid/index",
+					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
 		}, {
 			"path": "pages/storeDels/storeDels",
 			"style": {
@@ -63,7 +164,10 @@
 					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
 					"van-stepper": "/wxcomponents/vant/dist/stepper/index",
 					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-panel": "/wxcomponents/vant/dist/panel/index",
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
 				}
 			}
 		}, {
@@ -137,7 +241,12 @@
 			"style": {
 				"navigationBarTitleText": "订单列表",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000"
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
+				}
 			}
 		}, {
 			"path": "pages/buyTire/buyTire",
@@ -301,7 +410,7 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-		}, 
+		},
 		{
 			"path": "pages/orderParticulars/orderParticulars",
 			"style": {
@@ -316,7 +425,7 @@
 					"van-button": "/wxcomponents/vant/dist/button/index"
 				}
 			}
-		}, 
+		},
 		{
 			"path": "pages/discountCoupon/discountCoupon",
 			"style": {
@@ -328,10 +437,11 @@
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
 					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
-					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
+					"van-dialog": "/wxcomponents/vant/dist/dialog/index",
+					"van-search": "/wxcomponents/vant/dist/search/index"
 				}
 			}
-		}, 
+		},
 		{
 			"path": "pages/selectInvoice/selectInvoice",
 			"style": {
@@ -355,7 +465,7 @@
 					"van-divider": "/wxcomponents/vant/dist/divider/index"
 				}
 			}
-		}, 
+		},
 		{
 			"path": "pages/selectStore/selectStore",
 			"style": {
@@ -368,7 +478,7 @@
 					"van-divider": "/wxcomponents/vant/dist/divider/index"
 				}
 			}
-		}, 
+		},
 		/* 确认订单 */
 		{
 			"path": "pages/orderConfirmation/orderConfirmation",
@@ -478,8 +588,8 @@
 		}, {
 			"pagePath": "pages/Store/store",
 			"text": "门店",
-			"iconPath": "./static/tabbarimage/mendian1.png",
-			"selectedIconPath": "static/tabbarimage/mendian.png"
+			"iconPath": "./static/tabbarimage/mendian.png",
+			"selectedIconPath": "static/tabbarimage/mendian1.png"
 		}, {
 			"pagePath": "pages/Mine/Mine",
 			"text": "我的",

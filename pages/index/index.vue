@@ -26,31 +26,19 @@
 		<!-- 纵向轮播组件 -->
 		<Portrait></Portrait>
 		<Lattice></Lattice>
-		<!-- <view class="alllist">
-			<view class="alllistSon1" v-for="(item, index) in bannerList2" :key="index">
-				<image class="baoyangimg u-img-slide" :src="'https://xcx.zhongshengzb.com:8089/shoppingImg/images/' + item.imagepath" mode="aspectFill"></image>
-			</view>
-		</view> -->
+		
+		<!-- 单一广告图 -->
+		<view v-for="(item, index) in bannerList2" :key="index">
+			<image :src="item.imagepath | getImg" mode="widthFix" style="display: block;width: 100%; margin-top: 15rpx;"></image>
+		</view>
+
 		<view class="Title">
 			<text class="TitleLeft"></text>
 			<text class="titlename">精品推荐</text>
 		</view>
 		<!-- 瀑布流布局列表 -->
 		<view>
-			<view class="case-page">
-				<view class="list-masonry">
-					<view class="item-masonry" v-for="(item, index) in comList" :key="item.commdityId" @click="gotohomeDetals(item.commdityId)">
-						<image :src="'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'+item.commdityParameter" mode="widthFix"></image>
-						<view class="listtitle">
-							<view class="listtitle1">{{ item.commdityName }}</view>
-							<view class="listtitle2">
-								<text class="listtitle2son">￥</text>
-								{{ item.commdityPrice }}
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
+			<commdity :comList="comList"></commdity>
 		</view>
 	</view>
 </template>
@@ -61,14 +49,17 @@
 	import Portrait from '../Portrait/Portrait';
 	//引入九宫格
 	import Lattice from '../Lattice/Lattice';
+	//瀑布流商品
+	import commdity from '../../component/commdity.vue'
+
 	export default {
 		data() {
 			return {
 				bannerList: [], //轮播图列表
 				page: 1, //商品页数
 				comList: [], //商品列表
-				comListSon: [],
 				IsCity: "", //当前位置
+				bannerList2: []
 			};
 		},
 		onShow() {
@@ -80,10 +71,23 @@
 			const _this = this;
 			_this.getuserLo()
 			_this.getBanner(); //获取轮播
+
+			/* 获取单一广告图 */
+			post.gets({
+				url: '/banner/bannerAll',
+				data: {
+					type: 'h'
+				}
+			}).then(data => {
+				console.log('单一广告也', data);
+				this.bannerList2 = data.data.list;
+			})
+
 		},
 		components: {
 			Portrait,
-			Lattice
+			Lattice,
+			commdity
 		},
 		methods: {
 			//获取用户登录信息
@@ -127,25 +131,14 @@
 					data: {
 						page: page,
 						rows: 10,
-						// commdityType:"精品推荐"
+						commdityRecommd:0
 					}
 				}).then(res => {
-					//轮播图
-					if (res.statusCode === 200) {
-						if (res.data.code == 0) {
-							_this.comListSon = res.data.commdityList;
-							Array.prototype.push.apply(_this.comList, _this.comListSon); //合并加载更多的数据与源数据.
-						}
-					}
+					let list = res.data.commdityList;
+					this.comList = [...this.comList,...list];
 				});
 			},
-			//跳转首页产品详情
-			gotohomeDetals(id) {
-				//商品详情
-				uni.navigateTo({
-					url: '../storeDels/storeDels?id=' + id
-				});
-			},
+
 			getuserLo() {
 				const _this = this;
 				wx.getLocation({

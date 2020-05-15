@@ -14,7 +14,7 @@
 										<view class="header-position-top-view1">{{item.carName}}</view>
 									</view>
 									<view class="header-position-middle">
-										<text v-if="item.engineDis">{{item.engineDis}}</text>丨<text>{{item.productionYear}}</text>
+										<text v-if="item.engineDis">{{item.engineDis}}</text>
 									</view>
 									<view class="header-position-bottom">
 										<view class="header-position-bottom-view" v-if="item.isDefault==='1'"><van-icon name="success"/>已设为默认</view>
@@ -45,7 +45,7 @@
 							<view class="essentialInformation-cont-view2"></view>
 							<view class="essentialInformation-cont-view1">
 								<view>
-									<input disabled type="text" class="essentialInformation-cont-view1-T black" v-model="creatYear" @change="upDetaCar"
+									<input type="text" class="essentialInformation-cont-view1-T black" v-model="creatYear" @change="upDetaCar"
 									 value="" />
 									<view class="essentialInformation-cont-view1-engine">生产年份</view>
 								</view>

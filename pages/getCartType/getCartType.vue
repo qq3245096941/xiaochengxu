@@ -89,8 +89,8 @@
 						url: '/carbrand/carBrandAll',
 						data: {
 							carBrand: _this.name,
-							page: page,
-							rows: 348,
+							page: 1,
+							rows: 9999,
 						}
 					}).then(res => {
 						//轮播图
@@ -106,8 +106,8 @@
 						method: 'POST',
 						url: '/carbrand/carBrandAll',
 						data: {
-							page: page,
-							rows: 348,
+							page: 1,
+							rows: 9999,
 						}
 					}).then(res => {
 						//轮播图
@@ -158,8 +158,8 @@
 					url: '/vehicle/vehicleAll',
 					data: {
 						carBrand: id,
-						page: page,
-						rows: 30
+						page: 1,
+						rows: 9999
 					}
 				}).then(res => {
 					console.log(res, "所有车系")
@@ -176,7 +176,7 @@
 			onClose() {
 				const _this = this;
 				_this.show = false
-			},
+			}, 
 
 		},
 		onLoad() {

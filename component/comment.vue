@@ -1,0 +1,81 @@
+<!-- 评论组件 -->
+<template>
+	<view class="common">
+		<view :key="index" v-for="(common,index) in commonList">
+			<view class="message">
+				<van-image width="32" height="32" round :src="common.userTx" />
+				<view style="font-size: 28rpx;font-weight: bold;margin-left: 20rpx;">{{common.userName}}</view>
+				<van-rate readonly :value="common.levelType" />
+			</view>
+			<view class="content">
+				{{common.content}}
+			</view>
+			<van-divider />
+		</view>
+		<!-- 发布评论 -->
+		<van-button type="primary" block round @click="isShow=true">发表评论</van-button>
+		<van-popup :show="isShow" position="bottom" custom-style="height: 20%;" @close="isShow=false" >
+			
+		</van-popup>
+	</view>
+</template>
+
+<script>
+	import post from '../post.js'
+
+	export default {
+		props: {
+			comdityId: {
+				type: Number,
+				required: true
+			},
+			/* 是否展示评论弹框 */
+			isShow: false
+		},
+		data() {
+			return {
+				commonList: [],
+				page: 1
+			}
+		},
+		methods: {
+			getList(commdityId) {
+				/* 获取当前商品的评论 */
+				post.gets({
+					url: `/comment/${commdityId}/commentAll`,
+					data: {
+						page: 1,
+						rows: 9999
+					}
+				}).then(data => {
+					this.commonList = data.data.commentList;
+				})
+			}
+		},
+		watch: {
+			comdityId(newValue) {
+				this.getList(newValue);
+			}
+		},
+		onReachBottom() {
+			this.page++;
+			this.getList(this.comdityId);
+		}
+	}
+</script>
+
+<style>
+	.common {
+		padding: 20rpx;
+		margin-bottom: 80rpx;
+	}
+
+	.common .message {
+		display: flex;
+		align-items: center;
+	}
+
+	.common .content {
+		font-size: 25rpx;
+	}
+</style>

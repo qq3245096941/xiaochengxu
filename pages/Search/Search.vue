@@ -22,9 +22,6 @@
 				<view class="buyTire-cont-right-view4">154576条图文评价 99.4%好评</view>
 			</view>
 		</view>
-		
-		
-		
 	</view>
 </template>
 

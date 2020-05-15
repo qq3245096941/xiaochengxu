@@ -38,7 +38,7 @@
 				</navigator>
 				<view class="header-position-grid-line"></view>
 				<view class="header-position-grid-box" @click="discountCoupon">
-					<image class="header-position-grid-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine03.png" mode=""></image>
+					<image style="margin-left: 30rpx;" class="header-position-grid-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine03.png" mode=""></image>
 					<view style="margin-left: 16rpx;" class="header-position-grid-view">优惠券</view>
 				</view>
 			</view>
@@ -52,19 +52,15 @@
 				</view>
 			</navigator>
 			
-				<view @click="fnheaderCont(1)">
+				<view @click="fnheaderCont(0)">
 					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine05.png" mode=""></image>
 					<view>待付款</view>
-				</view>
-				<view @click="fnheaderCont(2)">
-					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine06.png" mode=""></image>
-					<view>待服务</view>
 				</view>
 				<view @click="fnheaderCont(3)">
 					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine07.png" mode=""></image>
 					<view>待评价</view>
 				</view>
-				<view @click="fnheaderCont(4)">
+				<view @click="fnheaderCont(5)">
 					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine08.png" mode=""></image>
 					<view>维权</view>
 				</view>

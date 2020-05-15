@@ -16,9 +16,6 @@
 			营业时间 {{obj.busHours}}
 		</view>
 		<view class="aboutUsName">
-			<view style="margin-top: 20rpx;">
-				<image mode="widthFix" style="width: 100rpx;" :src="'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'+obj.storeTax"></image>
-			</view>
 			<view class="aboutUsName-left">
 				<view class="name">{{obj.storeName}}</view>
 				<!-- <view class="order">总订单<text>2020</text></view> -->
@@ -46,7 +43,7 @@
 					</view>
 				</view>
 			</view>
-			<view v-show="commentList.length===0" style="text-align: center;margin-top: 50rpx;color: #d2d2d2;">
+			<view v-if="commentList.length===0" style="text-align: center;margin-top: 50rpx;color: #d2d2d2;">
 				<van-icon size="40" name="chat-o" />
 				<view style="font-size: 50rpx;">暂无评论</view>
 			</view>

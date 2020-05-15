@@ -52,15 +52,7 @@
 						</view> -->
 					</view>
 					<view class="titletow">
-						<text>
-							总评价
-							<text class="origin">{{ item.ason }}</text>
-						</text>
-						<text class="nbsp">|</text>
-						<text>
-							总订单
-							<text class="origin">{{ item.alist }}</text>
-						</text>
+						<text></text>
 					</view>
 					<view class="titletow">
 						<text class="istext">{{ item.storeAddress }}</text>
@@ -287,14 +279,14 @@
 					storeProvince: this.address.province.name,
 					storeCity: this.address.city.name,
 					storeCounty: this.address.district.name,
+
 					/* 店铺分类 */
 					industry: this.storeClassify.currentValue === 0 ? '' : this.storeClassify.currentValue
 				}
 
-				if (this.actions.selectValue === 1) {
-					Reflect.set(obj, 'distranceX', this.address.latitude);
-					Reflect.set(obj, 'distranceY', this.address.longitude);
-				}
+
+				Reflect.set(obj, 'distranceX', this.address.latitude);
+				Reflect.set(obj, 'distranceY', this.address.longitude);
 
 				post.gets({
 					method: 'POST',
@@ -304,6 +296,7 @@
 					wx.hideLoading();
 					if (res.statusCode === 200 && res.data.code == 0) {
 						const arr = res.data.list;
+						console.log('商店信息', arr);
 						/* 判断是否是上拉加载数据 */
 						if (isReachBottom) {
 							this.trueList = [...this.trueList, ...arr];
