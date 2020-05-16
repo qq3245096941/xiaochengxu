@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="isSechcComHeader">常规保养项目</view>
+		<!-- <view class="isSechcComHeader">常规保养项目</view> -->
 		<van-collapse :value="isSelectIndex" @change="onChange">
 			<van-collapse-item v-for="(firstItem,index) in firstList" :name="index" :key="index">
 				<view slot="title">
@@ -87,18 +87,19 @@
 			})).data.list;
 
 			for (let aiche of aicheList) {
+				console.log(aiche);
 				if (aiche.isDefault === '1') {
-					/* 通过默认爱车获取小保养*/
+					/* 通过默认爱车获取保养商品*/
 					post.gets({
 						method: 'POST',
 						url: '/pmain/pmainRemarkAll',
 						data: {
 							vehicle: aiche.carName,
-							gongli: aiche.travel
+							gongli: aiche.travel===null?'':aiche.travel
 						}
 					}).then(data => {
 						this.firstList = data.data.resultMap.map(item => {
-							let total = 0;
+							let total = 0; 
 
 							/* 是否点击了全选按钮 */
 							item.isClickAll = false;
@@ -111,7 +112,6 @@
 
 							return item;
 						});
-						console.log(this.firstList);
 					})
 					break;
 				}

@@ -495,7 +495,7 @@
 	}
 
 	.essentialInformation-cont-view1-engine {
-		font-size: 20rpx;
+		font-size: 25rpx;
 	}
 
 	.essentialInformation-cont-view3 {

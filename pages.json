@@ -5,14 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "主页",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000",
+				"navigationBarBackgroundColor": "#ed4014",
 				"usingComponents": {
 					"van-grid": "/wxcomponents/vant/dist/grid/index",
 					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
-					"van-tag": "/wxcomponents/vant/dist/tag/index",
-					"van-grid": "/wxcomponents/vant/dist/grid/index",
-					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index"
+					"van-tag": "/wxcomponents/vant/dist/tag/index"
 				}
 			}
 		},

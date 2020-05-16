@@ -76,7 +76,8 @@
 						<view class="serviceSettings-view">爱车档案</view>
 					</view>
 				</navigator>
-				<view class="serviceSettings-box" @click="goToFuWu">
+				<view class="serviceSettings-box" style="position: relative;">
+					<button style="position: absolute;width: 100%;height: 100%;opacity: 0;" open-type="contact"></button>
 					<image class="serviceSettings-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine10.png" mode=""></image>
 					<view class="serviceSettings-view">在线客服</view>
 				</view>

@@ -278,7 +278,7 @@
 					title: '加载中'
 				});
 
-				let obj = {
+				let obj = { 
 					page: isReachBottom ? this.page : 1, //请求页数
 					rows: 10, //每页10条
 					userId: this.userid, //userid

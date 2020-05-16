@@ -4,10 +4,10 @@
 			<view class="bannerTop">
 				<view class="Topmap">
 					<text>{{IsCity}}</text>
-					<van-icon class="next" color="white" name="location-o" />
+					<van-icon class="next" name="location-o" />
 				</view>
 				<view class="TopSerach">
-					<navigator url="../Search/Search">
+					<navigator url="../searchCommdity/searchCommdity">
 						<image class="serchImg" placeholder="轮胎" src="../../static/home/sousuo.png" mode=""></image>
 						<input type="text" class="Search" />
 					</navigator>
@@ -24,7 +24,7 @@
 			</swiper>
 		</view>
 		<!-- 纵向轮播组件 -->
-		<Portrait></Portrait>
+		<!-- <Portrait></Portrait> -->
 		<Lattice></Lattice>
 		
 		<!-- 单一广告图 -->
@@ -233,18 +233,19 @@
 		height: 100%;
 
 		.IndexBanner {
+			
 			width: 100%;
 			height: 422rpx;
-			background: #000000;
+			background: #fff;
 
 			.bannerTop {
 				height: 70rpx;
 				display: flex;
-				padding: 20rpx;
+				padding: 10rpx 20rpx 20rpx 20rpx;
 				width: 100%;
 
 				.Topmap {
-					color: #fff;
+					color: #000;
 					font-family: PingFang SC;
 					width: 335rpx;
 					height: 46rpx;
@@ -271,6 +272,7 @@
 					width: 415rpx;
 					height: 70rpx;
 					margin-right: 20rpx;
+					
 
 					.serchImg {
 						position: absolute;
@@ -281,10 +283,10 @@
 					}
 
 					.Search {
+						background-color: #f8f8f9;
 						width: 393rpx;
 						height: 42rpx;
 						border-radius: 20rpx;
-						background: #fff;
 						margin-top: 25rpx;
 						text-indent: 1em;
 					}

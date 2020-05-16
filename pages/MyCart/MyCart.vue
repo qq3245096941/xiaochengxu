@@ -1,8 +1,9 @@
 <template>
 	<view style="width:100%;min-height:1215rpx;background:rgba(245,245,245,1);">
 		<view class="garage" v-for="item in cartList" :key="item.mycarId">
+			<image class="back" src="../../static/aicheback.png" mode="widthFix"></image>
 			<div>
-				<image :src="item.carLogo" mode="widthFix"></image>
+				<image class="logo" :src="item.carLogo" mode="widthFix"></image>
 				<view class="garage-box">
 					<view class="view1">{{item.carName}}</view>
 					<view class="view2">
@@ -83,7 +84,7 @@
 				const _this = this;
 				post.gets({
 					method: "POST",
-					url: "/car/"+ _this.userid + "/" + id +"/upDefCar",
+					url: "/car/"+ uni.getStorageSync(login).userId + "/" + id +"/upDefCar",
 				}).then(res=>{
 					_this.getMyCart(_this.userid)
 				})
@@ -94,16 +95,24 @@
 
 <style lang="scss" scoped>
 	.garage{
+		position: relative;
 		width: 100%;
 		height: 300rpx;
-		background-color: #ffffff;
 		padding-top: 60rpx;
 		box-sizing: border-box;
 		margin-bottom: 20rpx;
 		>view{
 			display: flex;
 		}
-		image{
+		.back{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+		.logo{
 			margin: 0 80rpx;
 			margin-top: 20rpx;
 			width: 50rpx;

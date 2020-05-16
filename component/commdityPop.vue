@@ -9,6 +9,8 @@
 					<view style="color: #ed4014;margin-top: 5rpx;"><text style="font-size: 20rpx;">￥</text><text style="font-size: 60rpx;">{{commdity.commdityPrice}}</text></view>
 				</view>
 			</view>
+			
+			<view style="font-size: 35rpx;margin: 0 0 20rpx 20rpx;">选规格：</view>
 
 			<view class="commodityClassBox">
 				<view :key="index" @click="selectClass(index)" :class="['commodityClsss',isSelectClass===index?'active':'']" v-for="(item,index) in commdityClass">
@@ -135,8 +137,9 @@
 	}
 
 	.commodityClassBox .commodityClsss {
+		color: #808695;
 		font-size: 15rpx;
-		border: 1rpx solid #ed4014;
+		border: 1rpx solid #808695;
 		border-radius: 20rpx;
 		padding: 10rpx;
 		width: 25%;
@@ -145,7 +148,7 @@
 	}
 
 	.active {
-		color: #fff;
-		background: #ed4014;
+		color: #ed4014 !important;
+		border: 1rpx solid #ed4014 !important;
 	}
 </style>
