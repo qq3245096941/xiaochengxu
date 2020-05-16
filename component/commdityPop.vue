@@ -24,7 +24,7 @@
 			</van-cell-group>
 
 			<view style="position: fixed;width: 95%;bottom: 20rpx;">
-				<van-button type="danger" round block @click="joinCar">加入购物车</van-button>
+				<van-button type="danger" round block @click="joinCar">{{isType===0?'加入购物车':'立即购买'}}</van-button>
 			</view>
 
 			</van-grid>
@@ -121,8 +121,6 @@
 					this.commdityClass = JSON.parse(this.commdity.commdityClass).map(item => {
 						return item;
 					});
-					console.log('商品规格', this.commdityClass);
-					console.log('具体商品信息', this.commdity);
 				})
 			}
 		}

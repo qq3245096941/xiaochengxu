@@ -45,6 +45,7 @@
 
 <style scoped lang="scss">
 	.portrait {
+		margin-top: 40rpx;
 		width: 100%;
 		height: 68rpx;
 		background: #F4F4F4;

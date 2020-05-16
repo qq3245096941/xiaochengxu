@@ -38,6 +38,7 @@
 		},
 		watch: {
 			commdityId(newValue) {
+				console.log(newValue);
 				post.gets({
 					url: `/cart/${uni.getStorageSync('login').userId}/cartAll`,
 					data: {

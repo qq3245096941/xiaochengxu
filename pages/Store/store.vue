@@ -52,7 +52,7 @@
 						</view> -->
 					</view>
 					<view class="titletow">
-						<text></text>
+						<text>距离我：{{item.distance}}km</text>
 					</view>
 					<view class="titletow">
 						<text class="istext">{{ item.storeAddress }}</text>
@@ -123,6 +123,12 @@
 		},
 		onLoad() {
 			this.userid = uni.getStorageSync('login').userId;
+			
+			wx.getLocation({
+				success(res){
+					console.log('经纬度',res);
+				}
+			})
 			/* 获取分类店铺的信息 */
 			post.gets({
 				method: 'GET',
@@ -285,8 +291,8 @@
 				}
 
 
-				Reflect.set(obj, 'distranceX', this.address.latitude);
-				Reflect.set(obj, 'distranceY', this.address.longitude);
+				Reflect.set(obj, 'distranceX', this.address.longitude);
+				Reflect.set(obj, 'distranceY', this.address.latitude);
 
 				post.gets({
 					method: 'POST',

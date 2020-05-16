@@ -62,14 +62,10 @@
 				bannerList2: []
 			};
 		},
-		onShow() {
-			const _this = this;
-			_this.getUserList(); //判断用户授权
-			_this.getcomList(_this.page); //获取商品列表
-		},
 		onLoad() {
 			const _this = this;
 			_this.getuserLo()
+			this.getcomList();
 			_this.getBanner(); //获取轮播
 
 			/* 获取单一广告图 */
@@ -88,6 +84,9 @@
 			Portrait,
 			Lattice,
 			commdity
+		},
+		onShow(){
+			this.getUserList();
 		},
 		methods: {
 			//获取用户登录信息
@@ -123,13 +122,13 @@
 			},
 
 			// 获取商品列表
-			getcomList(page) {
+			getcomList() {
 				let _this = this;
 				post.gets({
 					method: 'POST',
 					url: '/commdity/commdityAll',
 					data: {
-						page: page,
+						page: this.page,
 						rows: 10,
 						commdityRecommd:0
 					}
@@ -164,7 +163,7 @@
 		onReachBottom: function() {
 			const _this = this;
 			_this.page++;
-			_this.getcomList(_this.page); //获取商品列表
+			_this.getcomList(); //获取商品列表
 		}
 	};
 </script>
@@ -241,6 +240,7 @@
 			.bannerTop {
 				height: 70rpx;
 				display: flex;
+				padding: 20rpx;
 				width: 100%;
 
 				.Topmap {
@@ -270,6 +270,7 @@
 					position: relative;
 					width: 415rpx;
 					height: 70rpx;
+					margin-right: 20rpx;
 
 					.serchImg {
 						position: absolute;

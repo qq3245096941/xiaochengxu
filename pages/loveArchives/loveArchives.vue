@@ -2,7 +2,9 @@
 	<view>
 		<view v-if="istrue">
 			<view class="header">
+				<image style="position: absolute;width: 100%;" src="../../static/aicheTopBack.png" mode="widthFix"></image>
 				<view class="header-position">
+					<image class="back" src="../../static/aicheback.png" mode=""></image>
 					<view class="ispositions">
 						<swiper indicator-dots class="u-wrp-bnr" @change="fnChange($event)" style="width:100%" interval="5000" duration="1000" circular="true">
 							<block class="bannerblock" v-for="(item,index) in usercart" :key="item.mycarId">
@@ -318,10 +320,11 @@
 	.header {
 		width: 750rpx;
 		height: 300rpx;
-		background-color: #000;
+		position: relative;
 	}
 
 	.header-position {
+		color: #fff;
 		position: relative;
 		top: 90rpx;
 		margin: 0 auto;
@@ -330,6 +333,12 @@
 		border-radius: 15rpx;
 		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 		background: #fff;
+	}
+	
+	.header-position .back{
+		position: absolute;
+		width: 100%;
+		height: 100%;
 	}
 
 	.header-position-top {
@@ -386,18 +395,17 @@
 	.header-position-bottom {
 		margin-left: 150rpx;
 		width: 210rpx;
-		border: 1rpx solid rgba(255, 255, 255, 1);
 		margin-top: 17rpx;
 		display: flex;
 	}
 
 	.header-position-bottom-view {
+		color: #fff;
 		margin-top: 9rpx;
 		font-size: 24rpx;
 		font-family: PingFang SC;
 		font-weight: 500;
-		color: red;
-		border: 1rpx solid red;
+		border: 1rpx solid #fff;
 		padding: 5rpx 20rpx;
 	}
 

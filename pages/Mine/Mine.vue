@@ -2,6 +2,7 @@
 	<view>
 		<!-- 头部开始 -->
 		<view class="header">
+			<image style="position: absolute;width: 100%;z-index: -1;" src="../../static/aicheTopBack.png" mode="widthFix"></image>
 			<view class="bannerTop">
 				<view class="Topmap">
 					<text>{{IsCity}}</text>
@@ -287,7 +288,6 @@
 	.header{
 		width:750rpx;
 		height:267rpx;
-		background:rgba(0,0,0,1);
 		position: relative;
 	}
 	.header-position{

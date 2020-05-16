@@ -12,10 +12,7 @@
 			</view>
 			<van-divider />
 		</view>
-		<!-- 发布评论 -->
-		<van-button type="primary" block round @click="isShow=true">发表评论</van-button>
-		<van-popup :show="isShow" position="bottom" custom-style="height: 20%;" @close="isShow=false" >
-			
+	
 		</van-popup>
 	</view>
 </template>
@@ -29,8 +26,6 @@
 				type: Number,
 				required: true
 			},
-			/* 是否展示评论弹框 */
-			isShow: false
 		},
 		data() {
 			return {

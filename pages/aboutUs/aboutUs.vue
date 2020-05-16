@@ -12,9 +12,9 @@
 			</swiper>
 		</view>
 		<!-- 营业时间 -->
-		<view class="times" v-if="obj.busHours">
+		<!-- <view class="times" v-if="obj.busHours">
 			营业时间 {{obj.busHours}}
-		</view>
+		</view> -->
 		<view class="aboutUsName">
 			<view class="aboutUsName-left">
 				<view class="name">{{obj.storeName}}</view>
@@ -231,10 +231,9 @@
 	}
 
 	.aboutUsName {
+		padding: 30rpx;
 		width: 100%;
-		height: 180rpx;
 		display: flex;
-		padding: 0 56rpx;
 		box-sizing: border-box;
 		justify-content: space-between;
 		border-bottom: 16rpx solid rgba(242, 242, 242, 1);
@@ -267,7 +266,7 @@
 			margin-top: 12rpx;
 			font-family: PingFang SC;
 			font-weight: bold;
-			text-align: center;
+			text-align: left;
 		}
 	}
 
