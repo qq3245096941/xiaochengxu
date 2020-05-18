@@ -73,7 +73,7 @@
 				})
 
 				uni.navigateTo({
-					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.total}&num=${JSON.stringify(commodityNum)}`
+					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.total}&num=${JSON.stringify(commodityNum)}&commdityClass=[]&orderType=1`
 				})
 			}
 		},

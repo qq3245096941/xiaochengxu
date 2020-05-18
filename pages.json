@@ -136,9 +136,13 @@
 					"van-grid": "/wxcomponents/vant/dist/grid/index",
 					"van-grid-item": "/wxcomponents/vant/dist/grid-item/index",
 					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-divider": "/wxcomponents/vant/dist/divider/index"
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index"
 				}
-			}
+			} 
 		},
 		{
 			"path": "pages/Lattice/Lattice",
@@ -427,9 +431,9 @@
 		{
 			"path": "pages/discountCoupon/discountCoupon",
 			"style": {
-				"navigationBarTitleText": "优惠券",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000",
+				"navigationBarTitleText": "免费首保",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#fff",
 				"usingComponents": {
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
 					"van-tab": "/wxcomponents/vant/dist/tab/index",

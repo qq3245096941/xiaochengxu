@@ -18,25 +18,21 @@
 				orderViewList: [{
 						title: '待发货',
 						list: [],
-						page: 1,
 						index: 1
 					},
 					{
 						title: '待付款',
 						list: [],
-						page: 1,
 						index: 0
 					},
 					{
 						title: '待评价',
 						list: [],
-						page: 1,
 						index: 3
 					},
 					{
 						title: '维权',
 						list: [],
-						page: 1,
 						index: 5
 					},
 				],
@@ -51,8 +47,8 @@
 			this.getcomList();
 		},
 		methods: {
+			/* 切换 */
 			tabChange(res) {
-				console.log(res);
 				this.isSelectTab = res.detail.name;
 				this.getcomList();
 			},
@@ -66,24 +62,15 @@
 					method: 'GET',
 					url: `/order/orderAll`,
 					data: {
-						page: order.page,
-						rows: 7,
+						page: 1,
+						rows: 9999,
 						userId: uni.getStorageSync('login').userId,
 						orderStat: this.isSelectTab
 					}
 				}).then(data => {
-					const list = data.data.list;
-					order.list = [...order.list, ...list];
-
+					order.list = data.data.list;
 				})
 			},
-		},
-		onReachBottom: function() {
-			let order = this.orderViewList.find((item) => {
-				return item.index === Number.parseInt(this.isSelectTab);
-			})
-			order.page++;
-			this.getcomList();
 		}
 	}
 </script>

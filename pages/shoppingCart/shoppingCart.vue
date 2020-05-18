@@ -1,61 +1,7 @@
 <template>
-	<view style="background:#F5F5F5;">
-		<view class="tishi">
-			<van-icon name="fail" color="red" class="isfail" /> 向左滑动删除 
-		</view>
-		<van-swipe-cell right-width="100" left-width="0" class="" v-for="(item,index) in comList" :key="item.cartId"> 
-		  <van-cell-group>
-			<van-cell title="单元格" value="内容"/>
-				<view class="iscontent">
-						<view class="isState">
-							<view class="isStateLeft">
-								订单编号：<!-- {{}} -->
-							</view>
-							<view class="isStateRight">
-								<!-- {{}} -->
-								<!-- 待付款 -->
-							</view>
-						</view>
-						<view class="collection-box" @click="goToDetls(item.commdityId)">
-							<image class="collection-box-image" 
-							:src="'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'+item.commdityThnmbnail"
-							 mode=""></image>
-							<view class="iscors">
-								<view class="collection-box-view">{{item.commdityName}}</view>
-								<view class="collection-box-text">
-									<view class="collection-box-textleft">
-										共{{item.commdityCount}}件
-									</view>
-									<view class="collection-box-textright">
-										￥{{item.commdityPrice*item.commdityCount}}
-									</view>
-								</view>
-							</view>
-						</view>
-						<!-- 底部付款 -->
-						<view class="gotobuy">
-							<!-- 创建订单并跳转 -->
-							<!-- @click="JoinCart2(userid,orderStatus,item.commdityPrice*item.commdityCount,payStat,item.storeId,item.commdityCount,item.commdityId,item.commdityName)" -->
-							<view class="buyson" @click="JoinCart2(userid,orderStatus,item.commdityPrice*item.commdityCount,payStat,item.storeId,item.commdityCount,item.commdityId,item.commdityName)">
-								微信支付
-							</view>
-							<view class="buyson">
-								预约
-							</view>
-						</view>
-				</view>
-		  </van-cell-group>
-		  <view slot="right" @click="removeItem(item.cartId)" style="height:328rpx;line-height:328rpx;background:red;color:#fff;width:200rpx;text-align:center;">删除</view>
-		</van-swipe-cell>
-	
-	</view>	
-
-		<!-- 没有收藏时sss -->
-		<!-- <view class="nothingShopp">
-			<image class="nothingShopp-image" src="../../static/home/content3.png" mode=""></image>
-			<view class="nothingShopp-view">购物车为空</view>
-			<view class="nothingShopp-view2">去逛逛</view>
-		</view> -->
+	<view>
+		
+	</view>
 </template>
 
 <script>
@@ -63,12 +9,7 @@
 	export default {
 		data() {
 			return {
-				page: 1, //商品页数
-				comList: [], //商品列表
-				comListSon: [],
-				userid:'' , 
-				orderStatus:0,
-				payStat:0,
+				commdityList:[]
 			}
 		},
 		mounted(){
@@ -80,7 +21,7 @@
 				let _this = this;
 				post.gets({
 					method: 'POST',
-					url: '/cart/'+ _this.userid +'/cartAll?page='+ page +'&rows=10',
+					url: ``
 				}).then(res => {
 					//轮播图
 					console.log(res,"购物车数据")

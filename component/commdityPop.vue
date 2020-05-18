@@ -19,7 +19,7 @@
 			</view>
 			<van-divider />
 
-			<van-cell-group v-if="isType===1">
+			<van-cell-group>
 				<van-cell title="购买数量" :border="false">
 					<van-stepper :value="number" @change="numberChange"/>
 				</van-cell>
@@ -86,6 +86,8 @@
 							data: {
 								userId: uni.getStorageSync('login').userId,
 								commdityId: this.commdityId,
+								commdityCount:this.number,
+								commdityClass:this.commdityClass[this.isSelectClass].specName
 							}
 						}).then(data => {
 							uni.showToast({
@@ -100,9 +102,10 @@
 						let list = [this.commdityId];
 						let total = this.number * this.commdity.commdityPrice;
 						let num = [this.number];
+						let commdityClass = JSON.stringify([this.commdityClass[this.isSelectClass].specName]);
 
 						uni.navigateTo({
-							url: `/pages/orderConfirmation/orderConfirmation?list=${JSON.stringify(list)}&total=${total}&num=${JSON.stringify(num)}`
+							url: `/pages/orderConfirmation/orderConfirmation?list=${JSON.stringify(list)}&total=${total}&num=${JSON.stringify(num)}&commdityClass=${commdityClass}&orderType=0`
 						})
 						break;
 				}

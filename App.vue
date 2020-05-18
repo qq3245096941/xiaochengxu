@@ -1,4 +1,6 @@
 <script>
+	import post from './post.js'
+	
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
@@ -9,30 +11,7 @@
 		onHide: function() {
 			console.log('App Hide')
 		},
-		url:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/',
-        request(){
-            return new Promise((resolve) => {
-                uni.request({
-                    method: method,
-                    url: 'https://zsxcx.zhongshengzb.com:8446/zs_two' + url,
-                    data: data,
-                    header: {
-                        'Accept': "*/*",
-                        'content-type': 'application/x-www-form-urlencoded',
-                    },
-                    success(res) {
-                        resolve(res);
-                    }, 
-                    fail(res) {
-                        wx.showToast({
-                            title: '请求失败',
-                            icon: 'none',
-                            duration: 1500,
-                        })
-                    }
-                })
-            })
-        },
+		url:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'
 	}
 </script>
 
@@ -48,7 +27,7 @@
 	}
 	
 	.hen {
-		background: #e8eaec;
-		height: 11rpx;
+		background: #f8f8f9;
+		height: 15rpx;
 	}
 </style>

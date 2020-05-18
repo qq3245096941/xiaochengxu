@@ -3,12 +3,12 @@
 		<view class="MineMsg-cont">
 			<view class="MineMsg-cont-box">
 				<view>头像</view>
-				<image class="headPortrait" :src="userinfo.avatarUrl" mode=""></image>
+				<image class="headPortrait" :src="userinfo.userTx" mode=""></image>
 			</view>
 			<view class="MineMsg-cont-box active">
 				<view>昵称</view>
 				<view class="view">
-					<view class="zi">{{userinfo.nickName}}</view>
+					<view class="zi">{{userinfo.userName}}</view>
 					<image class="tu" src="../../static/home/isnext.png" mode=""></image>
 				</view>
 			</view>
@@ -30,18 +30,11 @@
 				<view class="MineMsg-cont-box active">
 					<view>手机号</view>
 					<view class="view">
-						<view class="zi">{{phoneNumber}}</view>
+						<view class="zi">{{userinfo.userTel}}</view>
 						<image class="tu" src="../../static/home/isnext.png" mode=""></image>
 					</view>
 				</view>
 			</navigator>
-			<view class="MineMsg-cont-box">
-				<view>生日信息</view>
-				<view class="view">
-					<view class="zi">设置生日信息</view>
-					<image class="tu" src="../../static/home/isnext.png" mode=""></image>
-				</view>
-			</view>
 		</view>
 		<view class="MineMsg-cont-box2" @click="gotoAddress">
 			<view>收货地址</view>
@@ -54,50 +47,23 @@
 </template>
 
 <script>
+	import post from '../../post.js'
+	
 	export default {
 		data() {
 			return {
 				userinfo:{},
-				sex:"",
-				phoneNumber:"",
 			}
 		},
-		onShow() {
-			const _this = this;
-			_this.setUser()
-		},
 		onLoad(){
-			const _this = this;
-			_this.setUser()
+			post.gets({
+				url:`/user/${uni.getStorageSync('login').userId}/userInfo`,
+			}).then(data=>{
+				this.userinfo = data.data.obj;
+				console.log(this.userinfo);
+			})
 		},
 		methods: {
-			setUser(){
-				const _this = this;
-				uni.getStorage({
-				  key: 'usermsg',
-				  success (res) {
-					_this.userinfo= res.data.detail.userInfo
-					if(res.data.detail.userInfo.gender==1){
-						_this.sex = '男'
-					}else if(res.data.detail.userInfo.gender==2){
-						_this.sex = '女'
-					}else{
-						_this.sex = '未知'
-					}
-				  },
-				  fail() {
-				  	
-				  }
-				})
-				//用户手机
-				wx.getStorage({
-				  key: 'phonenumber',
-				  success (res) {
-					console.log(res.data)
-					_this.phoneNumber = res.data
-				  }
-				})
-			},
 			gotoAddress(){  //跳转到地址页面
 				uni.navigateTo({
 					url:"../Address/Address"

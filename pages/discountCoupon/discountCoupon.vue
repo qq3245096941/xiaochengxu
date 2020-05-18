@@ -1,22 +1,23 @@
 <!-- 优惠券 -->
 <template>
-	<view>
-		<van-search left-icon="gold-coin-o" :value="couponCode" @change="codeChange" use-action-slot shape="round" placeholder="输入口令立即领取" >
-			<view slot="action" @click="getCoupon">领取</view>
-		</van-search>
-		<view class="box">
-			<view :key="index" v-for="(coupon,index) in my_list" class="item">
-				<view class="price"><text style="font-size: 20rpx;">￥</text><text style="font-size: 70rpx;font-weight: bold;">{{coupon.couponPrice}}</text></view>
-				<view class="message">
-					<view style="font-size: 30rpx;color: #17233d;">{{coupon.couponName}}</view>
-					<view style="font-size: 20rpx;color: #808695;margin-top: 5rpx;">{{coupon.createDate}} ~ {{coupon.expTime}}</view>
-					<view style="font-size: 25rpx;color: #515a6e;margin-top: 15rpx;" @click="isShowToast=true">查看说明>></view>
-				</view>
-				<van-popup :show="isShowToast" @close="isShowToast=false" custom-style="height: 20%;padding:20rpx" position="bottom">
-					适用商品：{{coupon.commdityName}}
-				</van-popup>
+	<view style="background: #e8eaec;">
+		<van-popup custom-style="background-color: rgba(0, 0, 0, 0);" :show="isShow" @close="isShow=false" closeable>
+			<view class="content">
+				<input type="text" style="width: 200rpx;" placeholder="请输入口令" :value="code" @input="change">
+				<!-- 立即领取 -->
+				<button @click="getCoupon">立即领取</button>
 			</view>
-			
+		</van-popup>
+
+		<van-tabs active="0" bind:change="onChange">
+			<van-tab tab-active-class="tabActiveClass" name="0" :title="'我的优惠券('+num+')'"></van-tab>
+		</van-tabs>
+
+		<view @click="selectCon(item)" class="list" :key="index" v-for="(item,index) in list">
+			<view class="item">
+				<image src="../../static/discountCoupon/item.png" mode="widthFix"></image>
+				<text>未使用</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -27,80 +28,134 @@
 	export default {
 		data() {
 			return {
-				/* 是否展示说明 */
-				isShowToast: false,
-				my_list:[],
-				/* 口令 */
-				couponCode:''
+				isShow: true,
+				code: '',
+				list: [],
+				num: 0,
+				/* 传入的商品总价 */
+				total: 0
 			}
 		},
 		methods: {
-			codeChange({detail}){
-				this.couponCode = detail;
+			getCoupon() {
+				post.gets({
+					url: `/coupon/${this.code}/upCouponPwd`,
+					data: {
+						userId: uni.getStorageSync('login').userId
+					}
+				}).then(data => {
+					/* 成功 */
+					if (data.data.code === '0') {
+						this.isShow = false;
+						this.getData();
+					} else {
+						uni.showToast({
+							title: data.data.message,
+							icon: 'none'
+						})
+					}
+				})
 			},
-			/* 领取优惠券 */
-			getCoupon(){
-				
-			},
-			/* 获取优惠券 */
-			getDiscount(ticket) {
-				console.log(ticket);
-				this.discount.admin.isModalShow=true;
-			},
-			discountTab({
-				detail
-			}) {
-				this.isShowDiscount = detail;
-			},
-		},
-		onLoad() {
-			post.gets({
-				url:'/coupon/couponAll',
-				data:{
-					page:1,
-					rows:9999,
-					userId:uni.getStorageSync('login').userId
+			/* 选择优惠券 */
+			selectCon(item) {
+				if(isNaN(this.total)){
+					return;
 				}
-			}).then(data=>{
-				this.my_list = data.data.couponList;
-				this.my_list = [...this.my_list,...this.my_list];
-				console.log(this.my_list);
-			})
+
+				if (item.couponPrice > this.total) {
+					uni.showToast({
+						title: '优惠券价格大于商品价格，此优惠券不能使用',
+						icon: 'none'
+					})
+					return;
+				}
+
+				let pages = getCurrentPages();
+				let prevPage = pages[pages.length - 2];
+				prevPage.$vm.coupon.id = item.couponId;
+				prevPage.$vm.coupon.title = item.couponName;
+				prevPage.$vm.coupon.price = item.couponPrice;
+				uni.navigateBack({
+					delta: 1
+				})
+			},
+			getData() {
+				/* 获取当前用户的优惠券 */
+				post.gets({
+					url: '/coupon/couponAll',
+					data: {
+						userId: uni.getStorageSync('login').userId,
+						page: 1,
+						rows: 9999
+					}
+				}).then(data => {
+					this.list = data.data.couponList;
+					if (this.list.length > 0) {
+						this.isShow = false;
+					}
+					this.num = data.data.couponList.length;
+					console.log(this.list);
+				})
+			},
+			change(res) {
+				this.code = res.detail.value
+			}
 		},
-		onReachBottom() {
-		
-		}
+		onLoad({
+			total
+		}) {
+			this.total = Number.parseInt(total);
+			this.getData();
+		},
 	}
 </script>
 
 <style>
-	.box{
-		padding: 0 20rpx;
-		background: #f8f8f9;
+	.content {
+		position: relative;
+		background-image: url('https://xcx.zhongshengzb.com:8089/shoppingImg/images/home-icon/kouling.png');
+		background-size: 100% 100%;
+		width: 735rpx;
+		height: 760rpx;
+		position: relative;
+		margin-bottom: 200rpx;
 	}
-	
-	.box .item{
-		height: 170rpx;
-		background: #fff;
-		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-		margin-top: 20rpx;
-		border-radius: 10rpx;
-		display: flex;
-		overflow: hidden;
+
+	input {
+		position: absolute;
+		top: 458rpx;
+		left: 145rpx;
 	}
-	
-	.box .item .price{
-		width: 25%;
-		height: 100%;
-		text-align: center;
-		background: #ed4014;
+
+	button {
+		position: absolute;
+		top: 558rpx;
+		left: 145rpx;
+		width: 500rpx;
+		height: 100rpx;
+		background: red;
+		opacity: 0;
+	}
+
+	.list {
+		padding: 10rpx 10rpx 0 10rpx;
+		position: relative;
+	}
+
+	.list .item image {
+		position: absolute;
+		width: 98%;
+	}
+
+	.list .item text {
+		top: 100rpx;
+		font-size: 25rpx;
+		position: absolute;
+		right: 30rpx;
 		color: #fff;
-		line-height: 170rpx;
 	}
-	
-	.box .item .message{
-		width: 75%;
-		height: 100%;
-		padding: 20rpx 30rpx;
+
+	.van-ellipsis {
+		color: #d70910;
 	}
 </style>

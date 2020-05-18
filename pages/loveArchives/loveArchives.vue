@@ -6,12 +6,12 @@
 				<view class="header-position">
 					<image class="back" src="../../static/aicheback.png" mode=""></image>
 					<view class="ispositions">
-						<swiper indicator-dots class="u-wrp-bnr" @change="fnChange($event)" style="width:100%" interval="5000" duration="1000" circular="true">
+						<swiper indicator-dots class="u-wrp-bnr" @change="fnChange($event)" style="width:100%" interval="5000" duration="1000"
+						 circular="true">
 							<block class="bannerblock" v-for="(item,index) in usercart" :key="item.mycarId">
 								<swiper-item>
 									<view class="header-position-top">
-										<image class="header-position-top-image" v-if="item.carLogo" :src="item.carLogo"
-										 mode="widthFix"></image>
+										<image class="header-position-top-image" v-if="item.carLogo" :src="item.carLogo" mode="widthFix"></image>
 										<view class="header-position-top-image" v-if="!item.carLogo">暂无图片</view>
 										<view class="header-position-top-view1">{{item.carName}}</view>
 									</view>
@@ -19,15 +19,16 @@
 										<text v-if="item.engineDis">{{item.engineDis}}</text>
 									</view>
 									<view class="header-position-bottom">
-										<view class="header-position-bottom-view" v-if="item.isDefault==='1'"><van-icon name="success"/>已设为默认</view>
-										<view class="header-position-bottom-view" v-if="item.isDefault==='0'" @click="setDefault(item.mycarId)">设为默认</view>
+										<view class="header-position-bottom-view" v-if="item.isDefault==='1'">
+											<van-icon name="success" />已设为默认</view>
+										<view class="header-position-bottom-view" v-if="item.isDefault==='0'" @click="setDefault(item)">设为默认</view>
 									</view>
 								</swiper-item>
 							</block>
 						</swiper>
 					</view>
 				</view>
-				
+
 				<!-- 基本信息开始 -->
 				<view class="loveArchives-cont">
 					<view class="essentialInformation">
@@ -39,7 +40,8 @@
 						<view class="essentialInformation-cont">
 							<view class="essentialInformation-cont-view1">
 								<view>
-									<input disabled type="text" class="essentialInformation-cont-view1-T black" v-model="paiLiang" @change="upDetaCar" value="" />
+									<input disabled type="text" class="essentialInformation-cont-view1-T black" v-model="paiLiang" @change="upDetaCar"
+									 value="" />
 									<view class="essentialInformation-cont-view1-engine">发动机的排量</view>
 								</view>
 								<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
@@ -58,31 +60,33 @@
 							<view class="essentialInformation-cont-view3">款型</view>
 							<input type="text" class="essentialInformation-cont-input black" v-model="kuanXing" @change="upDetaCar" value="" />
 						</view>
-						
+
 						<view class="essentialInformation-cont">
 							<view class="essentialInformation-cont-view5">
 								<input type="date" class="essentialInformation-cont-view1-T black" v-model="shangLu" @change="upDetaCar" value="" />
 								<view>上路时间</view>
 							</view>
 							<view class="essentialInformation-cont-view5">
-								<input type="number" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar" value="" />
+								<input type="number" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar"
+								 value="" />
 								<view>行驶里程(km)</view>
 							</view>
 						</view>
-						
+
 						<view class="essentialInformation-cont register">
 							<view class="essentialInformation-cont-view3">注册时间</view>
-							<input disabled type="date" class="essentialInformation-cont-input black" v-model="zhuCe" @change="upDetaCar" style="margin-left: -200rpx;"/>
+							<input disabled type="date" class="essentialInformation-cont-input black" v-model="zhuCe" @change="upDetaCar"
+							 style="margin-left: -200rpx;" />
 							<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
 						</view>
-						
+
 					</view>
 				</view>
-				
+
 				<button class="Administration" type="primary" @click="gotoMyCart">管理车型</button>
 			</view>
 		</view>
-		
+
 
 		<view class="Isnothing" v-if="!istrue">
 			<view class="titlemsg">
@@ -205,19 +209,18 @@
 				})
 			},
 			// 获取爱车档案
-			getUserCart(id) {
+			getUserCart() {
 				let _this = this;
 				// 大图轮播
 				post.gets({
 					method: 'POST',
-					url: '/car/' + id + '/carUserAll',
+					url: '/car/' + uni.getStorageSync('login').userId + '/carUserAll',
 				}).then(res => {
 					if (res.statusCode === 200) {
 						if (res.data.code == 0) {
 							if (res.data.list.length != 0) {
 								_this.istrue = true
 								_this.usercart = res.data.list;
-								console.log("我的爱车", _this.usercart);
 								_this.fnChange()
 							} else {
 								_this.istrue = false
@@ -249,19 +252,19 @@
 						whetherTransfer: _this.YandN
 					}
 				}).then(res => {
-					_this.getUserCart(_this.userid)
+					_this.getUserCart()
 				});
 
 			},
-			setDefault(id) { //设为默认
-				console.log(id);
+			setDefault(car) { //设为默认
+				console.log(car);
 				let _this = this;
 				// 大图轮播
 				post.gets({
 					method: 'POST',
-					url: '/car/' + _this.userid + "/" + id + '/upDefCar',
+					url: '/car/' + uni.getStorageSync('login').userId + "/" + car.mycarId + '/upDefCar',
 				}).then(res => {
-					_this.getUserCart(_this.userid)
+					_this.getUserCart()
 				});
 			},
 			tianjiacar() {
@@ -271,18 +274,9 @@
 				})
 			}
 		},
-		onLoad() {
-			let _this = this;
-			uni.getStorage({ //获取userid
-				key: 'login',
-				success(res) {
-					_this.userid = res.data.userId
-					if (_this.userid) {
-						_this.getUserCart(_this.userid)
-					}
-				}
-			})
-		},
+		onShow() {
+			this.getUserCart();
+		}
 	}
 </script>
 
@@ -334,8 +328,8 @@
 		box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 		background: #fff;
 	}
-	
-	.header-position .back{
+
+	.header-position .back {
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -354,9 +348,8 @@
 	}
 
 	.header-position-top-view1 {
-		width: 298rpx;
 		height: 60rpx;
-		font-size: 40rpx;
+		font-size: 30rpx;
 		font-family: PingFang SC;
 		font-weight: bold;
 		margin-left: 40rpx;
