@@ -58,8 +58,8 @@
 			return {
 				id: '', //当前门店id 
 				obj: {}, //门店详情信息
-				distanceX: null,
-				distanceY: null,
+				distanceX: '',
+				distanceY: '',
 				commentList: [], //评论信息
 			}
 		},
@@ -112,10 +112,16 @@
 				this.isshow1 = false //隐藏
 			},
 			gotomap() {
-				// 地图导航
-				const _this = this;
-				uni.navigateTo({
-					url: "../isMap/isMap?distanceX=" + _this.distanceX + "&distanceY=" + _this.distanceY
+				console.log(Number.parseFloat(this.distanceX),Number.parseFloat(this.distanceY))
+				wx.openLocation({
+					latitude: Number.parseFloat(this.distanceY),
+					longitude: Number.parseFloat(this.distanceX),
+					success(){
+						
+					},
+					fail(error){
+						console.log(error);
+					}
 				})
 			}
 		},

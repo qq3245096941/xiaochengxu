@@ -29,7 +29,7 @@
 		
 		<!-- 单一广告图 -->
 		<view v-for="(item, index) in bannerList2" :key="index">
-			<image :src="item.imagepath | getImg" mode="widthFix" style="display: block;width: 100%; margin-top: 15rpx;"></image>
+			<image @click="clickImg" :src="item.imagepath | getImg" mode="widthFix" style="display: block;width: 100%; margin-top: 15rpx;"></image>
 		</view>
 
 		<view class="Title">
@@ -89,6 +89,11 @@
 			this.getUserList();
 		},
 		methods: {
+			clickImg(){
+				uni.navigateTo({
+					url:'/pages/discountCoupon/discountCoupon'
+				})
+			},
 			//获取用户登录信息
 			getUserList() {
 				uni.getStorage({

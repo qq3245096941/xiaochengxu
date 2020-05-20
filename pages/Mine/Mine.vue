@@ -23,7 +23,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="header-position-grid">
+			<view class="header-position-grid" style="margin-top: 40rpx;">
 				<navigator url="../order/order">
 					<view class="header-position-grid-box"> 
 						<image class="header-position-grid-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine01.png" mode=""></image>
@@ -296,7 +296,7 @@
 		width:705rpx;
 		height:275rpx; 
 		left: 25rpx;
-		top: 91rpx;
+		top: 130rpx;
 		background:linear-gradient(90deg,rgba(231,63,63,1) 0%,rgba(153,21,26,1) 100%);
 		border-radius:15rpx;
 	}
@@ -418,7 +418,7 @@
 		width:750rpx;
 		height:280rpx;
 		background:rgba(247,248,248,1);
-		padding-top: 147rpx;
+		padding-top: 170rpx;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-around;

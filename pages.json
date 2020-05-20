@@ -86,7 +86,7 @@
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
 					"van-button": "/wxcomponents/vant/dist/button/index"
-					
+
 				}
 			}
 		},
@@ -105,7 +105,7 @@
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
 					"van-button": "/wxcomponents/vant/dist/button/index"
-					
+
 				}
 			}
 		},
@@ -142,7 +142,7 @@
 					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
 					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index"
 				}
-			} 
+			}
 		},
 		{
 			"path": "pages/Lattice/Lattice",
@@ -207,7 +207,13 @@
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
 					"van-swipe-cell": "/wxcomponents/vant/dist/swipe-cell/index",
-					"van-icon": "/wxcomponents/vant/dist/icon/index"
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
 				}
 			}
 		}, {
@@ -568,7 +574,12 @@
 			"style": {
 				"navigationBarTitleText": "车型管理",
 				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000"
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
 			}
 		}
 	],

@@ -3,7 +3,9 @@
 	<view style="background: #e8eaec;">
 		<van-popup custom-style="background-color: rgba(0, 0, 0, 0);" :show="isShow" @close="isShow=false" closeable>
 			<view class="content">
-				<input type="text" style="width: 200rpx;" placeholder="请输入口令" :value="code" @input="change">
+				<view class="input" @click="isFocus=true">
+					<input :focus="isFocus" type="text" style="width: 200rpx;" placeholder="请输入口令" :value="code" @input="change">
+				</view>
 				<!-- 立即领取 -->
 				<button @click="getCoupon">立即领取</button>
 			</view>
@@ -33,7 +35,9 @@
 				list: [],
 				num: 0,
 				/* 传入的商品总价 */
-				total: 0
+				total: 0,
+				/* 输入框是否聚焦 */
+				isFocus:false
 			}
 		},
 		methods: {
@@ -62,7 +66,7 @@
 					return;
 				}
 
-				if (item.couponPrice > this.total) {
+				if (item.couponPrice*100 > this.total*100) {
 					uni.showToast({
 						title: '优惠券价格大于商品价格，此优惠券不能使用',
 						icon: 'none'
@@ -85,6 +89,7 @@
 					url: '/coupon/couponAll',
 					data: {
 						userId: uni.getStorageSync('login').userId,
+						remark:'0',
 						page: 1,
 						rows: 9999
 					}
@@ -104,7 +109,7 @@
 		onLoad({
 			total
 		}) {
-			this.total = Number.parseInt(total);
+			this.total = total;
 			this.getData();
 		},
 	}
@@ -121,10 +126,11 @@
 		margin-bottom: 200rpx;
 	}
 
-	input {
+	.input {
 		position: absolute;
 		top: 458rpx;
 		left: 145rpx;
+		width: 500rpx;
 	}
 
 	button {

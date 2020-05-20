@@ -33,7 +33,7 @@
 			</view>
 
 			<view class="btns">
-				<van-button type="danger" round size="small" @click="wxPay">微信支付</van-button>
+				<van-button type="danger" round size="mini" @click="wxPay" plain>微信支付</van-button>
 			</view>
 		</view>
 		<view class="hen"></view>
@@ -53,6 +53,11 @@
 			text: {
 				type: String,
 				required: true
+			},
+			/* 订单类型，为shop则是购物车 */
+			orderType:{
+				type:String,
+				default:''
 			}
 		},
 		methods: {
@@ -61,7 +66,7 @@
 			},
 			/* 微信支付 */
 			wxPay() {
-				post.wxPay(this.order.orderId, order.sumPrice);
+				post.wxPay(this.order.orderId, this.order.sumPrice);
 			}
 		},
 		data() {

@@ -3,13 +3,13 @@
 	<view>
 		<view style="margin-bottom: 150rpx;">
 			<!-- 基本信息 -->
-			<view style="display: flex;">
+			<!-- <view style="display: flex;">
 				<van-field :border="false" disabled left-icon="manager-o" style="width: 50%;" :value="user.userName" placeholder="请输入姓名"
 				 @change="inputName" />
 				<van-field :border="false" disabled left-icon="phone-circle-o" style="width: 50%;" :value="user.userTel"
 				 placeholder="请输入手机号" @change="inputPhone" />
 			</view>
-			<view class="hen"></view>
+			<view class="hen"></view> -->
 
 			<van-tabs :active="distributionWay.WayIndex" @change="distributionTab">
 				<van-tab :name="0" title="配送至门店">
@@ -34,24 +34,25 @@
 			<!-- 所有商品 -->
 			<view style="padding: 30rpx;">
 				<van-grid :border="false">
-					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.commdityParameter" :info="'x'+commdityNum[index]" :text="commdity.commdityName"/>
+					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.commdityParameter" :info="'x'+commdityNum[index]"
+					 :text="commdity.commdityName" />
 				</van-grid>
 				<view style="color: #515a6e;font-size: 20rpx;margin-left: 20rpx;text-align: right;">共{{commdityList.length}}件商品</view>
 			</view>
 			<view class="hen"></view>
 			<van-cell-group>
 				<van-cell icon="balance-o" title="支付方式" value="在线支付" />
-				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+total"/>
+				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+total" />
 				<van-cell icon="records" url="../selectInvoice/selectInvoice" is-link title="开发票" :value="invoice.title"></van-cell>
 			</van-cell-group>
-			
+
 			<view class="hen"></view>
-			
+
 			<van-cell-group :border="false">
 				<van-cell :key="index" v-for="(price,index) in priceList" :border="false" :title="price.name" :value="'￥'+price.price" />
 			</van-cell-group>
 		</view>
-		<van-submit-bar label="实付:" :price="total*100" button-text="提交订单" @submit="onSubmit" />
+		<van-submit-bar label="实付:" :price="finalPrice*100" button-text="提交订单" @submit="onSubmit" />
 	</view>
 </template>
 
@@ -88,15 +89,17 @@
 				commdityNum: [],
 				/* 总价 */
 				total: 0,
-				commdityClass:'',
+				commdityClass: '',
 				/* 0为普通商品，1为服务商品*/
-				orderType:0,
+				orderType: 0,
 				/* 优惠券id，紧紧适用于服务商品 */
-				coupon:{
-					id:'',
-					title:'选择优惠券',
-					price:0
+				coupon: {
+					id: '',
+					title: '选择优惠券',
+					price: 0
 				},
+				/* 购物车id，表示是从购物车跳转过来的 */
+				carid: '',
 				user: {},
 				userData: {
 					phone: '',
@@ -108,14 +111,11 @@
 						price: 0
 					},
 					{
-						name: '运费',
-						price: 0
-					},
-					{
 						name: '优惠',
 						price: 0
 					},
-				]
+				],
+				finalPrice: 0
 			}
 		},
 		methods: {
@@ -170,25 +170,36 @@
 						break;
 				}
 
-				let commJson = this.commdityList.map((item,index) => {
+				let commJson = this.commdityList.map((item, index) => {
 					return {
 						'commdityCount': this.commdityNum[index],
 						'commdityId': item.commdityId,
-						'commdityClass':this.commdityClass[index]
+						'commdityClass': this.commdityClass[index]
 					}
 				})
+				
+				console.log('总价为',this.finalPrice);
 
 				let obj = {
 					userId: this.user.userId, //当前用户id
 					orderStatus: 0, //订单状态，0商品购买 1服务购买
-					sumPrice: this.total, //总价
+					sumPrice: this.finalPrice, //总价
 					payStat: 0, //付款方式，默认为0，也就是现金支付
 					commJson: JSON.stringify(commJson),
 				}
-				
+
+				/* 是否是从购物车跳转过来的 */
+				if (this.carid !== '') {
+					Reflect.set(obj, 'cartJson', JSON.stringify(this.carid.map(item => {
+						return {
+							cartId: item
+						}
+					})));
+				}
+
 				/* 是否是服务商品 */
-				if(this.orderType===1){
-					Reflect.set(obj,'couponId',this.coupon.id);
+				if (this.orderType === 1) {
+					Reflect.set(obj, 'couponId', this.coupon.id);
 				}
 
 				/* 是否开发票 */
@@ -207,32 +218,37 @@
 					Reflect.set(obj, 'addressId', this.distributionWay.home.id);
 				}
 
-				console.log(obj);
-
 				post.gets({ //创建订单
 					method: "POST",
 					url: "/order/addOrder",
 					data: obj
 				}).then(res => {
+					console.log(res);
 					const orderId = res.data.data;
-					post.wxPay(orderId,this.total);
+					post.wxPay(orderId, this.total);
 				})
 			}
 		},
 		onLoad({
-			list,  //商品id
-			total,
+			list, //商品id 数组
+			total, //总价
 			/* 商品数量，list为[123,123]则num为[1,1] */
 			num,
-			commdityClass,
-			orderType
+			commdityClass, //数组类型
+			orderType,
+			/* 0为普通商品，1为服务商品*/
+			carid //购物车id
 		}) {
 			this.orderType = Number.parseInt(orderType);
 			this.total = total;
 			this.priceList[0].price = total;
-			this.commdityNum  = JSON.parse(num);
+			this.commdityNum = JSON.parse(num);
 			this.commdityClass = JSON.parse(commdityClass);
-			console.log('规格',this.commdityClass)
+
+			if (carid !== undefined) {
+				this.carid = JSON.parse(carid);
+			}
+
 			/* 获取当前用户信息 */
 			const user = uni.getStorageSync('login');
 
@@ -271,15 +287,13 @@
 					this.distributionWay.store.data = data.data.obj;
 				})
 			}
-			
-			console.log(this.coupon);
-			
-			this.priceList[2].price = this.coupon.price;
-			this.total = this.total-this.coupon.price;
+
+			this.priceList[1].price = this.coupon.price;
+			this.finalPrice = this.total - this.priceList[1].price;
 		}
 	}
 </script>
 
 <style>
-	
+
 </style>

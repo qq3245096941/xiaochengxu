@@ -57,6 +57,8 @@
 				let order = this.orderViewList.find((item) => {
 					return item.index === Number.parseInt(this.isSelectTab);
 				})
+				
+				console.log(order);
 
 				post.gets({
 					method: 'GET',
