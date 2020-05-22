@@ -30,8 +30,8 @@
 					</view>
 
 					<view style="text-align: right;">
-						<van-button type="warning" round size="mini" @click="deletePay(commdity,index)">去除</van-button>
-						<van-button type="danger" round size="mini" @click="wxPay(commdity)">去付款</van-button>
+						<van-button type="warning" plain round size="mini" @click="deletePay(commdity,index)">取消</van-button>
+						<van-button type="danger" plain round size="mini" @click="wxPay(commdity)">去付款</van-button>
 					</view>
 				</view>
 				<view class="hen"></view>

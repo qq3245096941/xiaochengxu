@@ -15,23 +15,24 @@
 	export default {
 		data() {
 			return {
-				orderViewList: [{
-						title: '待发货',
-						list: [],
-						index: 1
-					},
+				orderViewList: [
 					{
 						title: '待付款',
 						list: [],
 						index: 0
 					},
 					{
-						title: '待评价',
+						title: '待发货',
 						list: [],
-						index: 3
+						index: 1
 					},
 					{
-						title: '维权',
+						title: '已完成',
+						list: [],
+						index: 7
+					},
+					{
+						title: '待评价',
 						list: [],
 						index: 5
 					},

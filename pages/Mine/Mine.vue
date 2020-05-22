@@ -2,7 +2,7 @@
 	<view>
 		<!-- 头部开始 -->
 		<view class="header">
-			<image style="position: absolute;width: 100%;z-index: -1;" src="../../static/aicheTopBack.png" mode="widthFix"></image>
+			<image style="position: absolute;width: 100%;z-index: -1;" src="../../static/mineBack.png" mode="widthFix"></image>
 			<view class="bannerTop">
 				<view class="Topmap">
 					<text>{{IsCity}}</text>
@@ -24,7 +24,7 @@
 				</view>
 			</view>
 			<view class="header-position-grid" style="margin-top: 40rpx;">
-				<navigator url="../order/order">
+				<navigator url="../order/order?index=0">
 					<view class="header-position-grid-box"> 
 						<image class="header-position-grid-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine01.png" mode=""></image>
 						<view class="header-position-grid-view">我的订单</view>
@@ -63,7 +63,7 @@
 				</view>
 				<view @click="fnheaderCont(5)">
 					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine08.png" mode=""></image>
-					<view>维权</view>
+					<view>售后</view>
 				</view>
 		</view>
 		<!-- 公用标题样式开始 -->
@@ -72,22 +72,22 @@
 		<view class="serviceSettings">
 				<navigator url="../loveArchives/loveArchives">
 					<view class="serviceSettings-box">
-						<image class="serviceSettings-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine11.png" mode=""></image>
+						<image class="serviceSettings-image" src="../../static/home/tab/lovecar.png" mode=""></image>
 						<view class="serviceSettings-view">爱车档案</view>
 					</view>
 				</navigator>
 				<view class="serviceSettings-box" style="position: relative;">
 					<button style="position: absolute;width: 100%;height: 100%;opacity: 0;" open-type="contact"></button>
-					<image class="serviceSettings-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine10.png" mode=""></image>
+					<image class="serviceSettings-image" src="../../static/home/tab/serve.png" mode=""></image>
 					<view class="serviceSettings-view">在线客服</view>
 				</view>
 				<view class="serviceSettings-box" @click="goToAboutUs">
-					<image class="serviceSettings-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine12.png" mode=""></image>
-					<view class="serviceSettings-view">关于我们</view>
+					<image class="serviceSettings-image" src="../../static/home/tab/insurance.png" mode=""></image>
+					<view class="serviceSettings-view">车维保</view>
 				</view>
 				<view class="serviceSettings-box">
 					<navigator url="../opinion/opinion">
-						<image class="serviceSettings-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine14.png" mode=""></image>
+						<image class="serviceSettings-image" src="../../static/home/tab/feedback.png" mode=""></image>
 						<view class="serviceSettings-view">意见反馈</view>
 					</navigator>
 				</view>
@@ -296,7 +296,7 @@
 		width:705rpx;
 		height:275rpx; 
 		left: 25rpx;
-		top: 130rpx;
+		top: 190rpx;
 		background:linear-gradient(90deg,rgba(231,63,63,1) 0%,rgba(153,21,26,1) 100%);
 		border-radius:15rpx;
 	}
@@ -392,7 +392,7 @@
 		display: flex;
 		width: 80%;
 		left: 80rpx;
-		top: 244rpx;
+		top: 294rpx;
 		justify-content: space-around;
 	}
 	.header-position-grid-image{
@@ -403,7 +403,7 @@
 	.header-position-grid-line{
 		width:3rpx;
 		height:36rpx;
-		margin-top: 50rpx;
+		margin-top: 40rpx;
 		background:rgba(255,255,255,1);
 		border-radius:2px;
 	}
@@ -416,9 +416,8 @@
 	/* 九宫格 */
 	.headerCont{
 		width:750rpx;
-		height:280rpx;
 		background:rgba(247,248,248,1);
-		padding-top: 170rpx;
+		padding: 220rpx 0 20rpx 0;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-around;

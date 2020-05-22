@@ -104,6 +104,7 @@ function gets(obj) {
  * @param {NUmber} 0为普通商品，1为服务商品
  */
 function wxPay(orderId,total,orderType=0) {
+	console.log('只要支付的金额为',total)
 	request({
 		method: 'POST',
 		url: '/order/orderPay',

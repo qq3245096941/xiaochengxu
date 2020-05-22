@@ -23,7 +23,11 @@
 								<view style="padding: 20rpx;">
 									<view style="color: #515a6e;font-size: 30rpx;font-weight: bold;">{{commdity.commdityName}}</view>
 									<view style="margin-top: 80rpx;font-size: 25rpx;color: #515a6e;">
-										<text>共{{commdity.commdityCount}}件</text><text style="float: right;color: #ed4014;">￥{{commdity.commdityPrice*commdity.commdityCount}}</text>
+										<text>共{{commdity.commdityCount}}件</text>
+										<text style="float: right;color: #ed4014;">
+											<text v-if="commdity.commdityPrice*commdity.commdityCount!==order.sumPrice" style="text-decoration:line-through;color: #c5c8ce;">￥{{commdity.commdityPrice*commdity.commdityCount}}</text>
+											<text>￥{{order.sumPrice}}</text>
+										</text>
 									</view>
 								</view>
 							</van-col>

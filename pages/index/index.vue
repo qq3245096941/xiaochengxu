@@ -28,13 +28,13 @@
 		<Lattice></Lattice>
 		
 		<!-- 单一广告图 -->
-		<view v-for="(item, index) in bannerList2" :key="index">
+		<view v-for="(item, index) in bannerList2" :key="index" style="padding: 10rpx;">
 			<image @click="clickImg" :src="item.imagepath | getImg" mode="widthFix" style="display: block;width: 100%; margin-top: 15rpx;"></image>
 		</view>
-
-		<view class="Title">
-			<text class="TitleLeft"></text>
-			<text class="titlename">精品推荐</text>
+		
+		<!-- 为你推荐 -->
+		<view>
+			<image src="../../static/recommend.png" mode="widthFix" style="width: 100%;"></image>
 		</view>
 		<!-- 瀑布流布局列表 -->
 		<view>

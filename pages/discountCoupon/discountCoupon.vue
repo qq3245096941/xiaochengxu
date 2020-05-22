@@ -2,8 +2,8 @@
 <template>
 	<view style="background: #e8eaec;">
 		<van-popup custom-style="background-color: rgba(0, 0, 0, 0);" :show="isShow" @close="isShow=false" closeable>
-			<view class="content">
-				<view class="input" @click="isFocus=true">
+			<view class="content" @click="setFocus">
+				<view class="input">
 					<input :focus="isFocus" type="text" style="width: 200rpx;" placeholder="请输入口令" :value="code" @input="change">
 				</view>
 				<!-- 立即领取 -->
@@ -41,6 +41,9 @@
 			}
 		},
 		methods: {
+			setFocus(){
+				this.isFocus = !this.isFocus;
+			},
 			getCoupon() {
 				post.gets({
 					url: `/coupon/${this.code}/upCouponPwd`,
@@ -129,8 +132,12 @@
 	.input {
 		position: absolute;
 		top: 458rpx;
-		left: 145rpx;
-		width: 500rpx;
+		width: 100%;
+	}
+	
+	.input input{
+		margin: 0 auto;
+		width: 200rpx;
 	}
 
 	button {

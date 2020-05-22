@@ -2,14 +2,14 @@
 	<view class="case-page">
 		<view class="list-masonry">
 			<view class="item-masonry" v-for="(item, index) in comList" :key="item.commdityId" @click="gotohomeDetals(item.commdityId)">
-				<van-tag type="danger" v-if="item.commdityRecommed==='0'">推荐</van-tag>
+				<!-- <van-tag type="danger" v-if="item.commdityRecommed==='0'">推荐</van-tag> -->
 				<image :src="item.commdityThnmbnail | getImg" mode="widthFix"></image>
 				<view class="listtitle">
 					<view class="listtitle1">{{ item.commdityName }}</view>
-					<view class="listtitle2">
+					<!-- <view class="listtitle2">
 						<text class="listtitle2son">￥</text>
 						{{ item.commdityPrice }}
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>

@@ -25,7 +25,6 @@
 					<view class="Aright">
 						<van-icon name="arrow" />
 					</view>
-					<view class="brs"></view>
 				</view>
 			</van-cell-group>
 			<view slot="right" style="width:200rpx;height:196rpx;text-align:center;background:red;color:#fff;font-size:30rpx;line-height:196rpx;"
@@ -226,8 +225,6 @@
 	.brs {
 		width: 100%;
 		height: 14rpx;
-		background: linear-gradient(to right, #f40 50%, skyblue 0);
-		background-size: 30rpx 100%;
 		position: absolute;
 		left: 0;
 		bottom: 0;

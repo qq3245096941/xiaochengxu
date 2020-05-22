@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "主页",
+				"navigationBarTitleText": "首页",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#ed4014",
 				"usingComponents": {
@@ -59,7 +59,7 @@
 		}, {
 			"path": "pages/Mine/Mine",
 			"style": {
-				"navigationBarTitleText": "个人中心",
+				"navigationBarTitleText": "",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
@@ -329,16 +329,6 @@
 				"navigationBarBackgroundColor": "#000000"
 			}
 		}, {
-			"path": "pages/chagePhone/chagePhone",
-			"style": {
-				"navigationBarTitleText": "更换手机号",
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#000000",
-				"usingComponents": {
-					"van-icon": "/wxcomponents/vant/dist/icon/index"
-				}
-			}
-		}, {
 			"path": "pages/isSechcCom/isSechcCom",
 			"style": {
 				"navigationBarTitleText": "商品列表",
@@ -569,7 +559,8 @@
 					"van-field": "/wxcomponents/vant/dist/field/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/MyCart/MyCart",
 			"style": {
 				"navigationBarTitleText": "车型管理",
@@ -579,6 +570,34 @@
 					"van-row": "/wxcomponents/vant/dist/row/index",
 					"van-col": "/wxcomponents/vant/dist/col/index",
 					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+		},
+		{
+			"path": "pages/index/pages/engineSynopsis",
+			"style": {
+				"navigationBarTitleText": "机油简介",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index"
+				}
+			}
+		},
+		{
+			"path": "pages/index/pages/maintain",
+			"style": {
+				"navigationBarTitleText": "如何保养",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index"
 				}
 			}
 		}
@@ -594,8 +613,8 @@
 			"iconPath": "static/tabbarimage/home.png",
 			"selectedIconPath": "static/tabbarimage/home1.png"
 		}, {
-			"pagePath": "pages/ClassIfication/classification",
-			"text": "分类",
+			"pagePath": "pages/isSechcCom/isSechcCom",
+			"text": "保养",
 			"iconPath": "./static/tabbarimage/class.png",
 			"selectedIconPath": "static/tabbarimage/class1.png"
 		}, {

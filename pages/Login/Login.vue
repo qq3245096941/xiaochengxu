@@ -53,25 +53,11 @@
 								}
 							}).then(reqq => {
 								/*获取用户信息*/
-								uni.setStorageSync('phonenumber', res.data.data.userTel); //登录信息
+								uni.setStorageSync('phonenumber', res.data.data.userTel); //获取用户的手机号
 								uni.setStorageSync('openid', res.data.data.openId); //登录信息
-
-								/* 登录成功之后判断当前用户是否已经选中爱车 */
-								post.gets({
-									method: 'GET',
-									url: `/car/${_this.userid}/carUserTotalCount`
-								}).then(data => {
-									if (data.data.totalCount > 0) {
-										if (res) {
-											uni.navigateBack({
-												delta: 3
-											})
-										}
-									} else {
-										uni.redirectTo({ 
-											url:'../loveArchives/loveArchives'
-										})
-									}
+								
+								uni.navigateBack({
+									delta: 3
 								})
 							})
 						});

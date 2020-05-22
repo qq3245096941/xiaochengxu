@@ -77,15 +77,31 @@
 				})
 			}
 		},
-		async onLoad() {
+		onLoad() {
+			
+		},
+		async onShow(){ 
 			this.user = uni.getStorageSync('login');
-
+			this.total = 0;
+			
+			/* 登录成功之后判断当前用户是否已经选中爱车 */
+			post.gets({
+				method: 'GET',
+				url: `/car/${this.user.userId}/carUserTotalCount`
+			}).then(data => {
+				if (data.data.totalCount === 0) {
+					uni.navigateTo({
+						url:'../getCartType/getCartType'
+					})
+				}
+			})
+			
 			/* 通过用户获取当前用户爱车信息 */
 			const aicheList = (await post.gets({
 				method: 'POST',
 				url: `/car/${this.user.userId}/carUserAll`
 			})).data.list;
-
+			
 			for (let aiche of aicheList) {
 				console.log(aiche);
 				if (aiche.isDefault === '1') {
@@ -100,16 +116,16 @@
 					}).then(data => {
 						this.firstList = data.data.resultMap.map(item => {
 							let total = 0; 
-
+			
 							/* 是否点击了全选按钮 */
 							item.isClickAll = false;
-
+			
 							item.list.forEach(childItem => {
 								total = total + childItem.commdityPrice;
 							})
-
+			
 							item.total = total;
-
+			
 							return item;
 						});
 					})

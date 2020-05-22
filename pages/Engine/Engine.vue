@@ -58,7 +58,7 @@
 				const total = (await post.gets({
 					url: `/car/${userId}/carUserTotalCount`
 				})).data.totalCount;
-				
+
 				await post.gets({
 					method: 'POST',
 					url: '/car/addCar',
@@ -68,23 +68,15 @@
 						engineDis: item.engine
 					}
 				})
-				
+
 				uni.showToast({
 					title: '添加成功',
 					icon: 'success',
 				})
 
-				if (total > 0) {
-					uni.navigateBack({
-						delta: 2
-					})
-				}else{
-					setTimeout(()=>{
-						uni.switchTab({
-							url: '../Mine/Mine'
-						})
-					},2000);
-				}
+				uni.navigateBack({
+					delta: 2
+				})
 			},
 		},
 		onLoad(vehicleId, carBrand, vehicleName) {

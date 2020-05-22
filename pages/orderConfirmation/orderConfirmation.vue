@@ -149,6 +149,8 @@
 			},
 			/* 提交订单 */
 			onSubmit() {
+				this.finalPrice = this.finalPrice.toFixed(2);
+				
 				switch (this.distributionWay.WayIndex) {
 					case 0:
 						if (this.distributionWay.store.id === '') {
@@ -177,8 +179,6 @@
 						'commdityClass': this.commdityClass[index]
 					}
 				})
-				
-				console.log('总价为',this.finalPrice);
 
 				let obj = {
 					userId: this.user.userId, //当前用户id
@@ -225,7 +225,7 @@
 				}).then(res => {
 					console.log(res);
 					const orderId = res.data.data;
-					post.wxPay(orderId, this.total);
+					post.wxPay(orderId, this.finalPrice);
 				})
 			}
 		},
