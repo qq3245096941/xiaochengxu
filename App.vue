@@ -11,7 +11,7 @@
 		onHide: function() {
 			console.log('App Hide')
 		},
-		url:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/'
+		url:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/',
 	}
 </script>
 

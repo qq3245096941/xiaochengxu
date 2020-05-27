@@ -2,7 +2,7 @@
 	<view>
 		<van-tabs :active="isSelectTab" @change="tabChange">
 			<van-tab :key="index" v-for="(item,index) in orderViewList" :title="item.title" :name="item.index+''">
-				<orderForm :text="item.title" :key="orderIndex" :order="order" v-for="(order,orderIndex) in item.list"></orderForm>
+				<orderForm :index="Number.parseInt(isSelectTab)" :key="orderIndex" :order="order" v-for="(order,orderIndex) in item.list"></orderForm>
 			</van-tab>
 		</van-tabs>
 	</view>
@@ -22,9 +22,9 @@
 						index: 0
 					},
 					{
-						title: '待发货',
+						title: '待收货',
 						list: [],
-						index: 1
+						index: 2
 					},
 					{
 						title: '已完成',
@@ -37,7 +37,7 @@
 						index: 5
 					},
 				],
-				isSelectTab: '1',
+				isSelectTab: '0',
 			}
 		},
 		components: {
@@ -58,8 +58,6 @@
 				let order = this.orderViewList.find((item) => {
 					return item.index === Number.parseInt(this.isSelectTab);
 				})
-				
-				console.log(order);
 
 				post.gets({
 					method: 'GET',

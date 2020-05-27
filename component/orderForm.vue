@@ -1,43 +1,27 @@
 <!-- 订单项目 -->
 <template>
 	<view>
-		<view style="padding:10rpx 30rpx;">
-			<view class="order">
+		<view>
+			<view style="padding: 25rpx;font-size: 25rpx;">
 				<text>订单编号：{{order.orderId}}</text>
 				<text style="float: right;color: #ff9900;">{{text}}</text>
 			</view>
 
-			<view style="border-bottom: 1rpx solid #e8eaec;margin-bottom: 10rpx;">
-				<van-row :key="index" v-for="(commdity,index) in commdityList">
-					<van-col span="2">
-						<view style="margin-top: 70rpx;">
-							<van-checkbox :value="commdity.isClick" @change="setClick(commdity)"></van-checkbox>
-						</view>
-					</van-col>
-					<van-col span="22">
-						<van-row>
-							<van-col span="6">
-								<image style="width: 200rpx;" mode="widthFix" :src="commdity.commdityThnmbnail | getImg"></image>
-							</van-col>
-							<van-col span="18">
-								<view style="padding: 20rpx;">
-									<view style="color: #515a6e;font-size: 30rpx;font-weight: bold;">{{commdity.commdityName}}</view>
-									<view style="margin-top: 80rpx;font-size: 25rpx;color: #515a6e;">
-										<text>共{{commdity.commdityCount}}件</text>
-										<text style="float: right;color: #ed4014;">
-											<text v-if="commdity.commdityPrice*commdity.commdityCount!==order.sumPrice" style="text-decoration:line-through;color: #c5c8ce;">￥{{commdity.commdityPrice*commdity.commdityCount}}</text>
-											<text>￥{{order.sumPrice}}</text>
-										</text>
-									</view>
-								</view>
-							</van-col>
-						</van-row>
-					</van-col>
-				</van-row>
-			</view>
-
-			<view class="btns">
-				<van-button type="danger" round size="mini" @click="wxPay" plain>微信支付</van-button>
+			<view style="border-bottom: 1rpx solid #e8eaec;">
+				<view :key="commdityIndex" v-for="(commdity,commdityIndex) in commdityList" @click="jumpOrderPar()">	
+					<van-card 
+					:origin-price="commdity.commdityPrice*commdity.commdityCount"
+					:num="commdity.commdityCount" 
+					:price="order.sumPrice" 
+					:title="commdity.commdityName" 
+					:thumb="commdity.commdityThnmbnail | getImg">
+						<view slot="footer">
+						    <van-button v-if="index===0" type="danger" round size="mini" @click="wxPay" plain>微信支付</van-button>
+						    <van-button v-if="index===2" type="danger" round size="mini" @click="wxDelivery(commdityIndex)" plain>确认收货</van-button>
+						  </view>
+					</van-card>
+					
+				</view>
 			</view>
 		</view>
 		<view class="hen"></view>
@@ -53,15 +37,32 @@
 				type: Object,
 				required: true
 			},
-			/* 需要展示tab文本 */
-			text: {
-				type: String,
+			index: {
+				type: Number,
 				required: true
-			},
-			/* 订单类型，为shop则是购物车 */
-			orderType:{
-				type:String,
-				default:''
+			}
+		},
+		data() {
+			return {
+				text: ''
+			}
+		},
+		watch: {
+			index(newValue) {
+				switch (newValue) {
+					case 0:
+						this.text = '待付款';
+						break;
+					case 2:
+						this.text = '待收货';
+						break;
+					case 7:
+						this.text = '已完成';
+						break;
+					case 5:
+						this.text = '待评价';
+						break;
+				}
 			}
 		},
 		methods: {
@@ -71,6 +72,34 @@
 			/* 微信支付 */
 			wxPay() {
 				post.wxPay(this.order.orderId, this.order.sumPrice);
+			},
+			/* 待收货 */
+			wxDelivery(index) {
+				post.gets({
+					url: `/order/confimReceipt`,
+					data: {
+						orderId: this.order.orderId
+					}
+				}).then(data => {
+					uni.showToast({
+						title:'已确认收货',
+						icon:'none',
+						success(){
+							this.commdityList.splice(index,1);
+						}
+					})
+				})
+			},
+			/* 跳转到订单详情 */
+			jumpOrderPar(){
+				if(this.index===7){
+					uni.navigateTo({
+						url:`/pages/orderParticulars/orderParticulars?total=${this.order.sumPrice}&orderId=${this.order.orderId}`,
+						fail(error){
+							console.log(error);
+						}
+					})
+				}
 			}
 		},
 		data() {
@@ -81,20 +110,9 @@
 				})
 			}
 		},
-		mounted() {
-
-		}
 	}
 </script>
 
 <style scoped>
-	.order {
-		font-size: 20rpx;
-		padding: 20rpx 0;
-		border-bottom: 1rpx solid #e8eaec;
-	}
-
-	.btns {
-		text-align: right;
-	}
+	
 </style>

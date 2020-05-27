@@ -140,7 +140,8 @@
 					"van-row": "/wxcomponents/vant/dist/row/index",
 					"van-col": "/wxcomponents/vant/dist/col/index",
 					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
-					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index"
+					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+					"van-card": "/wxcomponents/vant/dist/card/index"
 				}
 			}
 		},
@@ -213,7 +214,8 @@
 					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
 					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
 					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
+					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index",
+					"van-card": "/wxcomponents/vant/dist/card/index"
 				}
 			}
 		}, {
@@ -331,7 +333,7 @@
 		}, {
 			"path": "pages/isSechcCom/isSechcCom",
 			"style": {
-				"navigationBarTitleText": "商品列表",
+				"navigationBarTitleText": "选择保养项目",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#000000",
 				"usingComponents": {
@@ -342,7 +344,14 @@
 					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
 					"van-card": "/wxcomponents/vant/dist/card/index",
 					"van-image": "/wxcomponents/vant/dist/image/index",
-					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index"
+					"van-submit-bar": "/wxcomponents/vant/dist/submit-bar/index",
+					"van-dropdown-menu": "/wxcomponents/vant/dist/dropdown-menu/index",
+					"van-dropdown-item": "/wxcomponents/vant/dist/dropdown-item/index",
+					"van-goods-action": "/wxcomponents/vant/dist/goods-action/index",
+					"van-goods-action-icon": "/wxcomponents/vant/dist/goods-action-icon/index",
+					"van-goods-action-button": "/wxcomponents/vant/dist/goods-action-button/index",
+					"van-tag": "/wxcomponents/vant/dist/tag/index",
+					"van-button": "/wxcomponents/vant/dist/button/index"
 				}
 			}
 		}, {

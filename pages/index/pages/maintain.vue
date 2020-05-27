@@ -1,55 +1,6 @@
 <template>
 	<view style="padding: 20rpx;">
-		<ul>
-			<li>
-				<view>一、如何保养？</view>
-				<view>
-					汽车保养是指定期对汽车相关部分进行检查、清洁、补给、润滑、调整或更换某些零件的预防性工作，又称汽车维护。
-				</view>
-			</li>
-			<van-divider />
-			<li>
-				<view>二、为什么保养？</view>
-				<view>
-					汽车保养的目的是保持车容整洁，技术状况正常，消除隐患，预防故障发生，减缓劣化过程，延长使用周期。
-				</view>
-			</li>
-			<van-divider />
-			<li>
-				<view>三、车维保的保养项目</view>
-				<view>
-					汽车保养的目的是保持车容整洁，技术状况正常，消除隐患，预防故障发生，减缓劣化过程，延长使用周期。
-				</view>
-				<ul style="padding: 10rpx;font-size: 25rpx;">
-					<li>
-						<view>* 常规保养( 机油、机滤）</view>
-						<view>
-							机油：机油就是发动机运转的润滑油。能对发动机起到润滑、清洁、冷却、密封、减磨等作用。对于降低发动机零件的磨损，延长使用寿命有着重要的意义。
-							机滤：机油滤芯是过滤机油的部件。机油中都含有一定量的胶质、杂质、水分和添加剂;在发动机工作过程中，各部件摩擦产生的金属屑、吸入空气中的杂质、机油氧化物等，都是机油滤芯过滤的对象。若机油不作过滤，直接进入油路循环，将会对发动机的性能和寿命产生不利的影响。
-						</view>
-					</li>
-					<li>
-						<view>* 更换空气滤清器</view>
-						<view>空滤：发动机在工作过程中要吸进大量的空气，如果空气不经过滤，其中的尘埃会加速活塞组及气缸的磨损。较大的颗粒进入活塞与气缸之间，还会造成严重的“拉缸”现象。空气滤芯的作用就是滤除空气中的灰尘、颗粒，保证气缸中进入足量、清洁的空气。</view>
-					</li>
-					<li>
-						<view>* 更换空调滤清器</view>
-						<view>空调滤：过滤从外界进入车厢内部的空气使空气的洁净度提高，一般的过滤物质是指空气中所包含的杂质。</view>
-					</li>
-				</ul>
-			</li>
-			<van-divider />
-			<li>
-				<view>四、车辆保养周期表</view>
-				<view>
-					汽车保养的目的是保持车容整洁，技术状况正常，消除隐患，预防故障发生，减缓劣化过程，延长使用周期。
-				</view>
-				<ul>
-					<image style="width: 100%;" src="../../../static/nurse.jpg" mode="widthFix"></image>
-				</ul>
-			</li>
-			
-		</ul>
+		<rich-text :nodes="html" space></rich-text>
 	</view>
 </template>
 
@@ -57,11 +8,19 @@
 	export default {
 		data() {
 			return {
-				
+				html:''
 			}
 		},
 		methods: {
 			
+		},
+		onLoad(){
+			uni.request({
+				url:'https://zsxcx.zhongshengzb.com:8446/zs_two/config/configAll',
+				success:(res)=>{
+					this.html = res.data.data[4].sysValue
+				}
+			})
 		}
 	}
 </script>

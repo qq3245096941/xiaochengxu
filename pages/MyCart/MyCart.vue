@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="box" :key="index" v-for="(cart,index) in cartList">
-			<image class="back" src="../../static/aicheback.png" mode="widthFix"></image>
+			<image class="back" :src="'aicheback.png' | webImg" mode="widthFix"></image>
 			<van-row>
 				<van-col span="6">
 					<view style="text-align: center;margin-top: 50rpx;">

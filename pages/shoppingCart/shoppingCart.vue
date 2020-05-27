@@ -1,41 +1,27 @@
 <template>
 	<view>
 		<view class="total">共{{num}}件商品</view>
-		<view style="margin-bottom: 100rpx;">
-			<view :key="index" v-for="(commdity,index) in commdityList">
-				<view style="padding:10rpx 30rpx;">
-					<view style="border-bottom: 1rpx solid #e8eaec;margin-bottom: 10rpx;">
-						<van-row>
-							<van-col span="2">
-								<view style="margin-top: 70rpx;">
-									<van-checkbox :value="commdity.isClick" @change="setClick(commdity)"></van-checkbox>
-								</view>
-							</van-col>
-							<van-col span="22">
-								<van-row>
-									<van-col span="6">
-										<image style="width: 200rpx;" mode="widthFix" :src="commdity.commdityThnmbnail | getImg"></image>
-									</van-col>
-									<van-col span="18">
-										<view style="padding: 20rpx;">
-											<view style="color: #515a6e;font-size: 30rpx;font-weight: bold;">{{commdity.commdityName}}</view>
-											<view style="margin-top: 80rpx;font-size: 25rpx;color: #515a6e;">
-												<text>共{{commdity.commdityCount}}件</text><text style="float: right;color: #ed4014;">￥{{commdity.commdityPrice*commdity.commdityCount}}</text>
-											</view>
-										</view>
-									</van-col>
-								</van-row>
-							</van-col>
-						</van-row>
+		<view :key="index" v-for="(commdity,index) in commdityList">
+			<van-row>
+				<van-col span="3">
+					<view style="margin: 70rpx 0 0 25rpx;">
+						<van-checkbox :value="commdity.isClick" @change="setClick(commdity)"></van-checkbox>
 					</view>
-
-					<view style="text-align: right;">
-						<van-button type="warning" plain round size="mini" @click="deletePay(commdity,index)">取消</van-button>
-						<van-button type="danger" plain round size="mini" @click="wxPay(commdity)">去付款</van-button>
-					</view>
-				</view>
-				<view class="hen"></view>
-			</view>
+				</van-col>
+				<van-col span="21">
+					<van-card custom-class="card" 
+					:num="commdity.commdityCount" 
+					:price="commdity.commdityPrice*commdity.commdityCount" 
+					:title="commdity.commdityName" 
+					:thumb="commdity.commdityThnmbnail | getImg" >
+						<view slot="footer">
+						    <van-button type="warning" plain round size="mini" @click="deletePay(commdity,index)">取消</van-button>
+						    <van-button type="danger" plain round size="mini" @click="wxPay(commdity)">去付款</van-button>
+						  </view>
+					</van-card>
+				</van-col>
+			</van-row>
+			<view class="hen"></view>
 		</view>
 
 		<van-submit-bar button-text="立即支付" :price="total" safe-area-inset-bottom @submit="allSubmit">
@@ -64,7 +50,10 @@
 		methods: {
 			/* 全选提交 */
 			allSubmit() {
-				let [total,list,num,commdityClass,orderType,carid] = [0,[],[],[],0,[]];
+				let [total, list, num, commdityClass, orderType, carid] = [0, [],
+					[],
+					[], 0, []
+				];
 
 				this.commdityList.forEach(commdity => {
 					if (commdity.isClick === true) {
@@ -76,7 +65,7 @@
 						carid = [...carid, commdity.cartId];
 					}
 				})
-				
+
 				list = JSON.stringify(list);
 				num = JSON.stringify(num);
 				commdityClass = JSON.stringify(commdityClass);
@@ -157,11 +146,15 @@
 	}
 </script>
 
-<style scoped>
+<style>
 	.total {
 		background: #e8eaec;
 		font-size: 28rpx;
 		color: #515a6e;
 		padding: 15rpx;
+	}
+	
+	.card{
+		background: #fff;
 	}
 </style>

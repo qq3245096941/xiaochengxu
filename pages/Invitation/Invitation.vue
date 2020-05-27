@@ -10,16 +10,14 @@
 	export default {
 		data() {
 			return {
-				image:'../../static/fenxiang.jpg'
+				image:'https://xcx.zhongshengzb.com:8089/shoppingImg/images/home-icon/qrcode.jpg'
 			}
 		},
 		methods: {
 			invitationClick(){
-				console.log(this.image)
 				uni.downloadFile({
 						url: this.image,
 						success: (res) =>{
-							console.log(res);
 							if (res.statusCode === 200){
 								uni.saveImageToPhotosAlbum({
 									filePath: res.tempFilePath,

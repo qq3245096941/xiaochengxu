@@ -4,13 +4,13 @@
 			<view class="item-masonry" v-for="(item, index) in comList" :key="item.commdityId" @click="gotohomeDetals(item.commdityId)">
 				<!-- <van-tag type="danger" v-if="item.commdityRecommed==='0'">推荐</van-tag> -->
 				<image :src="item.commdityThnmbnail | getImg" mode="widthFix"></image>
-				<view class="listtitle">
+				<!-- <view class="listtitle">
 					<view class="listtitle1">{{ item.commdityName }}</view>
-					<!-- <view class="listtitle2">
+					<view class="listtitle2">
 						<text class="listtitle2son">￥</text>
 						{{ item.commdityPrice }}
-					</view> -->
-				</view>
+					</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
@@ -73,6 +73,7 @@
 	
 	.item-masonry image {
 		width: 100%;
+		display: block;
 	}
 	
 	.listtitle {
@@ -96,134 +97,5 @@
 		}
 	}
 	
-	//页面主样式
-	.u-img-slide {
-		width: 100%;
-		height: 100%;
-	}
 	
-	.Index {
-		width: 100%;
-		height: 100%;
-	
-		.IndexBanner {
-			width: 100%;
-			height: 422rpx;
-			background: #000000;
-	
-			.bannerTop {
-				height: 70rpx;
-				display: flex;
-				width: 100%;
-	
-				.Topmap {
-					color: #fff;
-					font-family: PingFang SC;
-					width: 335rpx;
-					height: 46rpx;
-					font-size: 26rpx;
-					line-height: 46rpx;
-					margin-top: 20rpx;
-					text-indent: 23rpx;
-	
-					text {
-						float: left;
-						clear: both;
-					}
-	
-					.next {
-						float: left;
-						width: 26rpx;
-						height: 26rpx;
-						margin-top: 11rpx;
-					}
-				}
-	
-				.TopSerach {
-					position: relative;
-					width: 415rpx;
-					height: 70rpx;
-	
-					.serchImg {
-						position: absolute;
-						width: 21rpx;
-						height: 23rpx;
-						top: 34rpx;
-						left: 353rpx;
-					}
-	
-					.Search {
-						width: 393rpx;
-						height: 42rpx;
-						border-radius: 20rpx;
-						background: #fff;
-						margin-top: 25rpx;
-						text-indent: 1em;
-					}
-				}
-			}
-	
-			.u-wrp-bnr {
-				width: 100%;
-				height: 352rpx;
-			}
-		}
-	}
-	
-	.alllist {
-		width: 100%;
-		height: 223rpx;
-		line-height: 223rpx;
-		display: inline;
-		white-space: nowrap;
-		overflow-x: scroll;
-		float: left;
-		overflow-y: hidden;
-	
-		.alllistSon1 {
-			margin-top: 65rpx;
-			margin-left: 21rpx;
-			display: inline-block;
-	
-			.baoyangimg {
-				width: 481rpx;
-				height: 168rpx;
-			}
-		}
-	}
-	
-	.Title {
-		clear: both;
-		width: 706rpx;
-		margin-left: 22rpx;
-		height: 112rpx;
-	
-		.TitleLeft {
-			display: inline-block;
-			width: 10rpx;
-			height: 40rpx;
-			background: #d83738;
-			border-radius: 5rpx;
-			float: left;
-			margin-top: 36rpx;
-		}
-	
-		.titlename {
-			margin: 0;
-			padding: 0;
-			display: inline-block;
-			color: #595757;
-			font-size: 36rpx;
-			font-weight: bold;
-			float: left;
-			margin-top: 33rpx;
-			margin-left: 29rpx;
-			letter-spacing: 2px;
-		}
-	}
-	
-	.bannerimg {
-		width: 100%;
-		height: 100%;
-	}
 </style>

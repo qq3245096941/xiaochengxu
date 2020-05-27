@@ -2,7 +2,7 @@
 	<view>
 		<!-- 头部开始 -->
 		<view class="header">
-			<image style="position: absolute;width: 100%;z-index: -1;" src="../../static/mineBack.png" mode="widthFix"></image>
+			<image style="position: absolute;width: 100%;z-index: -1;" :src="'mineBack.png' | webImg" mode="widthFix"></image>
 			<view class="bannerTop">
 				<view class="Topmap">
 					<text>{{IsCity}}</text>

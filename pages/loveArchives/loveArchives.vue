@@ -2,9 +2,9 @@
 	<view>
 		<view v-if="istrue">
 			<view class="header">
-				<image style="position: absolute;width: 100%;" src="../../static/aicheTopBack.png" mode="widthFix"></image>
+				<image style="position: absolute;width: 100%;" :src="'aicheTopBack.png' | webImg" mode="widthFix"></image>
 				<view class="header-position">
-					<image class="back" src="../../static/aicheback.png" mode=""></image>
+					<image class="back" :src="'aicheback.png' | webImg" mode=""></image>
 					<view class="ispositions">
 						<swiper indicator-dots class="u-wrp-bnr" @change="fnChange($event)" style="width:100%" interval="5000" duration="1000"
 						 circular="true">
@@ -64,7 +64,7 @@
 						<view class="essentialInformation-cont">
 							<view class="essentialInformation-cont-view5">
 								<input type="date" class="essentialInformation-cont-view1-T black" v-model="shangLu" @change="upDetaCar" value="" />
-								<view>上路时间</view>
+								<view>车架号</view>
 							</view>
 							<view class="essentialInformation-cont-view5">
 								<input type="number" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar"
@@ -238,7 +238,7 @@
 					url: '/car/upCar',
 					data: {
 						mycarId: _this.mycarId,
-						userId: _this.userid,
+						userId: uni.getStorageSync('login').userId,
 						engineDis: _this.paiLiang,
 						productionYear: _this.creatYear,
 						typeMoney: _this.kuanXing,

@@ -10,6 +10,21 @@ Vue.filter('getImg',function(url){
 	return post.url + url;
 })
 
+Vue.mixin({
+	methods:{
+		makingCall(){
+			uni.makePhoneCall({
+				phoneNumber:'4006456777'
+			})
+
+		}
+	}
+})
+
+Vue.filter('webImg',function(name){
+	return 'https://xcx.zhongshengzb.com:8089/shoppingImg/images/home-icon/'+name;
+})
+
 const app = new Vue({
 	...App
 });

@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<view class="title">
+	<view style="padding: 20rpx;">
+		<!-- <view class="title">
 			<view class="title-image">
 				<image class="timg" src="../../static/basicprofile.png" mode=""></image>
 			</view>
@@ -9,7 +9,9 @@
 		<view class="Found">
 			中盛(天津）汽车服务有限公司是一家利用自身的“双CRM”模式，整合技术专家团队、数据精算团队、IT研发团队组成车辆保障项目团队，全面做好车辆质量保修服务项目的保障方案设计、产品精算定价、承保/理赔审核、管理规范制定、案件管理、数据挖掘等风险管控服务的工作。
 		</view>
-		<!-- <view class="Edition">版本号V6.4.5</view> -->
+		<view class="Edition">版本号V6.4.5</view> -->
+		
+		<rich-text :nodes="html" space></rich-text>
 	</view>
 </template>
 
@@ -17,10 +19,16 @@
 	export default {
 		data() {
 			return {
+				html:''
 			}
 		},
 		onLoad() {
-
+			uni.request({
+				url:'https://zsxcx.zhongshengzb.com:8446/zs_two/config/configAll',
+				success:(res)=>{
+					this.html = res.data.data[3].sysValue
+				}
+			})
 		},
 		methods: {
 

@@ -14,7 +14,7 @@
 		 <view class="order">
 			 <ul>
 				 <li>订单编号：{{order.orderId}}</li>
-				 <li>创建时间：{{order.paymentTime}}</li>
+				 <li>创建时间：{{order.createDate}}</li>
 				 <li>支付方式：线上支付</li>
 				 <li>配送方式：{{order.freeShip==='1'?'配送至门店':'配送至家'}}</li>
 			 </ul>
@@ -32,7 +32,8 @@
 		 <view style="font-size: 30rpx;color: #17233d;float: right;padding: 0 40rpx;">实付款：<text style="color: #ed4014;">￥{{total}}</text></view>
 			
 		 <view class="btns">
-			 <van-button open-type="contact" icon="service-o" type="default" block>在线客服</van-button><van-button icon="phone-circle-o" type="default" block>电话咨询</van-button>
+			 <van-button open-type="contact" icon="service-o" type="default" block>在线客服</van-button>
+			 <van-button icon="phone-circle-o" type="default" block @click="makingCall">电话咨询</van-button>
 		 </view>
 		
 	</view>
@@ -55,10 +56,12 @@
 		methods: {
 
 		},
+		/**
+		 * @param options.total 总价
+		 * @param options.orderId 订单id 
+		 */
 		async onLoad(options) {
-			console.log(options);
 			this.total = options.total;
-
 			this.order = (await post.gets({
 				method: 'GET',
 				url: `/order/${options.orderId}/searchOrderInfo`
@@ -68,8 +71,6 @@
 				item.commdityThnmbnail = post.url + item.commdityThnmbnail;
 				return item;
 			});
-
-			console.log(this.order);
 
 			this.user = (await post.gets({
 				method: 'POST',

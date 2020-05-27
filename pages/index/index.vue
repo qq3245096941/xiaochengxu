@@ -26,16 +26,15 @@
 		<!-- 纵向轮播组件 -->
 		<!-- <Portrait></Portrait> -->
 		<Lattice></Lattice>
-		
-		<!-- 单一广告图 -->
-		<view v-for="(item, index) in bannerList2" :key="index" style="padding: 10rpx;">
-			<image @click="clickImg" :src="item.imagepath | getImg" mode="widthFix" style="display: block;width: 100%; margin-top: 15rpx;"></image>
+
+		<view style="padding: 0 20rpx;">
+			<image @click="clickImg" :src="bannerList2[0].imagepath | getImg" mode="widthFix" style="width: 100%;display: block;"></image>
 		</view>
-		
-		<!-- 为你推荐 -->
-		<view>
-			<image src="../../static/recommend.png" mode="widthFix" style="width: 100%;"></image>
-		</view>
+		<image src="../../static/recommend.png" mode="widthFix" style="width: 100%;"></image>
+		<!-- 第二张广告图 -->
+		<view class="advertising">
+			<image :src="bannerList2[1].imagepath | getImg" mode="widthFix"></image>
+		</view> 
 		<!-- 瀑布流布局列表 -->
 		<view>
 			<commdity :comList="comList"></commdity>
@@ -85,13 +84,13 @@
 			Lattice,
 			commdity
 		},
-		onShow(){
+		onShow() {
 			this.getUserList();
 		},
 		methods: {
-			clickImg(){
+			clickImg() {
 				uni.navigateTo({
-					url:'/pages/discountCoupon/discountCoupon'
+					url: '/pages/discountCoupon/discountCoupon'
 				})
 			},
 			//获取用户登录信息
@@ -135,11 +134,11 @@
 					data: {
 						page: this.page,
 						rows: 10,
-						commdityRecommd:0
+						commdityRecommd: 0
 					}
 				}).then(res => {
 					let list = res.data.commdityList;
-					this.comList = [...this.comList,...list];
+					this.comList = [...this.comList, ...list];
 				});
 			},
 
@@ -174,59 +173,17 @@
 </script>
 
 <style scoped="scoped" lang="scss">
-	//瀑布流
-	page {
-		background-color: #eee;
-		height: 100%;
-	}
-
-	.case-page {
-		padding: 22rpx;
-	}
-
-	.list-masonry {
-		column-count: 2;
-		column-gap: 20rpx;
-	}
-
-	.item-masonry {
-		box-sizing: border-box;
-		border-radius: 15rpx;
-		overflow: hidden;
-		background-color: #fff;
-		break-inside: avoid;
-		/*避免在元素内部插入分页符*/
-		box-sizing: border-box;
-		margin-bottom: 20rpx;
-		box-shadow: 0px 0px 28rpx 1rpx rgba(78, 101, 153, 0.14);
-	}
-
-	.item-masonry image {
-		width: 100%;
-	}
-
-	.listtitle {
-		padding-left: 22rpx;
-		height: 171rpx;
-		font-size: 24rpx;
-
-		.listtitle1 {
-			line-height: 39rpx;
-		}
-
-		.listtitle2 {
-			color: #ff0000;
-			font-size: 30rpx;
-			line-height: 30rpx;
-			font-weight: bold;
-			padding-top: 22rpx;
-
-			.listtitle2son {
-				font-size: 18rpx;
-			}
+	/* 广告 */
+	.advertising{
+		padding: 10rpx 20rpx 0 20rpx;
+		
+		image{
+			width: 100%;
+			border-radius: 15rpx;
+			display: block;
 		}
 	}
-
+	
 	//页面主样式
 	.u-img-slide {
 		width: 100%;
@@ -234,20 +191,17 @@
 	}
 
 	.Index {
+		position: absolute;
 		width: 100%;
 		height: 100%;
 
 		.IndexBanner {
-			
 			width: 100%;
 			height: 422rpx;
 			background: #fff;
 
 			.bannerTop {
-				height: 70rpx;
 				display: flex;
-				padding: 10rpx 20rpx 20rpx 20rpx;
-				width: 100%;
 
 				.Topmap {
 					color: #000;
@@ -277,7 +231,8 @@
 					width: 415rpx;
 					height: 70rpx;
 					margin-right: 20rpx;
-					
+					padding: 0 0 20rpx 0;
+
 
 					.serchImg {
 						position: absolute;
