@@ -63,11 +63,11 @@
 
 						<view class="essentialInformation-cont">
 							<view class="essentialInformation-cont-view5">
-								<input type="date" class="essentialInformation-cont-view1-T black" v-model="shangLu" @change="upDetaCar" value="" />
+								<input type="text" class="essentialInformation-cont-view1-T black" maxlength="11" v-model="shangLu" @change="upDetaCar" value="" />
 								<view>车架号</view>
 							</view>
 							<view class="essentialInformation-cont-view5">
-								<input type="number" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar"
+								<input type="number" maxlength="5" class="essentialInformation-cont-view1-T black" v-model="liCheng" @change="upDetaCar"
 								 value="" />
 								<view>行驶里程(km)</view>
 							</view>
@@ -208,7 +208,6 @@
 					url: '../MyCart/MyCart'
 				})
 			},
-			// 获取爱车档案
 			getUserCart() {
 				let _this = this;
 				// 大图轮播
@@ -221,19 +220,25 @@
 							if (res.data.list.length != 0) {
 								_this.istrue = true
 								_this.usercart = res.data.list;
-								_this.fnChange()
+								
+								_this.fnChange({
+									detail:{
+										current:_this.index
+									}
+								})
 							} else {
 								_this.istrue = false
 							}
 						}
 					}
 				});
+
 			},
 			//更新车辆信息
-			upDetaCar() {
+			async upDetaCar() {
 				let _this = this;
 				// 大图轮播
-				post.gets({
+				await post.gets({
 					method: 'POST',
 					url: '/car/upCar',
 					data: {
@@ -251,10 +256,9 @@
 						insureCity: _this.City,
 						whetherTransfer: _this.YandN
 					}
-				}).then(res => {
-					_this.getUserCart()
 				});
-
+				
+				this.getUserCart();
 			},
 			setDefault(car) { //设为默认
 				console.log(car);

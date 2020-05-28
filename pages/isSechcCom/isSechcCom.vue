@@ -39,7 +39,7 @@
 			
 			<view class="text">
 				<view>合计：<text style="color: #ed4014;font-size: 50rpx;font-weight: bold;"><text style="font-size: 30rpx;">￥</text>{{total}}</text></view>
-				<view class="abandon">不包含安装费</view>
+				<!-- <view class="abandon">包含安装费</view> -->
 			</view>
 			
 			<view class="btn">

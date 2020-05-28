@@ -16,7 +16,6 @@
 			<input class="opinion-phone-input" type="text" value="" />
 		</view>
 		<view class="opinion-button" @tap="fnClick">提交反馈</view>
-		<view class="opinion-bangzhu">紧急问题可拨打<text class="opinion-bangzhu-text">12313654</text>紧急问题可拨打</view>
 	</view>
 </template>
 

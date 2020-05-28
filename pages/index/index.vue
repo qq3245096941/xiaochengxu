@@ -28,12 +28,12 @@
 		<Lattice></Lattice>
 
 		<view style="padding: 0 20rpx;">
-			<image @click="clickImg" :src="bannerList2[0].imagepath | getImg" mode="widthFix" style="width: 100%;display: block;"></image>
+			<image @click="clickImg" :src="tup0 | getImg" mode="widthFix" style="width: 100%;display: block;"></image>
 		</view>
-		<image src="../../static/recommend.png" mode="widthFix" style="width: 100%;"></image>
+		<image v-if="tup0!==''" src="../../static/recommend.png" mode="widthFix" style="width: 100%;"></image>
 		<!-- 第二张广告图 -->
-		<view class="advertising">
-			<image :src="bannerList2[1].imagepath | getImg" mode="widthFix"></image>
+		<view class="advertising" v-if="tup1!==''">
+			<image :src="tup1 | getImg" mode="widthFix"></image>
 		</view> 
 		<!-- 瀑布流布局列表 -->
 		<view>
@@ -58,7 +58,8 @@
 				page: 1, //商品页数
 				comList: [], //商品列表
 				IsCity: "", //当前位置
-				bannerList2: []
+				tup0:'',
+				tup1:''
 			};
 		},
 		onLoad() {
@@ -74,12 +75,13 @@
 					type: 'h'
 				}
 			}).then(data => {
-				console.log('单一广告也', data);
-				this.bannerList2 = data.data.list;
+				let list = data.data.list
+				this.tup0 = list[0].imagepath;
+				this.tup1 = list[1].imagepath;
 			})
 
 		},
-		components: {
+		components: { 
 			Portrait,
 			Lattice,
 			commdity

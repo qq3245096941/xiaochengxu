@@ -141,7 +141,9 @@
 					"van-col": "/wxcomponents/vant/dist/col/index",
 					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
 					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
-					"van-card": "/wxcomponents/vant/dist/card/index"
+					"van-card": "/wxcomponents/vant/dist/card/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index"
 				}
 			}
 		},

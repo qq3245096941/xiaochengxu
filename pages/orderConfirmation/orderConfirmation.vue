@@ -34,8 +34,8 @@
 			<!-- 所有商品 -->
 			<view style="padding: 30rpx;">
 				<van-grid :border="false">
-					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.commdityParameter" :info="'x'+commdityNum[index]"
-					 :text="commdity.commdityName" />
+					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.commdityThnmbnail | getImg"
+					 :info="'x'+commdityNum[index]" :text="commdity.commdityName" />
 				</van-grid>
 				<view style="color: #515a6e;font-size: 20rpx;margin-left: 20rpx;text-align: right;">共{{commdityList.length}}件商品</view>
 			</view>
@@ -150,7 +150,7 @@
 			/* 提交订单 */
 			onSubmit() {
 				this.finalPrice = this.finalPrice.toFixed(2);
-				
+
 				switch (this.distributionWay.WayIndex) {
 					case 0:
 						if (this.distributionWay.store.id === '') {

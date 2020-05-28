@@ -34,7 +34,7 @@
 					{
 						title: '待评价',
 						list: [],
-						index: 5
+						index: 3
 					},
 				],
 				isSelectTab: '0',
