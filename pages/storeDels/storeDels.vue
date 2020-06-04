@@ -5,12 +5,12 @@
 				<image mode="widthFix" :src="banner.amUrl | getImg" style="display: block;width: 100%;"></image>
 			</swiper-item>
 		</swiper>
-		<view class="quality">
+		<!-- <view class="quality">
 			<van-icon name="passed" /><text style="margin-right: 30rpx;">30天质保</text>
 			<van-icon name="passed" /><text style="margin-right: 30rpx;">正品保证</text>
 			<van-icon name="passed" /><text style="margin-right: 30rpx;">7天退货</text>
 			<van-icon name="passed" /><text style="margin-right: 50rpx;">全国联保</text>
-		</view>
+		</view> -->
 		<view style="color: #ed4014;padding: 20rpx 0 20rpx 40rpx;"><text style="font-size: 18rpx;">￥</text><text style="font-size: 50rpx;">{{commdity.commdityPrice}}</text></view>
 		<view style="padding: 0 0 30rpx 30rpx;font-size: 30rpx;font-weight: bold;">{{commdity.commdityName}}</view>
 		<van-tabs active="0">

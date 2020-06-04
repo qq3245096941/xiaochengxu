@@ -36,10 +36,10 @@
 					<view class="evaluate-top-cont">
 						<view class="evaluate-top-cont-shang">
 							<view style="color: #000000;font-size: 20rpx;">{{comment.userName}}</view>
-							<!-- <view style="margin-left: -200rpx;">牌子 车型</view> -->
 							<view>{{comment.createDate | timeFormatting}}</view>
 						</view>
-						<view class="evaluate-cont">{{comment.content}}</view>
+						<view class="evaluate-cont">{{comment.comTitle}}</view>
+						<van-uploader :file-list="comment.content" preview-size="60" :deletable="false" accept="image"/>
 					</view>
 				</view>
 			</view>
@@ -80,7 +80,6 @@
 				}).then(res => {
 					if (res.statusCode === 200 && res.data.code == 0) {
 						this.obj = res.data.obj;
-						console.log(res);
 						/* 设置标题 */
 						uni.setNavigationBarTitle({
 							title: this.obj.storeName
@@ -88,10 +87,12 @@
 
 						this.distanceX = res.data.obj.distanceX;
 						this.distanceY = res.data.obj.distanceY;
+						
 						/* 评论信息 */
-						this.commentList = res.data.commentList;
-						console.log(this.commentList);
-
+						this.commentList = res.data.commentList.map(item=>{
+							item.content = JSON.parse(item.content);
+							return item;
+						});
 					}
 				})
 			},
@@ -130,13 +131,16 @@
 		}) {
 			// id=280
 			this.id = id;
-			console.log(id);
 			this.getStoreList()
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+	.van-uploader__upload{
+		display: none !important;
+	}
+	
 	//下拉弹框
 	.guige {
 		width: 92%;
@@ -455,6 +459,7 @@
 			width: 676rpx;
 			font-size: 26rpx;
 			font-family: PingFang SC;
+			margin-bottom: 20rpx;
 			font-weight: 500;
 			color: rgba(103, 103, 103, 1);
 		}

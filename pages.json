@@ -117,7 +117,8 @@
 					"van-divider": "/wxcomponents/vant/dist/divider/index",
 					"van-rate": "/wxcomponents/vant/dist/rate/index",
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
-					"van-button": "/wxcomponents/vant/dist/button/index"
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index"
 				}
 			}
 		},
@@ -315,7 +316,8 @@
 				"usingComponents": {
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
 					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
-					"van-rate": "/wxcomponents/vant/dist/rate/index"
+					"van-rate": "/wxcomponents/vant/dist/rate/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index"
 				}
 			}
 		}, {

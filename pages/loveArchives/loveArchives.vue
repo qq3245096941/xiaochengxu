@@ -29,6 +29,8 @@
 					</view>
 				</view>
 
+				
+
 				<!-- 基本信息开始 -->
 				<view class="loveArchives-cont">
 					<view class="essentialInformation">
@@ -37,7 +39,15 @@
 							<text class="essentialInformation-title-text1">基本信息</text>
 							<text class="essentialInformation-title-text2">为您精确匹配保养服务和配件</text>
 						</view>
-						<view class="essentialInformation-cont">
+						
+						<van-cell-group>
+							<van-field label="发动机排量" :value="paiLiang" :border="false" disabled />
+							<van-field label="生产年份" :value="creatYear"  :border="false" @change="dateChange" />
+							<van-field label="车架号" :value="shangLu"  :border="false" @change="chejiaChange" />
+							<van-field label="注册时间" :value="zhuCe"  :border="false" disabled />
+						</van-cell-group>
+						
+						<!-- <view class="essentialInformation-cont">
 							<view class="essentialInformation-cont-view1">
 								<view>
 									<input disabled type="text" class="essentialInformation-cont-view1-T black" v-model="paiLiang" @change="upDetaCar"
@@ -78,7 +88,7 @@
 							<input disabled type="date" class="essentialInformation-cont-input black" v-model="zhuCe" @change="upDetaCar"
 							 style="margin-left: -200rpx;" />
 							<image class="essentialInformation-cont-view1-image" src="../../static/home/my03.png" mode=""></image>
-						</view>
+						</view> -->
 
 					</view>
 				</view>
@@ -132,6 +142,14 @@
 			}
 		},
 		methods: {
+			chejiaChange({detail}){
+				this.shangLu = detail;
+				this.upDetaCar();
+			},
+			dateChange({detail}){
+				this.creatYear = detail;
+				this.upDetaCar();
+			},
 			// 获取轮播车辆下标
 			fnChange(event) {
 				const _this = this;
@@ -220,10 +238,10 @@
 							if (res.data.list.length != 0) {
 								_this.istrue = true
 								_this.usercart = res.data.list;
-								
+
 								_this.fnChange({
-									detail:{
-										current:_this.index
+									detail: {
+										current: _this.index
 									}
 								})
 							} else {
@@ -257,7 +275,7 @@
 						whetherTransfer: _this.YandN
 					}
 				});
-				
+
 				this.getUserCart();
 			},
 			setDefault(car) { //设为默认

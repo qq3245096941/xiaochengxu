@@ -16,7 +16,17 @@ Vue.mixin({
 			uni.makePhoneCall({
 				phoneNumber:'4006456777'
 			})
-
+		},
+		/* 是否登录 */
+		isLogin(){
+			if(uni.getStorageSync('openid')===''){
+				uni.redirectTo({
+					url: "/pages/Authorization/Authorization",
+					fail(error){
+						console.log(error);
+					}
+				})
+			}
 		}
 	}
 })

@@ -3,7 +3,7 @@
 		<view class="IndexBanner">
 			<view class="bannerTop">
 				<view class="Topmap">
-					<text>{{IsCity}}</text>
+					<text>{{address}}</text>
 					<van-icon class="next" name="location-o" />
 				</view>
 				<view class="TopSerach">
@@ -27,7 +27,7 @@
 		<!-- <Portrait></Portrait> -->
 		<Lattice></Lattice>
 
-		<view style="padding: 0 20rpx;">
+		<view style="padding: 0 20rpx;" v-if="tup0!==''">
 			<image @click="clickImg" :src="tup0 | getImg" mode="widthFix" style="width: 100%;display: block;"></image>
 		</view>
 		<image v-if="tup0!==''" src="../../static/recommend.png" mode="widthFix" style="width: 100%;"></image>
@@ -57,17 +57,17 @@
 				bannerList: [], //轮播图列表
 				page: 1, //商品页数
 				comList: [], //商品列表
-				IsCity: "", //当前位置
+				address: '', //当前位置
 				tup0:'',
 				tup1:''
 			};
 		},
 		onLoad() {
-			const _this = this;
-			_this.getuserLo()
+			post.getLocation().then(data=>{
+				this.address = data.address.city
+			})
 			this.getcomList();
-			_this.getBanner(); //获取轮播
-
+			this.getBanner(); //获取轮播
 			/* 获取单一广告图 */
 			post.gets({
 				url: '/banner/bannerAll',
@@ -79,35 +79,17 @@
 				this.tup0 = list[0].imagepath;
 				this.tup1 = list[1].imagepath;
 			})
-
 		},
 		components: { 
 			Portrait,
 			Lattice,
 			commdity
 		},
-		onShow() {
-			this.getUserList();
-		},
 		methods: {
+			/* 点击第一章广告图 */
 			clickImg() {
 				uni.navigateTo({
 					url: '/pages/discountCoupon/discountCoupon'
-				})
-			},
-			//获取用户登录信息
-			getUserList() {
-				uni.getStorage({
-					key: 'login',
-					success(res) {
-
-					},
-					fail(res) {
-						uni.navigateTo({
-							url: "../Authorization/Authorization"
-						})
-					}
-
 				})
 			},
 			// 获取轮播图
@@ -142,34 +124,11 @@
 					let list = res.data.commdityList;
 					this.comList = [...this.comList, ...list];
 				});
-			},
-
-			getuserLo() {
-				const _this = this;
-				wx.getLocation({
-					type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-					success(res) {
-						let latitude = res.latitude;
-						let longitude = res.longitude;
-						let keys = 'SGXBZ-6X3K6-NYLSF-MALZD-QC6PK-BABOS';
-						wx.request({
-							url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${keys}`,
-							success(res) {
-								console.log(res.data.result.address_component)
-								_this.IsCity = res.data.result.address_component.district;
-							}
-						});
-					},
-					fail(res) {
-						console.log(res);
-					}
-				});
-			},
+			}
 		},
 		onReachBottom: function() {
-			const _this = this;
-			_this.page++;
-			_this.getcomList(); //获取商品列表
+			this.page++;
+			this.getcomList(); //获取商品列表
 		}
 	};
 </script>

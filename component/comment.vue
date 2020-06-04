@@ -5,12 +5,11 @@
 			<view class="message">
 				<van-image width="32" height="32" round :src="common.userTx" />
 				<view style="font-size: 28rpx;font-weight: bold;margin-left: 20rpx;">{{common.userName}}</view>
-				<van-rate readonly :value="common.levelType" />
 			</view>
 			<view class="content">
-				{{common.content}}
+				{{common.title}}
 			</view>
-			<van-divider />
+			<van-uploader :file-list="common.imgs" preview-size="60" :deletable="false"/><van-divider />
 		</view>
 	
 		</van-popup>
@@ -30,7 +29,7 @@
 		data() {
 			return {
 				commonList: [],
-				page: 1
+				page: 1,
 			}
 		},
 		methods: {
@@ -43,7 +42,11 @@
 						rows: 9999
 					}
 				}).then(data => {
-					this.commonList = data.data.commentList;
+					this.commonList = data.data.commentList.map(item=>{
+						item.title = item.comTitle;
+						item.imgs = JSON.parse(item.content);
+						return item;
+					});
 				})
 			}
 		},
@@ -71,6 +74,11 @@
 	}
 
 	.common .content {
-		font-size: 25rpx;
+		font-size: 35rpx;
+		margin-bottom: 20rpx;
+	}
+	
+	.van-uploader__upload{
+		display: none !important;
 	}
 </style>

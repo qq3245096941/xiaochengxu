@@ -61,9 +61,9 @@
 					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine07.png" mode=""></image>
 					<view>待评价</view>
 				</view>
-				<view @click="fnheaderCont(5)">
+				<view @click="makingCall">
 					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine08.png" mode=""></image>
-					<view>售后</view>
+					<view>拨打电话</view>
 				</view>
 		</view>
 		<!-- 公用标题样式开始 -->
@@ -112,7 +112,9 @@
 			}
 		}, 
 		onLoad() {
-			const _this = this ;
+			const _this = this;
+			this.isLogin();
+			
 			_this.getcomList(_this.page)//获取商品列表
 			_this.getUserId()
 			_this.getTrueList()//附近门店

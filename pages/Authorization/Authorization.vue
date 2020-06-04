@@ -36,8 +36,6 @@
 					})
 				});
 
-				console.log(user);
-
 				const userData = (await post.gets({
 					method: 'POST',
 					url: '/user/loginUser',
@@ -46,8 +44,9 @@
 					}
 				})).data.obj;
 				
-				uni.setStorageSync('login', userData); //登录
 				console.log(userData);
+				
+				uni.setStorageSync('login', userData); //登录
 
 				/* 更新当前用户信息，就是将昵称和头像传入后台 */
 				await post.gets({

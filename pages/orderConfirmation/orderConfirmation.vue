@@ -33,7 +33,7 @@
 			<view class="hen"></view>
 			<!-- 所有商品 -->
 			<view style="padding: 30rpx;">
-				<van-grid :border="false">
+				<van-grid :border="false" square center>
 					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.commdityThnmbnail | getImg"
 					 :info="'x'+commdityNum[index]" :text="commdity.commdityName" />
 				</van-grid>
@@ -116,6 +116,12 @@
 					},
 				],
 				finalPrice: 0
+			}
+		},
+		watch: {
+			'coupon.price'(newValue) {
+				this.priceList[1].price = newValue;
+				this.finalPrice = this.total - newValue;
 			}
 		},
 		methods: {
@@ -249,6 +255,27 @@
 				this.carid = JSON.parse(carid);
 			}
 
+			/* 获取当前用户的优惠券 */
+			post.gets({
+				method: 'POST',
+				url: '/coupon/couponAll',
+				data: {
+					page: 1,
+					rows: 9999,
+					userId: uni.getStorageSync('login').userId
+				}
+			}).then(data => {
+				let list = data.data.couponList;
+				if (list[0].couponPrice < total) {
+					this.coupon = {
+						id: list[0].couponId,
+						title: list[0].couponName,
+						price: list[0].couponPrice
+					}
+				}
+			})
+
+
 			/* 获取当前用户信息 */
 			const user = uni.getStorageSync('login');
 
@@ -287,13 +314,12 @@
 					this.distributionWay.store.data = data.data.obj;
 				})
 			}
-
-			this.priceList[1].price = this.coupon.price;
-			this.finalPrice = this.total - this.priceList[1].price;
 		}
 	}
 </script>
 
 <style>
-
+	.van-grid-item__text {
+		font-size: 20rpx !important;
+	}
 </style>

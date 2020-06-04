@@ -22,7 +22,12 @@
 						index: 0
 					},
 					{
-						title: '待收货',
+						title:'已付款',
+						list:[],
+						index:1
+					},
+					{
+						title: '配送中',
 						list: [],
 						index: 2
 					},

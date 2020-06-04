@@ -2,7 +2,6 @@
 	<view class="case-page">
 		<view class="list-masonry">
 			<view class="item-masonry" v-for="(item, index) in comList" :key="item.commdityId" @click="gotohomeDetals(item.commdityId)">
-				<!-- <van-tag type="danger" v-if="item.commdityRecommed==='0'">推荐</van-tag> -->
 				<image :src="item.commdityThnmbnail | getImg" mode="widthFix"></image>
 				<!-- <view class="listtitle">
 					<view class="listtitle1">{{ item.commdityName }}</view>
@@ -34,6 +33,7 @@
 		methods:{
 			//跳转首页产品详情
 			gotohomeDetals(id) {
+				this.isLogin();
 				//商品详情
 				uni.navigateTo({
 					url: '../storeDels/storeDels?id=' + id

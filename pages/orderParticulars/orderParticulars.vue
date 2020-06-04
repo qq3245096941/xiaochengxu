@@ -29,7 +29,7 @@
 			 </ul>
 		 </view>
 		 <van-divider />
-		 <view style="font-size: 30rpx;color: #17233d;float: right;padding: 0 40rpx;">实付款：<text style="color: #ed4014;">￥{{total}}</text></view>
+		 <view style="font-size: 30rpx;color: #17233d;float: right;padding: 0 40rpx;margin-bottom: 100rpx;">实付款：<text style="color: #ed4014;">￥{{total}}</text></view>
 			
 		 <view class="btns">
 			 <van-button open-type="contact" icon="service-o" type="default" block>在线客服</van-button>
@@ -94,7 +94,7 @@
 	.btns{
 		width: 100%;
 		display: flex;
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 	}
 	

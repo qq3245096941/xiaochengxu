@@ -3,7 +3,7 @@ function request({method, url, data}) {
 	return new Promise((resolve) => {
 		wx.request({
 			method: method,
-			url: 'https://zsxcx.zhongshengzb.com:8446/zs_two' + url,
+			url: 'https://xcx.zhongshengzb.com:8446/zs_two' + url,
 			data: data,
 			header: {
 				'Accept': "*/*",

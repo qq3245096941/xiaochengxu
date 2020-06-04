@@ -18,7 +18,7 @@
 		},
 		onLoad(){
 			uni.request({
-				url:'https://zsxcx.zhongshengzb.com:8446/zs_two/config/configAll',
+				url:'https://xcx.zhongshengzb.com:8446/zs_two/config/configAll',
 				success:(res)=>{
 					this.html = res.data.data[5].sysValue
 				}

@@ -56,8 +56,8 @@
 								uni.setStorageSync('phonenumber', res.data.data.userTel); //获取用户的手机号
 								uni.setStorageSync('openid', res.data.data.openId); //登录信息
 								
-								uni.navigateBack({
-									delta: 3
+								uni.switchTab({
+									url:'../Mine/Mine'
 								})
 							})
 						});

@@ -8,23 +8,24 @@
 					<van-icon name="arrow-down" />
 				</view>
 				<!-- 市 -->
-				<view class="isCity" @click="clickAddress('市')">
+				<view class="isCity" @click="clickAddress('市')" v-if="isShowCitySelect">
 					{{address.city.name===''?'选择市':address.city.name}}
 					<van-icon name="arrow-down" />
 				</view>
 				<!-- 区 -->
-				<view class="isCity" @click="clickAddress('区')">
+				<!-- <view class="isCity" @click="clickAddress('区')">
 					{{address.district.name===''?'选择区':address.district.name}}
 					<van-icon name="arrow-down" />
-				</view>
+				</view> -->
 				<!-- 地址选择器 -->
 				<van-action-sheet :show="address.isShow" @close="address.isShow=false" @cancel="address.isShow=false" title="选择地址">
 					<view>
 						<van-area v-if="address.province.isClick" :area-list="address.area" @confirm="addressConfirm" :columns-num="1"
 						 :value="address.province.code" />
-						<van-area v-if="address.city.isClick" :area-list="address.area" @confirm="addressConfirm" :columns-num="2" :value="address.province.code" />
-						<van-area v-if="address.district.isClick" :area-list="address.area" @confirm="addressConfirm" :columns-num="3"
-						 :value="address.province.code" />
+						<van-area v-if="address.city.isClick" :area-list="address.area" @confirm="addressConfirm" :columns-num="2" 
+						:value="address.city.code===0? address.province.code : address.city.code" />
+						<!-- <van-area v-if="address.district.isClick" :area-list="address.area" @confirm="addressConfirm" :columns-num="3"
+						 :value="address.district.code===0?address.city.code : address.district.code" /> -->
 					</view>
 				</van-action-sheet>
 			</view>
@@ -121,14 +122,15 @@
 				rows: 10, //每页10条,
 			};
 		},
+		computed:{
+			/* 是否显示选择市的选择器 */
+			isShowCitySelect(){
+				return this.address.province.name.indexOf('市')===-1;
+			}
+		},
 		onLoad() {
 			this.userid = uni.getStorageSync('login').userId;
-			
-			wx.getLocation({
-				success(res){
-					console.log('经纬度',res);
-				}
-			})
+
 			/* 获取分类店铺的信息 */
 			post.gets({
 				method: 'GET',
@@ -159,6 +161,7 @@
 				this.actions.selectValue = res.detail;
 				this.getTrueList(this.page);
 			},
+			/* 选择分类时 */
 			selectClassify(res) {
 				this.storeClassify.currentValue = res.detail;
 				this.getTrueList(this.page);
@@ -184,6 +187,8 @@
 			},
 			/* 提交用户选择的信息 */
 			addressConfirm(res) {
+				console.log(res);
+				
 				this.address.isShow = false;
 				this.address.province = {
 					name: '',
@@ -198,19 +203,29 @@
 					code: 0
 				};
 				const arr = res.detail.values;
-				this.address.province = {
-					name: arr[0].name,
-					code: arr[0].code
-				};
 
 				switch (arr.length) {
+					case 1:
+						this.address.province = {
+							name: arr[0].name,
+							code: arr[0].code
+						};
+						break;
 					case 2:
+						this.address.province = {
+							name: arr[0].name,
+							code: arr[0].code
+						};
 						this.address.city = {
 							name: arr[1].name,
 							code: arr[1].code
 						};
 						break;
 					case 3:
+						this.address.province = {
+							name: arr[0].name,
+							code: arr[0].code
+						};
 						this.address.city = {
 							name: arr[1].name,
 							code: arr[1].code
@@ -221,6 +236,7 @@
 						};
 						break;
 				}
+
 				this.getTrueList(this.page);
 			},
 			//获取地理位置
@@ -235,7 +251,6 @@
 						wx.request({
 							url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${_this.address.latitude},${_this.address.longitude}&key=${keys}`,
 							success(res) {
-								console.log(res);
 								const {
 									province,
 									city,
@@ -278,7 +293,7 @@
 					title: '加载中'
 				});
 
-				let obj = { 
+				let obj = {
 					page: isReachBottom ? this.page : 1, //请求页数
 					rows: 10, //每页10条
 					userId: this.userid, //userid
@@ -302,7 +317,6 @@
 					wx.hideLoading();
 					if (res.statusCode === 200 && res.data.code == 0) {
 						const arr = res.data.list;
-						console.log('商店信息', arr);
 						/* 判断是否是上拉加载数据 */
 						if (isReachBottom) {
 							this.trueList = [...this.trueList, ...arr];

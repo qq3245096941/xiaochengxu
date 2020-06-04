@@ -7,12 +7,9 @@
 			</view>
 
 			<view style="border-bottom: 1rpx solid #e8eaec;">
-				<view :key="commdityIndex" v-for="(commdity,commdityIndex) in commdityList" @click="jumpOrderPar()">	
-					<van-card 
-					:num="commdity.commdityCount" 
-					:price="commdity.commdityPrice*commdity.commdityCount" 
-					:title="commdity.commdityName" 
-					:thumb="commdity.commdityThnmbnail | getImg">
+				<view :key="commdityIndex" v-for="(commdity,commdityIndex) in commdityList" @click="jumpOrderPar()">
+					<van-card :num="commdity.commdityCount" :price="commdity.commdityPrice*commdity.commdityCount" :title="commdity.commdityName"
+					 :thumb="commdity.commdityThnmbnail | getImg">
 					</van-card>
 				</view>
 			</view>
@@ -22,19 +19,22 @@
 					<text style="color: #ed4014;font-size: 40rpx;font-weight: bold;">{{order.sumPrice}}</text>
 				</text>
 				<van-button v-if="index===0" type="danger" round size="mini" @click="wxPay" plain>微信支付</van-button>
+				<van-button v-if="index===0" type="warning" round size="mini" @click="cancelPay" plain style="margin-left: 5rpx;">取消订单</van-button>
 				<van-button v-if="index===2" type="danger" round size="mini" @click="wxDelivery" plain>确认收货</van-button>
-				<van-button v-if="index===3" type="danger" round size="mini" @click="isShowComment=!isShowComment" plain>评价</van-button>
+				<van-button v-if="index===3" type="danger" round size="mini" @click="this.isShowComment = !this.isShowComment"
+				 plain>评价</van-button>
 			</view>
 		</view>
-		<view class="hen"></view> 
-		
+		<view class="hen"></view>
+
 		<!-- 评论弹框 -->
-		<van-popup position="bottom" :show="isShowComment" bind:close="onClose">
+		<van-popup position="bottom" :show="isShowComment" @close="isShowComment=false">
 			<view class="pop">
 				<view>
-					<textarea name="" id="" placeholder="亲，您对商品还满意吗？" cols="30" rows="10"></textarea>
-					<van-uploader accept="image" :file-list="fileList" @after-read="uploadImg"/>
+					<textarea v-model="content" name="" id="" placeholder="亲，您对商品还满意吗？" cols="30" rows="10"></textarea>
+					<van-uploader accept="image" preview-size="60" :deletable="false" :file-list="fileList" @after-read="uploadImg" />
 				</view>
+				<van-button @click="postComment" type="danger" round block>发起评论</van-button>
 			</view>
 		</van-popup>
 	</view>
@@ -61,19 +61,63 @@
 					return item;
 				}),
 				/* 是否显示该组件 */
-				isShow:true,
+				isShow: true,
 				/* 是否展示评论弹框 */
-				isShowComment:false,
+				isShowComment: false,
 				/* 已经上传的文件 */
-				fileList:[]
+				fileList: [],
+				/* 评论内容 */
+				content: ''
 			}
 		},
 		watch: {
-			
+
 		},
 		methods: {
-			setClick(commdity) {
-				commdity.isClick = !commdity.isClick;
+			/* 取消订单 */
+			cancelPay() {
+				uni.showModal({
+					title: '确定取消订单吗',
+					success: ({
+						confirm
+					}) => {
+						if (confirm) {
+							post.gets({
+								method: 'POST',
+								url: `/order/${this.order.orderId}/cancelOrder`
+							}).then(data => {
+								this.isShow = false;
+							})
+						}
+					}
+				})
+
+			},
+			/* 提交评论 */
+			postComment() {
+				post.gets({
+					method: 'POST',
+					url: '/comment/addComment',
+					data: {
+						userId: uni.getStorageSync('login').userId,
+						orderId: this.order.orderId,
+						comTitle: this.content,
+						content: JSON.stringify(this.fileList),
+						comType: 1,
+						commdityIds: this.commdityList.map(item => {
+							return item.commdityId
+						}).join(',')
+					}
+				}).then(data => {
+					console.log(data);
+					uni.showToast({
+						title: '评论成功',
+						icon: 'none',
+					})
+
+					this.isShowComment = false;
+					this.isShow = false;
+				})
 			},
 			/* 微信支付 */
 			wxPay() {
@@ -88,65 +132,62 @@
 					}
 				}).then(data => {
 					uni.showToast({
-						title:'已确认收货',
-						icon:'none',
-						success:()=>{
+						title: '已确认收货',
+						icon: 'none',
+						success: () => {
 							this.isShow = false;
 						}
 					})
 				})
 			},
 			/* 跳转到订单详情 */
-			jumpOrderPar(){
-				if(this.index===7){
+			jumpOrderPar() {
+				if (this.index === 7) {
 					uni.navigateTo({
-						url:`/pages/orderParticulars/orderParticulars?total=${this.order.sumPrice}&orderId=${this.order.orderId}`,
-						fail(error){
+						url: `/pages/orderParticulars/orderParticulars?total=${this.order.sumPrice}&orderId=${this.order.orderId}`,
+						fail(error) {
 							console.log(error);
 						}
 					})
 				}
 			},
 			/* 上传图片 */
-			uploadImg(res){
-				console.log(res);
+			uploadImg(res) {
 				const tmpImg = res.detail.file.path;
-				
+
 				uni.uploadFile({
-					url:'https://zsxcx.zhongshengzb.com:8446/zs_two/file/uploadPicAjax',
-					filePath:tmpImg,
-					name:'file',
-					success(res){
+					url: 'https://xcx.zhongshengzb.com:8446/zs_two/file/uploadPicAjax',
+					filePath: tmpImg,
+					name: 'image',
+					success: (res) => {
 						console.log(res);
+						const json = JSON.parse(res.data);
+						let path = json.data.serverUrl + "/" + json.data.picPath.split('/images/')[1];
+						path = path.replace(/\\/g, "/");
+
+						this.fileList = [...this.fileList, {
+							url: path
+						}]
 					}
 				})
-				// post.gets({
-				// 	method:'POST',
-				// 	url:'/file/uploadPicAjax',
-				// 	data:{
-				// 		file:tmpImg
-				// 	}
-				// }).then(data=>{
-				// 	console.log(data);
-				// })
 			}
 		}
 	}
 </script>
 
 <style scoped lang="scss">
-	.pop{
+	.pop {
 		padding: 15rpx;
-		
-		view{
+
+		view {
 			border-radius: 10rpx;
 			box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 			padding: 15rpx;
-			
-			textarea{
+			margin-bottom: 20rpx;
+
+			textarea {
 				display: block;
 				width: 100%;
-				font-size: 20rpx;
 			}
 		}
 	}
