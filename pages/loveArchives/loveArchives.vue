@@ -43,7 +43,7 @@
 						<van-cell-group>
 							<van-field label="发动机排量" :value="paiLiang" :border="false" disabled />
 							<van-field label="生产年份" :value="creatYear"  :border="false" @change="dateChange" />
-							<van-field label="车架号" :value="shangLu"  :border="false" @change="chejiaChange" />
+							<van-field label="车架号(后六位)" :value="shangLu"  :border="false" @change="chejiaChange" />
 							<van-field label="注册时间" :value="zhuCe"  :border="false" disabled />
 						</van-cell-group>
 						

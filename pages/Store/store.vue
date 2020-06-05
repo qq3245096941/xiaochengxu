@@ -187,8 +187,7 @@
 			},
 			/* 提交用户选择的信息 */
 			addressConfirm(res) {
-				console.log(res);
-				
+			
 				this.address.isShow = false;
 				this.address.province = {
 					name: '',
@@ -260,14 +259,14 @@
 									name: province,
 									code: _this.findKey(area.province_list, province)
 								}
-								_this.address.city = {
-									name: city,
-									code: _this.findKey(area.city_list, city)
-								}
-								_this.address.district = {
-									name: district,
-									code: _this.findKey(area.county_list, district)
-								}
+								// _this.address.city = {
+								// 	name: city,
+								// 	code: _this.findKey(area.city_list, city)
+								// }
+								// _this.address.district = {
+								// 	name: district,
+								// 	code: _this.findKey(area.county_list, district)
+								// }
 								_this.getTrueList(_this.page);
 							}
 						});
