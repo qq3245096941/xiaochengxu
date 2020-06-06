@@ -12,18 +12,18 @@
 			return {
 				list: [{
 						index: 0,
-						img: "../../static/index/index3.png",
+						img: "https://xcx.zhongshengzb.com:8089/shoppingImg/images/home-icon/index17.png",
 						navlink: '../isSechcCom/isSechcCom'
 					},
 					{
 						index: 1,
-						img: "../../static/index/index2.png",
+						img: "https://xcx.zhongshengzb.com:8089/shoppingImg/images/home-icon/index16.png",
 						navlink: '../index/pages/engineSynopsis'
 					},
 					{
 						index: 2,
 						name: "空气滤清器",
-						img: "../../static/index/index1.png",
+						img: "https://xcx.zhongshengzb.com:8089/shoppingImg/images/home-icon/index15.png",
 						navlink: '../index/pages/maintain'
 					}
 				],

@@ -30,7 +30,7 @@
 				</van-tab>
 			</van-tabs>
 
-			<view class="hen"></view>
+			<image src="../../static/hen.png" mode="widthFix" style="width: 100%;display:block;"></image>
 			<!-- 所有商品 -->
 			<view style="padding: 30rpx;">
 				<van-grid :border="false" square center>
@@ -321,5 +321,9 @@
 <style>
 	.van-grid-item__text {
 		font-size: 20rpx !important;
+	}
+	
+	.van-grid-item__icon{
+		font-size: var(--grid-item-icon-size,37px) !important;
 	}
 </style>

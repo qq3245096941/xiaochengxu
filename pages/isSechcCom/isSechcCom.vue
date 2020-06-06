@@ -7,7 +7,7 @@
 			<!-- <view class="isSechcComHeader">常规保养项目</view> -->
 			<van-collapse :value="isSelectIndex" @change="onChange">
 				<van-collapse-item v-for="(firstItem,index) in firstList" :name="index" :key="index" icon="...">
-					<view slot="title">
+					<view slot="title" style="font-size: 35rpx;">
 						<van-checkbox :value="firstItem.isClickAll" @change="clickAll(firstItem)">{{firstItem.mainName}}丨
 							<text class="total">总计：¥{{firstItem.total}}</text></van-checkbox>
 					</view>
@@ -200,6 +200,8 @@
 					value: item.mycarId
 				}
 			})
+			
+			this.isSelectIndex = [];
 		},
 		onReachBottom() {
 

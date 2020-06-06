@@ -18,6 +18,11 @@
 <style>
 	/*每个页面公共css */
 	@import "/wxcomponents/vant/dist/common/index.wxss";
+	
+	.custormer .van-cell__title{
+		max-width: 118px !important;
+	}
+	
 	page{
 		width: 100%;
 		margin: 0;

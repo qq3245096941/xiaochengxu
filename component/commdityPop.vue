@@ -141,7 +141,7 @@
 
 	.commodityClassBox .commodityClsss {
 		color: #808695;
-		font-size: 15rpx;
+		font-size: 20rpx;
 		border: 1rpx solid #808695;
 		border-radius: 20rpx;
 		padding: 10rpx;
@@ -153,5 +153,6 @@
 	.active {
 		color: #ed4014 !important;
 		border: 1rpx solid #ed4014 !important;
+		background:  #ffe5e5;
 	}
 </style>

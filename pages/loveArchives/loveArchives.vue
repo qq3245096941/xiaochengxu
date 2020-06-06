@@ -40,10 +40,10 @@
 							<text class="essentialInformation-title-text2">为您精确匹配保养服务和配件</text>
 						</view>
 						
-						<van-cell-group>
+						<van-cell-group class="custormer">
 							<van-field label="发动机排量" :value="paiLiang" :border="false" disabled />
 							<van-field label="生产年份" :value="creatYear"  :border="false" @change="dateChange" />
-							<van-field label="车架号(后六位)" :value="shangLu"  :border="false" @change="chejiaChange" />
+							<van-field maxlength="6" label="车架号(后六位)" :value="shangLu"  :border="false" @change="chejiaChange"/>
 							<van-field label="注册时间" :value="zhuCe"  :border="false" disabled />
 						</van-cell-group>
 						
@@ -302,7 +302,7 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.Isnothing {
 		width: 100%;
 		height: 100%;

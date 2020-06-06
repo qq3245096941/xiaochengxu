@@ -259,14 +259,6 @@
 									name: province,
 									code: _this.findKey(area.province_list, province)
 								}
-								// _this.address.city = {
-								// 	name: city,
-								// 	code: _this.findKey(area.city_list, city)
-								// }
-								// _this.address.district = {
-								// 	name: district,
-								// 	code: _this.findKey(area.county_list, district)
-								// }
 								_this.getTrueList(_this.page);
 							}
 						});
@@ -304,7 +296,6 @@
 					industry: this.storeClassify.currentValue === 0 ? '' : this.storeClassify.currentValue
 				}
 
-
 				Reflect.set(obj, 'distranceX', this.address.longitude);
 				Reflect.set(obj, 'distranceY', this.address.latitude);
 
@@ -324,6 +315,11 @@
 							/* 初始化页数 */
 							this.page = 1;
 						}
+						
+						/* 把店铺分类 */
+						this.trueList.sort((one,two)=>{
+							return Number.parseFloat(one.distance) - Number.parseFloat(two.distance)
+						})
 
 						if (arr.length === 0) {
 							wx.showToast({
