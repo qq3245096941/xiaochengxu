@@ -99,7 +99,7 @@
 				})
 
 				uni.navigateTo({
-					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.total}&num=${JSON.stringify(num)}&commdityClass=[]&orderType=1`
+					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.total}&num=${JSON.stringify(num)}&commdityClass=[]&orderType=1&carName=${this.car.default.carName}`
 				})
 			}
 		},

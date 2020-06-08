@@ -42,7 +42,7 @@
 			<view class="hen"></view>
 			<van-cell-group>
 				<van-cell icon="balance-o" title="支付方式" value="在线支付" />
-				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+total" />
+				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+priceList[0].price" />
 				<van-cell icon="records" url="../selectInvoice/selectInvoice" is-link title="开发票" :value="invoice.title"></van-cell>
 			</van-cell-group>
 
@@ -87,8 +87,6 @@
 				commdityList: [],
 				/* 购买数量 */
 				commdityNum: [],
-				/* 总价 */
-				total: 0,
 				commdityClass: '',
 				/* 0为普通商品，1为服务商品*/
 				orderType: 0,
@@ -121,7 +119,7 @@
 		watch: {
 			'coupon.price'(newValue) {
 				this.priceList[1].price = newValue;
-				this.finalPrice = this.total - newValue;
+				this.finalPrice = this.priceList[0].price - newValue;
 			}
 		},
 		methods: {
@@ -243,11 +241,13 @@
 			commdityClass, //数组类型
 			orderType,
 			/* 0为普通商品，1为服务商品*/
-			carid //购物车id
+			carid, //购物车id,
+			/* 默认爱车名称 */
+			carName
 		}) {
 			this.orderType = Number.parseInt(orderType);
-			this.total = total;
 			this.priceList[0].price = total;
+			this.finalPrice = total;
 			this.commdityNum = JSON.parse(num);
 			this.commdityClass = JSON.parse(commdityClass);
 
@@ -255,26 +255,26 @@
 				this.carid = JSON.parse(carid);
 			}
 
-			/* 获取当前用户的优惠券 */
-			post.gets({
-				method: 'POST',
-				url: '/coupon/couponAll',
-				data: {
-					page: 1,
-					rows: 9999,
-					userId: uni.getStorageSync('login').userId
-				}
-			}).then(data => {
-				let list = data.data.couponList;
-				if (list[0].couponPrice < total) {
+			if (this.orderType === 1) {
+				/* 获取当前用户的优惠券 */
+				post.gets({
+					method: 'POST',
+					url: '/coupon/couponAll',
+					data: {
+						page: 1,
+						rows: 9999,
+						vehicleName: carName,
+						userId: uni.getStorageSync('login').userId
+					}
+				}).then(data => {
+					let list = data.data.couponList;
 					this.coupon = {
 						id: list[0].couponId,
 						title: list[0].couponName,
 						price: list[0].couponPrice
 					}
-				}
-			})
-
+				})
+			}
 
 			/* 获取当前用户信息 */
 			const user = uni.getStorageSync('login');
@@ -322,8 +322,8 @@
 	.van-grid-item__text {
 		font-size: 20rpx !important;
 	}
-	
-	.van-grid-item__icon{
-		font-size: var(--grid-item-icon-size,37px) !important;
+
+	.van-grid-item__icon {
+		font-size: var(--grid-item-icon-size, 37px) !important;
 	}
 </style>

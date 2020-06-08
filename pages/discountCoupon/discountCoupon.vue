@@ -37,11 +37,11 @@
 				/* 传入的商品总价 */
 				total: 0,
 				/* 输入框是否聚焦 */
-				isFocus:false
+				isFocus: false
 			}
 		},
 		methods: {
-			setFocus(){
+			setFocus() {
 				this.isFocus = !this.isFocus;
 			},
 			getCoupon() {
@@ -65,11 +65,11 @@
 			},
 			/* 选择优惠券 */
 			selectCon(item) {
-				if(isNaN(this.total)){
+				if (isNaN(this.total)) {
 					return;
 				}
 
-				if (item.couponPrice*100 > this.total*100) {
+				if (item.couponPrice * 100 > this.total * 100) {
 					uni.showToast({
 						title: '优惠券价格大于商品价格，此优惠券不能使用',
 						icon: 'none'
@@ -86,13 +86,14 @@
 					delta: 1
 				})
 			},
-			getData() {
+			getData(vehicleName) {
 				/* 获取当前用户的优惠券 */
 				post.gets({
 					url: '/coupon/couponAll',
 					data: {
 						userId: uni.getStorageSync('login').userId,
-						remark:'0',
+						remark: '0',
+						vehicleName,
 						page: 1,
 						rows: 9999
 					}
@@ -102,7 +103,6 @@
 						this.isShow = false;
 					}
 					this.num = data.data.couponList.length;
-					console.log(this.list);
 				})
 			},
 			change(res) {
@@ -113,7 +113,18 @@
 			total
 		}) {
 			this.total = total;
-			this.getData();
+
+			/* 获取的爱车默认车名 */
+			post.gets({
+				method: 'POST',
+				url: `/car/${uni.getStorageSync('login').userId}/carUserAll`
+			}).then(data => {
+				data.data.list.forEach(item=>{
+					if(item.isDefault==='1'){
+						this.getData(item.carName);
+					}
+				})
+			})
 		},
 	}
 </script>
@@ -134,8 +145,8 @@
 		top: 458rpx;
 		width: 100%;
 	}
-	
-	.input input{
+
+	.input input {
 		margin: 0 auto;
 		width: 200rpx;
 	}
