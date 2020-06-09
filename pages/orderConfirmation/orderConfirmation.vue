@@ -42,7 +42,7 @@
 			<view class="hen"></view>
 			<van-cell-group>
 				<van-cell icon="balance-o" title="支付方式" value="在线支付" />
-				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+priceList[0].price" />
+				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+priceList[0].price+'&carName='+carName" />
 				<van-cell icon="records" url="../selectInvoice/selectInvoice" is-link title="开发票" :value="invoice.title"></van-cell>
 			</van-cell-group>
 
@@ -103,7 +103,7 @@
 					phone: '',
 					name: ''
 				},
-
+				carName:'',  //当前选择的车辆
 				priceList: [{
 						name: '商品总价',
 						price: 0
@@ -227,7 +227,6 @@
 					url: "/order/addOrder",
 					data: obj
 				}).then(res => {
-					console.log(res);
 					const orderId = res.data.data;
 					post.wxPay(orderId, this.finalPrice);
 				})
@@ -250,6 +249,7 @@
 			this.finalPrice = total;
 			this.commdityNum = JSON.parse(num);
 			this.commdityClass = JSON.parse(commdityClass);
+			this.carName = carName;
 
 			if (carid !== undefined) {
 				this.carid = JSON.parse(carid);
@@ -263,7 +263,7 @@
 					data: {
 						page: 1,
 						rows: 9999,
-						vehicleName: carName,
+						vechicleName: carName,
 						userId: uni.getStorageSync('login').userId
 					}
 				}).then(data => {

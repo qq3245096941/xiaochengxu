@@ -86,14 +86,14 @@
 					delta: 1
 				})
 			},
-			getData(vehicleName) {
+			getData(vechicleName) {
 				/* 获取当前用户的优惠券 */
 				post.gets({
 					url: '/coupon/couponAll',
 					data: {
 						userId: uni.getStorageSync('login').userId,
 						remark: '0',
-						vehicleName,
+						vechicleName,
 						page: 1,
 						rows: 9999
 					}
@@ -110,21 +110,11 @@
 			}
 		},
 		onLoad({
-			total
+			total,
+			carName
 		}) {
 			this.total = total;
-
-			/* 获取的爱车默认车名 */
-			post.gets({
-				method: 'POST',
-				url: `/car/${uni.getStorageSync('login').userId}/carUserAll`
-			}).then(data => {
-				data.data.list.forEach(item=>{
-					if(item.isDefault==='1'){
-						this.getData(item.carName);
-					}
-				})
-			})
+			this.getData(carName);
 		},
 	}
 </script>
