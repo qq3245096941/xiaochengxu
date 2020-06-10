@@ -153,7 +153,7 @@
 			},
 			/* 提交订单 */
 			onSubmit() {
-				this.finalPrice = this.finalPrice.toFixed(2);
+				this.finalPrice = Number.parseFloat(this.finalPrice).toFixed(2);
 
 				switch (this.distributionWay.WayIndex) {
 					case 0:
@@ -244,10 +244,12 @@
 			/* 默认爱车名称 */
 			carName
 		}) {
+			
 			this.orderType = Number.parseInt(orderType);
 			this.priceList[0].price = total;
 			this.finalPrice = total;
 			this.commdityNum = JSON.parse(num);
+			console.log('商品数量',this.commdityNum);
 			this.commdityClass = JSON.parse(commdityClass);
 			this.carName = carName;
 
