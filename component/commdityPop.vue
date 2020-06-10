@@ -99,13 +99,16 @@
 						this.$emit('success');
 						break;
 					case 1:
-						let list = [this.commdityId];
+						let commdityList = [{
+							commdityId:this.commdityId,
+							num:this.number,
+							clazz:JSON.stringify([this.commdityClass[this.isSelectClass].specName])
+						}];
+						
 						let total = this.number * this.commdity.commdityPrice;
-						let num = [this.number];
-						let commdityClass = JSON.stringify([this.commdityClass[this.isSelectClass].specName]);
 
 						uni.navigateTo({
-							url: `/pages/orderConfirmation/orderConfirmation?list=${JSON.stringify(list)}&total=${total}&num=${JSON.stringify(num)}&commdityClass=${commdityClass}&orderType=0`
+							url: `/pages/orderConfirmation/orderConfirmation?commdityList=${JSON.stringify(commdityList)}&total=${total}&orderType=0`
 						})
 						break;
 				}

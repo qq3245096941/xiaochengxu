@@ -37,7 +37,8 @@
 				/* 传入的商品总价 */
 				total: 0,
 				/* 输入框是否聚焦 */
-				isFocus: false
+				isFocus: false,
+				ids:[]
 			}
 		},
 		methods: {
@@ -94,6 +95,7 @@
 						userId: uni.getStorageSync('login').userId,
 						remark: '0',
 						vechicleName,
+						commdityIds:this.ids.join(","),
 						page: 1,
 						rows: 9999
 					}
@@ -111,8 +113,10 @@
 		},
 		onLoad({
 			total,
-			carName
+			carName,
+			ids
 		}) {
+			this.ids = JSON.parse(ids);
 			this.total = total;
 			this.getData(carName);
 		},

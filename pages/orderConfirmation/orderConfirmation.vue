@@ -34,15 +34,15 @@
 			<!-- 所有商品 -->
 			<view style="padding: 30rpx;">
 				<van-grid :border="false" square center>
-					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.commdityThnmbnail | getImg"
-					 :info="'x'+commdityNum[index]" :text="commdity.commdityName" />
+					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.info.commdityThnmbnail | getImg"
+					 :info="'x'+commdity.num" :text="commdity.info.commdityName" />
 				</van-grid>
 				<view style="color: #515a6e;font-size: 20rpx;margin-left: 20rpx;text-align: right;">共{{commdityList.length}}件商品</view>
 			</view>
 			<view class="hen"></view>
 			<van-cell-group>
 				<van-cell icon="balance-o" title="支付方式" value="在线支付" />
-				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+priceList[0].price+'&carName='+carName" />
+				<van-cell v-if="orderType===1" icon="debit-pay" is-link title="优惠" :value="coupon.title" :url="'/pages/discountCoupon/discountCoupon?total='+priceList[0].price+'&carName='+carName+'&ids='+JSON.stringify(commdityList.map(item=>item.commdityId))" />
 				<van-cell icon="records" url="../selectInvoice/selectInvoice" is-link title="开发票" :value="invoice.title"></van-cell>
 			</van-cell-group>
 
@@ -83,11 +83,9 @@
 						}
 					}
 				},
+				commdity: {},
 				/* 购买的货物list */
 				commdityList: [],
-				/* 购买数量 */
-				commdityNum: [],
-				commdityClass: '',
 				/* 0为普通商品，1为服务商品*/
 				orderType: 0,
 				/* 优惠券id，紧紧适用于服务商品 */
@@ -98,12 +96,7 @@
 				},
 				/* 购物车id，表示是从购物车跳转过来的 */
 				carid: '',
-				user: {},
-				userData: {
-					phone: '',
-					name: ''
-				},
-				carName:'',  //当前选择的车辆
+				carName: '', //当前选择的车辆
 				priceList: [{
 						name: '商品总价',
 						price: 0
@@ -123,16 +116,6 @@
 			}
 		},
 		methods: {
-			inputName({
-				detail
-			}) {
-				this.userData.name = detail;
-			},
-			inputPhone({
-				detail
-			}) {
-				this.userData.phone = detail;
-			},
 			/* 跳转到选择门店 */
 			jumpSelectStore() {
 				uni.navigateTo({
@@ -153,7 +136,7 @@
 			},
 			/* 提交订单 */
 			onSubmit() {
-				this.finalPrice = this.finalPrice.toFixed(2);
+				this.finalPrice = Number.parseFloat(this.finalPrice).toFixed(2);
 
 				switch (this.distributionWay.WayIndex) {
 					case 0:
@@ -178,14 +161,14 @@
 
 				let commJson = this.commdityList.map((item, index) => {
 					return {
-						'commdityCount': this.commdityNum[index],
+						'commdityCount': item.num,
 						'commdityId': item.commdityId,
-						'commdityClass': this.commdityClass[index]
+						'commdityClass': item.clazz
 					}
 				})
 
 				let obj = {
-					userId: this.user.userId, //当前用户id
+					userId: uni.getStorageSync('login').userId, //当前用户id
 					orderStatus: 0, //订单状态，0商品购买 1服务购买
 					sumPrice: this.finalPrice, //总价
 					payStat: 0, //付款方式，默认为0，也就是现金支付
@@ -227,17 +210,21 @@
 					url: "/order/addOrder",
 					data: obj
 				}).then(res => {
-					const orderId = res.data.data;
-					post.wxPay(orderId, this.finalPrice);
+					if (res.data.code === '5') {
+						uni.showToast({
+							title: res.data.message,
+							icon: 'none'
+						})
+					} else {
+						const orderId = res.data.data;
+						post.wxPay(orderId, this.finalPrice);
+					}
 				})
 			}
 		},
 		onLoad({
-			list, //商品id 数组
+			commdityList, //商品集合{commdityId:商品id,num:购买数量,clazz:规格}
 			total, //总价
-			/* 商品数量，list为[123,123]则num为[1,1] */
-			num,
-			commdityClass, //数组类型
 			orderType,
 			/* 0为普通商品，1为服务商品*/
 			carid, //购物车id,
@@ -247,9 +234,8 @@
 			this.orderType = Number.parseInt(orderType);
 			this.priceList[0].price = total;
 			this.finalPrice = total;
-			this.commdityNum = JSON.parse(num);
-			this.commdityClass = JSON.parse(commdityClass);
 			this.carName = carName;
+			commdityList = JSON.parse(commdityList);
 
 			if (carid !== undefined) {
 				this.carid = JSON.parse(carid);
@@ -264,6 +250,10 @@
 						page: 1,
 						rows: 9999,
 						vechicleName: carName,
+						commdityIds: commdityList.map(item => {
+							return item.commdityId;
+						}),
+						remark: '0',
 						userId: uni.getStorageSync('login').userId
 					}
 				}).then(data => {
@@ -276,28 +266,18 @@
 				})
 			}
 
-			/* 获取当前用户信息 */
-			const user = uni.getStorageSync('login');
-
-			/* 获取用户信息 */
-			post.gets({
-				method: 'GET',
-				url: `/user/${user.userId}/userInfo`,
-			}).then(data => {
-				this.user = data.data.obj;
-			})
-
-			JSON.parse(list).forEach(id => {
+			/* 解析商品集合 */
+			commdityList.forEach(commdity => {
 				post.gets({
 					method: 'POST',
-					url: `/commdity/${id}/searchInfo`,
+					url: `/commdity/${commdity.commdityId}/searchInfo`,
 					data: {
-						userId: user.userId
+						userId: uni.getStorageSync('login').userId
 					}
 				}).then(data => {
 					let commdityInfo = data.data.commdityInfo;
-					commdityInfo.commdityParameter = post.url + commdityInfo.commdityParameter;
-					this.commdityList.push(commdityInfo);
+					Reflect.set(commdity, 'info', commdityInfo);
+					this.commdityList.push(commdity);
 				})
 			})
 		},

@@ -86,20 +86,22 @@
 			},
 			/* 提交订单 */
 			submit(res) {
-				let commodityList = [];
-				let num = [];
+				let commdityList = [];
 
 				this.firstList.forEach(item => {
 					if (item.isClickAll) {
 						item.list.forEach(commodity => {
-							commodityList.push(commodity.commdityId);
-							num.push(commodity.commdityCount);
+							commdityList.push({
+								commdityId:commodity.commdityId,
+								num:commodity.commdityCount,
+								clazz:''
+							});
 						})
 					}
 				})
-
+				
 				uni.navigateTo({
-					url: `../orderConfirmation/orderConfirmation?list=${JSON.stringify(commodityList)}&total=${this.total}&num=${JSON.stringify(num)}&commdityClass=[]&orderType=1&carName=${this.car.default.carName}`
+					url: `../orderConfirmation/orderConfirmation?commdityList=${JSON.stringify(commdityList)}&total=${this.total}&commdityClass=[]&orderType=1&carName=${this.car.default.carName}`
 				})
 			}
 		},

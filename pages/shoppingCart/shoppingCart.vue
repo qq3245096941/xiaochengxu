@@ -50,29 +50,27 @@
 		methods: {
 			/* 全选提交 */
 			allSubmit() {
-				let [total, list, num, commdityClass, orderType, carid] = [0, [],
-					[],
-					[], 0, []
-				];
+				let total = 0;
+				let commdityList = [];
+				let carid = [];
 
 				this.commdityList.forEach(commdity => {
 					if (commdity.isClick === true) {
+						commdityList.push({
+							commdityId:commdity.commdityId,
+							num:commdity.commdityCount,
+							clazz:commdity.commdityClass
+						})
+						
 						total = total + commdity.commdityPrice * commdity.commdityCount;
-						console.log(total);
-						list = [...list, commdity.commdityId];
-						num = [...num, commdity.commdityCount];
-						commdityClass = [...commdityClass, commdity.commdityCount];
 						carid = [...carid, commdity.cartId];
 					}
 				})
-
-				list = JSON.stringify(list);
-				num = JSON.stringify(num);
-				commdityClass = JSON.stringify(commdityClass);
+				
 				carid = JSON.stringify(carid);
 
 				uni.navigateTo({
-					url: `/pages/orderConfirmation/orderConfirmation?list=${list}&total=${total}&num=${num}&commdityClass=${commdityClass}&orderType=${orderType}&carid=${carid}`
+					url: `/pages/orderConfirmation/orderConfirmation?commdityList=${JSON.stringify(commdityList)}&total=${total}&orderType=0&carid=${carid}`
 				})
 			},
 			/* 清除购物车的一个商品 */
@@ -101,14 +99,17 @@
 			/* 单个商品付款 */
 			wxPay(commdity) {
 				let total = commdity.commdityCount * commdity.commdityPrice;
-				let list = JSON.stringify([commdity.commdityId]);
-				let num = JSON.stringify([commdity.commdityCount]);
-				let commdityClass = JSON.stringify([commdity.commdityClass]);
-				let orderType = 0;
+				
+				let commdityList = [{
+					commdityId:commdity.commdityId,
+					num:commdity.commdityCount,
+					clazz:commdity.commdityClass
+				}];
+				
 				let carid = JSON.stringify([commdity.cartId])
 
 				uni.navigateTo({
-					url: `/pages/orderConfirmation/orderConfirmation?list=${list}&total=${total}&num=${num}&commdityClass=${commdityClass}&orderType=${orderType}&carid=${carid}`
+					url: `/pages/orderConfirmation/orderConfirmation?commdityList=${JSON.stringify(commdityList)}&total=${total}&orderType=0&carid=${carid}`
 				})
 			},
 			/* 全选 */
