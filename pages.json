@@ -24,6 +24,17 @@
 			}
 		},
 		{
+			"path": "pages/commdityList/commdityList",
+			"style": {
+				"navigationBarTitleText": "商品服务清单",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#000000",
+				"usingComponents": {
+					"van-card": "/wxcomponents/vant/dist/card/index"
+				}
+			}
+		},
+		{
 			"path": "pages/searchCommdity/searchCommdity",
 			"style": {
 				"navigationBarTitleText": "所有商品",
@@ -509,7 +520,8 @@
 					"van-radio": "/wxcomponents/vant/dist/radio/index",
 					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index",
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
-					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
+					"van-image": "/wxcomponents/vant/dist/image/index"
 				}
 			}
 		},

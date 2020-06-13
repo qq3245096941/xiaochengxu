@@ -32,13 +32,19 @@
 
 			<image src="../../static/hen.png" mode="widthFix" style="width: 100%;display:block;"></image>
 			<!-- 所有商品 -->
-			<view style="padding: 30rpx;">
-				<van-grid :border="false" square center>
+			<view class="commdityList" @click="lookCommdityParticulars">
+				<van-image :key="index" v-for="(commdity,index) in commdityList.slice(0,4)" width="110rpx" height="110rpx" fit="contain" :src="commdity.info.commdityThnmbnail | getImg" />
+
+				<!-- <van-grid :border="false" square center>
 					<van-grid-item :key="index" v-for="(commdity,index) in commdityList" :icon="commdity.info.commdityThnmbnail | getImg"
 					 :info="'x'+commdity.num" :text="commdity.info.commdityName" />
-				</van-grid>
-				<view style="color: #515a6e;font-size: 20rpx;margin-left: 20rpx;text-align: right;">共{{commdityList.length}}件商品</view>
+				</van-grid> -->
+				<view style="height: 20rpx;line-height: 20rpx;margin: 0 20rpx 20rpx 0;" v-if="commdityList.length>4">...</view>
+				<view style="flex: 1;text-align: right;">
+					<van-icon  name="arrow" />
+				</view>
 			</view>
+			<view style="color: #515a6e;font-size: 20rpx;margin: 0 20rpx 20rpx 0;text-align: right;">共{{commdityList.length}}件商品</view>
 			<view class="hen"></view>
 			<van-cell-group>
 				<van-cell icon="balance-o" title="支付方式" value="在线支付" />
@@ -85,6 +91,7 @@
 				},
 				commdity: {},
 				/* 购买的货物list */
+				orderCommdityList:[],
 				commdityList: [],
 				/* 0为普通商品，1为服务商品*/
 				orderType: 0,
@@ -116,6 +123,12 @@
 			}
 		},
 		methods: {
+			/* 查看商品列表详情 */
+			lookCommdityParticulars(){
+				uni.navigateTo({
+					url:'../commdityList/commdityList?ids='+JSON.stringify(this.orderCommdityList)
+				})
+			},
 			/* 跳转到选择门店 */
 			jumpSelectStore() {
 				uni.navigateTo({
@@ -235,8 +248,9 @@
 			this.priceList[0].price = total;
 			this.finalPrice = total;
 			this.carName = carName;
+			this.orderCommdityList = JSON.parse(commdityList);
 			commdityList = JSON.parse(commdityList);
-
+			
 			if (carid !== undefined) {
 				this.carid = JSON.parse(carid);
 			}
@@ -298,12 +312,24 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.van-grid-item__text {
 		font-size: 20rpx !important;
 	}
 
 	.van-grid-item__icon {
 		font-size: var(--grid-item-icon-size, 37px) !important;
+	}
+
+	.commdityList {
+		padding: 30rpx;
+		display: flex;
+		align-items: center;
+
+		van-image {
+			border: 1rpx solid #d2d2d2;
+			margin-right: 15rpx;
+			padding: 10rpx;
+		}
 	}
 </style>
