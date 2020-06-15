@@ -5,8 +5,14 @@
 		  :price="commdity.info.commdityPrice"
 		  :desc="commdity.info.commdityType"
 		  :title="commdity.info.commdityName"
-		  :thumb="commdity.info.commdityThnmbnail | getImg"
-		/>
+		  :thumb="commdity.info.commdityThnmbnail | getImg"/>
+		  
+		<view class="hen"></view> 
+		<view class="message" style="padding: 20rpx;">
+			<view class="title">安装服务相关说明</view>
+			<view class="body">相关操作：保养完成需对保养提示灯进行归零复位，特殊车型保养灯复位请与门店协商</view>
+			<view class="body">注：更换机油及机油滤清器</view>
+		</view>
 	</view>
 </template>
 
@@ -22,7 +28,6 @@
 		onLoad(options){
 			let commdityList = JSON.parse(options.ids);
 			console.log(commdityList);
-			
 			for(let {commdityId,num} of commdityList){
 				post.gets({
 					method: 'POST',
@@ -38,11 +43,24 @@
 					});
 				})
 			}
-			
-			
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
+	
+	.message{
+		font-size: 28rpx;
+		
+		.title{
+			color: #808695;
+			margin-bottom: 20rpx;
+		}
+		
+		.body{
+			color: #17233d;
+		}
+	}
+	
+	
 </style>

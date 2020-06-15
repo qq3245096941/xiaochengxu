@@ -29,6 +29,8 @@
 					<van-cell icon="location-o" @click="jumpSelectAddress" is-link :title="distributionWay.home.data.address" />
 				</van-tab>
 			</van-tabs>
+			
+			<view class="hen"></view>
 
 			<image src="../../static/hen.png" mode="widthFix" style="width: 100%;display:block;"></image>
 			<!-- 所有商品 -->
