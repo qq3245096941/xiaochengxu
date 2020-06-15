@@ -20,17 +20,19 @@
 							<text style="color: #515a6e;font-size: 20rpx;">{{distributionWay.store.data.storeAddress}}</text>
 						</view>
 					</view>
+					<view class="hen"></view>
 					<view>
 						<van-cell icon="location-o" @click="jumpSelectStore" is-link title="选择一个门店服务" />
 					</view>
 				</van-tab>
+				
 
 				<van-tab :name="1" title="配送到家">
 					<van-cell icon="location-o" @click="jumpSelectAddress" is-link :title="distributionWay.home.data.address" />
 				</van-tab>
 			</van-tabs>
 			
-			<view class="hen"></view>
+			
 
 			<image src="../../static/hen.png" mode="widthFix" style="width: 100%;display:block;"></image>
 			<!-- 所有商品 -->
