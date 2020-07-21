@@ -48,21 +48,21 @@
 		<view class="headerCont">
 			<navigator url="../shoppingCart/shoppingCart">
 				<view>
-					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine04.png" mode=""></image>
+					<image class="headerCont-image" src="../../static/mine/shopping.png" mode=""></image>
 					<view>购物车</view>
 				</view>
 			</navigator>
 			
 				<view @click="fnheaderCont(0)">
-					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine05.png" mode=""></image>
+					<image class="headerCont-image" src="../../static/mine/obligation.png" mode=""></image>
 					<view>待付款</view>
 				</view>
 				<view @click="fnheaderCont(3)">
-					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine07.png" mode=""></image>
+					<image class="headerCont-image" src="../../static/mine/evaluated.png" mode=""></image>
 					<view>待评价</view>
 				</view>
 				<view @click="makingCall">
-					<image class="headerCont-image" src="https://xcx.zhongshengzb.com:8089/shoppingImg/images/my-icon/mine08.png" mode=""></image>
+					<image class="headerCont-image" src="../../static/mine/phone.png" mode=""></image>
 					<view>拨打电话</view>
 				</view>
 		</view>
@@ -72,22 +72,22 @@
 		<view class="serviceSettings">
 				<navigator url="../loveArchives/loveArchives">
 					<view class="serviceSettings-box">
-						<image class="serviceSettings-image" src="../../static/home/tab/lovecar.png" mode=""></image>
+						<image class="serviceSettings-image" src="../../static/mine/car.png" mode=""></image>
 						<view class="serviceSettings-view">爱车档案</view>
 					</view>
 				</navigator>
 				<view class="serviceSettings-box" style="position: relative;">
 					<button style="position: absolute;width: 100%;height: 100%;opacity: 0;" open-type="contact"></button>
-					<image class="serviceSettings-image" src="../../static/home/tab/serve.png" mode=""></image>
+					<image class="serviceSettings-image" src="../../static/mine/serve.png" mode=""></image>
 					<view class="serviceSettings-view">在线客服</view>
 				</view>
 				<view class="serviceSettings-box" @click="goToAboutUs">
-					<image class="serviceSettings-image" src="../../static/home/tab/insurance.png" mode=""></image>
+					<image class="serviceSettings-image" src="../../static/mine/insurance.png" mode=""></image>
 					<view class="serviceSettings-view">车维保</view>
 				</view>
 				<view class="serviceSettings-box">
 					<navigator url="../opinion/opinion">
-						<image class="serviceSettings-image" src="../../static/home/tab/feedback.png" mode=""></image>
+						<image style="margin-top: 13rpx;" class="serviceSettings-image" src="../../static/mine/feedback.png" mode=""></image>
 						<view class="serviceSettings-view">意见反馈</view>
 					</navigator>
 				</view>
